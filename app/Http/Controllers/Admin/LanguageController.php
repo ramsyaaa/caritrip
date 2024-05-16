@@ -19,17 +19,18 @@ class LanguageController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request, $lang)
     {
         $perPage = 25;
         $language = Language::latest()->paginate($perPage);
         $data['language'] = $language;
+        $data['language_default'] = $lang;
         return view('admin.language.index', $data);
     }
 
@@ -38,9 +39,10 @@ class LanguageController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create($lang)
     {
-        return view('admin.language.create');
+        $data['language_default'] = $lang;
+        return view('admin.language.create', $data);
     }
 
     /**
@@ -50,15 +52,38 @@ class LanguageController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(Request $request, $lang)
     {
-        
-        $requestData = $request->all();
-        
-        Language::create($requestData);
+        $request->validate([
+            'language_name' => 'required|string|unique:languages',
+            'language_code' => 'required|string|unique:languages',
+            'is_default' => 'required',
+            'is_active' => 'required'
+        ]);
+
+        if($request->is_active && $request->is_default){
+            Language::where([
+                'is_active' => true,
+                'is_default' => true,
+            ])->update([
+                'is_default' => false,
+            ]);
+        }
+
+        $is_default = $request->is_default;
+        if($request->is_active == false && $request->is_default){
+            $is_default = false;
+        }
+
+        Language::create([
+            'language_name' => $request->language_name,
+            'language_code' => strtolower($request->language_code),
+            'is_default' => $is_default,
+            'is_active' => $request->is_active
+        ]);
         alert()->success('New ' . 'Language'. ' Created!' );
 
-        return redirect('admin/language');
+        return redirect($lang . '/admin/language');
     }
 
     /**
@@ -68,11 +93,12 @@ class LanguageController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function show($id)
+    public function show($lang, $id)
     {
-        $language = Language::findOrFail($id);
+        $data['language'] = Language::findOrFail($id);
+        $data['language_default'] = $lang;
 
-        return view('admin.language.show', compact('language'));
+        return view('admin.language.show', $data);
     }
 
     /**
@@ -82,10 +108,11 @@ class LanguageController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit($lang, $id)
     {
         $language = Language::findOrFail($id);
         $data['language'] = $language;
+        $data['language_default'] = $lang;
         return view('admin.language.edit', $data);
     }
 
@@ -97,16 +124,71 @@ class LanguageController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $lang, $id)
     {
-        
-        $requestData = $request->all();
-        
         $language = Language::findOrFail($id);
-        alert()->success('Record Updated!' );
-        $language->update($requestData);
 
-        return redirect('admin/language');
+        $language_name = 'required|string|unique:languages';
+        if($language->language_name == $request->language_name){
+            $language_name = 'required|string';
+        }
+        $language_code = 'required|string|unique:languages';
+        if($language->language_code == $request->language_code){
+            $language_code = 'required|string';
+        }
+
+        $request->validate([
+            'language_name' => $language_name,
+            'language_code' => $language_code,
+            'is_default' => 'required',
+            'is_active' => 'required'
+        ]);
+
+        if($request->is_active && $request->is_default){
+            Language::where([
+                'is_active' => true,
+                'is_default' => true,
+            ])->update([
+                'is_default' => false,
+            ]);
+
+            Language::where('id', $id)->update([
+                'language_name' => $request->language_name,
+                'language_code' => strtolower($request->language_code),
+                'is_default' => $request->is_default,
+                'is_active' => $request->is_active
+            ]);
+        }else{
+            $is_default = $request->is_default;
+            $is_active = $request->is_active;
+            if($request->is_active == false && $request->is_default){
+                $is_default = false;
+            }
+
+            Language::where('id', $id)->update([
+                'language_name' => $request->language_name,
+                'language_code' => strtolower($request->language_code),
+                'is_default' => $is_default,
+                'is_active' => $is_active
+            ]);
+
+            $checkLang = Language::where([
+                'is_active' => true,
+                'is_default' => true,
+            ])->first();
+
+            if($checkLang == null){
+                $checkLang = Language::where([
+                    'is_active' => true,
+                ])->latest()->first()->update([
+                    'is_default' => true,
+                ]);
+            }
+        }
+
+        alert()->success('Record Updated!' );
+
+        return redirect($lang . '/admin/language');
     }
 
     /**
@@ -116,11 +198,11 @@ class LanguageController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy($id)
+    public function destroy($lang, $id)
     {
         alert()->success('Record Deleted!' );
         Language::destroy($id);
 
-        return redirect('admin/language');
+        return redirect($lang . '/admin/language');
     }
 }
