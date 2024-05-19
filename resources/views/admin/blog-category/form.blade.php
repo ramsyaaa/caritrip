@@ -7,6 +7,14 @@
 
 <div class="form-group" align="right">
     {!! Form::submit($formMode === 'edit' ? 'Update' : 'Create', ['class' => 'btn btn-primary']) !!}
-    {!! Form::reset('Reset', ['class' => 'btn btn-warning']) !!}
+    <button type="button" class="btn btn-warning" id="resetForm">Reset</button>
     <a href="#" onClick="javascript:history.go(-1)" class="btn btn-danger">Cancel and Back</a>
 </div>
+
+
+<script>
+    document.getElementById('resetForm').addEventListener('click', function() {
+        document.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
+        document.querySelectorAll('select').forEach(select => select.value = '1');
+    });
+</script>

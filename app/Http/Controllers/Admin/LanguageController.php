@@ -20,17 +20,40 @@ class LanguageController extends Controller
         $this->middleware('auth');
     }
 
+    public function checkLang($lang, $url){
+        $checkLang = Language::where([
+            'language_code' => $lang,
+            'is_active' => true,
+        ])->first();
+
+        if($checkLang == null){
+            $checkLang = Language::where([
+                'is_default' => true,
+                'is_active' => true,
+            ])->first();
+
+            if($checkLang == null){
+                $checkLang = Language::latest()->first();
+                if($checkLang == null){
+                    return abort(404);
+                }
+            }
+
+            return redirect($checkLang->language_code . $url);
+        }
+        return null;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\View\View
      */
-    public function index(Request $request, $lang)
+    public function index(Request $request)
     {
         $perPage = 25;
         $language = Language::latest()->paginate($perPage);
         $data['language'] = $language;
-        $data['language_default'] = $lang;
         return view('admin.language.index', $data);
     }
 
@@ -39,10 +62,9 @@ class LanguageController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create($lang)
+    public function create()
     {
-        $data['language_default'] = $lang;
-        return view('admin.language.create', $data);
+        return view('admin.language.create');
     }
 
     /**
@@ -52,7 +74,7 @@ class LanguageController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request, $lang)
+    public function store(Request $request)
     {
         $request->validate([
             'language_name' => 'required|string|unique:languages',
@@ -83,7 +105,7 @@ class LanguageController extends Controller
         ]);
         alert()->success('New ' . 'Language'. ' Created!' );
 
-        return redirect($lang . '/admin/language');
+        return redirect('/admin/language');
     }
 
     /**
@@ -93,10 +115,9 @@ class LanguageController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function show($lang, $id)
+    public function show($id)
     {
         $data['language'] = Language::findOrFail($id);
-        $data['language_default'] = $lang;
 
         return view('admin.language.show', $data);
     }
@@ -108,11 +129,10 @@ class LanguageController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function edit($lang, $id)
+    public function edit($id)
     {
         $language = Language::findOrFail($id);
         $data['language'] = $language;
-        $data['language_default'] = $lang;
         return view('admin.language.edit', $data);
     }
 
@@ -124,7 +144,7 @@ class LanguageController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, $lang, $id)
+    public function update(Request $request, $id)
     {
         $language = Language::findOrFail($id);
 
@@ -188,7 +208,7 @@ class LanguageController extends Controller
 
         alert()->success('Record Updated!' );
 
-        return redirect($lang . '/admin/language');
+        return redirect('/admin/language');
     }
 
     /**
@@ -198,11 +218,17 @@ class LanguageController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy($lang, $id)
+    public function destroy($id)
     {
+        $checkLang = Language::count();
+        if($checkLang <= 1){
+            alert()->error('Cannot delete the latest date' );
+            return redirect('/admin/language');
+        }
+
         alert()->success('Record Deleted!' );
         Language::destroy($id);
 
-        return redirect($lang . '/admin/language');
+        return redirect('/admin/language');
     }
 }

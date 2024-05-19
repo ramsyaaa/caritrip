@@ -22,18 +22,16 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => '{lang}', ], function () {
-    Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-        Route::get('', 'Admin\AdminController@index')->name('index');
-        Route::resource('page', 'Admin\\PageController');
-        Route::resource('boat', 'Admin\\BoatController');
-        Route::resource('boat-image', 'Admin\\BoatImageController');
-        Route::resource('boat-travel-package', 'Admin\\BoatTravelPackageController');
-        Route::resource('boat-travel-trip', 'Admin\\BoatTravelTripController');
-        Route::resource('boat-travel-trip-image', 'Admin\\BoatTravelTripImageController');
-        Route::resource('language', 'Admin\\LanguageController');
-        Route::resource('blog', 'Admin\\BlogController');
-        Route::resource('blog-category', 'Admin\\BlogCategoryController');
-    });
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::get('', 'Admin\AdminController@index')->name('index');
+    Route::resource('page', 'Admin\\PageController');
+    Route::resource('boat', 'Admin\\BoatController');
+    Route::resource('boat-image', 'Admin\\BoatImageController');
+    Route::resource('boat-travel-package', 'Admin\\BoatTravelPackageController');
+    Route::resource('boat-travel-trip', 'Admin\\BoatTravelTripController');
+    Route::resource('boat-travel-trip-image', 'Admin\\BoatTravelTripImageController');
+    Route::resource('language', 'Admin\\LanguageController');
+    Route::resource('blog', 'Admin\\BlogController');
+    Route::resource('blog-category', 'Admin\\BlogCategoryController');
 });
 

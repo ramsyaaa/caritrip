@@ -13,7 +13,7 @@
                     </div>
                     <div class="card-body">
                         {!! Form::open(['url' => '/admin/blog', 'class' => '', 'enctype' => 'multipart/form-data'])  !!}
-                            @include ('admin.blog.form', ['formMode' => 'create'])
+                            @include ('admin.blog.form', ['formMode' => 'create', 'blog_categories' => $blog_categories])
                         {!! Form::close() !!}
                     </div>
                 </div>

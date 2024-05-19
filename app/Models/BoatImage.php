@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BoatImage extends Model
 {
-    
+
 
     /**
      * The database table used by the model.
@@ -27,8 +27,14 @@ class BoatImage extends Model
      *
      * @var array
      */
+
+     public function boat()
+    {
+        return $this->belongsTo(Boat::class, 'boat_id');
+    }
+
     protected $fillable = ['boat_id', 'image_name', 'image_description', 'key_visual'];
 
-    
+
 
 }

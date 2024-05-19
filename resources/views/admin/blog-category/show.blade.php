@@ -8,17 +8,13 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">BlogCategory Detail</h4>
+                            <h4 class="card-title">Blog Category Detail</h4>
                         </div>
                     </div>
                     <div class="card-body px-0">
                         <div class="table-responsive">
                             <table class="table table-striped" role="grid">
                                 <tbody>
-                                    <tr>
-                                        <th>ID</th>
-                                        <td>{{ $blogcategory->id }}</td>
-                                    </tr>
                                     <tr><th> Category Name </th><td> {{ $blogcategory->category_name }} </td></tr>
                                 </tbody>
                             </table>

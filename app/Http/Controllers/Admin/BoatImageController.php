@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
+use App\Models\Boat;
 use App\Models\BoatImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BoatImageController extends Controller
 {
@@ -19,7 +21,7 @@ class BoatImageController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +42,8 @@ class BoatImageController extends Controller
      */
     public function create()
     {
-        return view('admin.boat-image.create');
+        $data['boats'] = Boat::get();
+        return view('admin.boat-image.create', $data);
     }
 
     /**
@@ -52,11 +55,18 @@ class BoatImageController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'boat_id' => 'required',
+            'image_name' => 'required',
+            'image_description' => 'required',
+            'key_visual' => 'required'
+        ]);
+
         $requestData = $request->all();
-                if ($request->hasFile('key_visual')) {
-            $requestData['key_visual'] = $request->file('key_visual')
-                ->store('', 'uploads');
+        if ($request->hasFile('key_visual')) {
+            $requestData['key_visual'] = $request->key_visual
+                ->store('uploads', 'public');
+                $requestData['key_visual'] = 'storage/' . $requestData['key_visual'];
         }
 
         BoatImage::create($requestData);
@@ -90,6 +100,7 @@ class BoatImageController extends Controller
     {
         $boatimage = BoatImage::findOrFail($id);
         $data['boatimage'] = $boatimage;
+        $data['boats'] = Boat::get();
         return view('admin.boat-image.edit', $data);
     }
 
@@ -103,14 +114,25 @@ class BoatImageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $request->validate([
+            'boat_id' => 'required',
+            'image_name' => 'required',
+            'image_description' => 'required',
+        ]);
+
         $requestData = $request->all();
-                if ($request->hasFile('key_visual')) {
-            $requestData['key_visual'] = $request->file('key_visual')
-                ->store('', 'uploads');
+        $boatimage = BoatImage::findOrFail($id);
+
+        if ($request->hasFile('key_visual')) {
+            if ($boatimage->key_visual) {
+                $oldImagePath = str_replace('storage/', '', $boatimage->key_visual);
+                Storage::disk('public')->delete($oldImagePath);
+            }
+            $requestData['key_visual'] = $request->key_visual
+                ->store('uploads', 'public');
+            $requestData['key_visual'] = 'storage/' . $requestData['key_visual'];
         }
 
-        $boatimage = BoatImage::findOrFail($id);
         alert()->success('Record Updated!' );
         $boatimage->update($requestData);
 

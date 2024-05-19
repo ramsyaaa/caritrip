@@ -17,7 +17,7 @@
                             'url' => ['/admin/blog', $blog->id],
                             'class' => '','enctype' => 'multipart/form-data']) !!}
 
-                            @include ('admin.blog.form', ['formMode' => 'edit'])
+                            @include ('admin.blog.form', ['formMode' => 'edit', 'blog_categories' => $blog_categories])
                         {!! Form::close() !!}
                     </div>
                 </div>

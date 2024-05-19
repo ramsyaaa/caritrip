@@ -9,7 +9,7 @@
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
                             <h4 class="card-title">Language List</h4>
-                            <a href="{{ url($language_default . '/admin/language'. '/create') }}" class="btn btn-success mr-2">
+                            <a href="{{ url('/admin/language'. '/create') }}" class="btn btn-success mr-2">
                                 <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                 </svg>
@@ -34,14 +34,14 @@
                                         <td>{{ $item->language_name }}</td><td>{{ $item->language_code }}</td><td>{{ $item->is_default ? 'Yes' : 'No' }}</td><td>{{ $item->is_active ? 'Yes' : 'No' }}</td>
                                         <td>
                                             <div class="flex align-items-center list-user-action">
-                                                <a class="btn btn-sm btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="View" href="{{ url($language_default . '/admin/language/' . $item->id) }}">
+                                                <a class="btn btn-sm btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="View" href="{{ url('/admin/language/' . $item->id) }}">
                                                     <span class="btn-inner">
                                                     <svg fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-32" width="32" height="32" viewBox="0 0 24 24">
                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8.09756 12C8.09756 14.1333 9.8439 15.8691 12 15.8691C14.1463 15.8691 15.8927 14.1333 15.8927 12C15.8927 9.85697 14.1463 8.12121 12 8.12121C9.8439 8.12121 8.09756 9.85697 8.09756 12ZM17.7366 6.04606C19.4439 7.36485 20.8976 9.29455 21.9415 11.7091C22.0195 11.8933 22.0195 12.1067 21.9415 12.2812C19.8537 17.1103 16.1366 20 12 20H11.9902C7.86341 20 4.14634 17.1103 2.05854 12.2812C1.98049 12.1067 1.98049 11.8933 2.05854 11.7091C4.14634 6.88 7.86341 4 11.9902 4H12C14.0683 4 16.0293 4.71758 17.7366 6.04606ZM12.0012 14.4124C13.3378 14.4124 14.4304 13.3264 14.4304 11.9979C14.4304 10.6597 13.3378 9.57362 12.0012 9.57362C11.8841 9.57362 11.767 9.58332 11.6597 9.60272C11.6207 10.6694 10.7426 11.5227 9.65971 11.5227H9.61093C9.58166 11.6779 9.56215 11.833 9.56215 11.9979C9.56215 13.3264 10.6548 14.4124 12.0012 14.4124Z" fill="currentColor"></path>
                                                     </svg>
                                                     </span>
                                                 </a>
-                                                <a class="btn btn-sm btn-icon btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-original-title="Edit" href="{{ url($language_default . '/admin/language/' . $item->id . '/edit') }}">
+                                                <a class="btn btn-sm btn-icon btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-original-title="Edit" href="{{ url('/admin/language/' . $item->id . '/edit') }}">
                                                     <span class="btn-inner">
                                                     <svg class="icon-20" width="20" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M11.4925 2.78906H7.75349C4.67849 2.78906 2.75049 4.96606 2.75049 8.04806V16.3621C2.75049 19.4441 4.66949 21.6211 7.75349 21.6211H16.5775C19.6625 21.6211 21.5815 19.4441 21.5815 16.3621V12.3341" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -61,7 +61,7 @@
                                                 </a>
                                                 {!! Form::open([
                                                     'method' => 'DELETE',
-                                                    'url' => [$language_default . '/admin/language', $item->id],
+                                                    'url' => ['/admin/language', $item->id],
                                                     'style' => 'display:inline',
                                                     'id' => 'deleteForm' . $item->id
                                                 ]) !!}

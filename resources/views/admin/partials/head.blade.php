@@ -9,7 +9,7 @@
 
         <!-- Google Font Api KEY-->
         <meta name="google_font_api" content="AIzaSyBG58yNdAjc20_8jAvLNSVi9E4Xhwjau_k">
-        
+
         <!-- Favicon -->
         <link rel="shortcut icon" href="{{asset('vendor/dashboard')}}/assets/images/favicon.ico">
         <!-- Library / Plugin Css Build -->
@@ -35,4 +35,6 @@
         <link rel="stylesheet" href="{{asset('vendor/sweetalert')}}/sweetalert.css">
         <!-- End SweetAlert2 -->
         <link rel="stylesheet" href="{{asset('vendor/dashboard')}}/assets/vendor/swiperSlider/swiper-bundle.min.css"/>
+        {{-- ckeditor --}}
+        <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
     </head>

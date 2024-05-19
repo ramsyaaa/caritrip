@@ -14,7 +14,7 @@
                     <div class="card-body">
                        {!! Form::model($language, [
                             'method' => 'PATCH',
-                            'url' => [$language_default . '/admin/language', $language->id],
+                            'url' => ['/admin/language', $language->id],
                             'class' => '','enctype' => 'multipart/form-data']) !!}
 
                             @include ('admin.language.form', ['formMode' => 'edit'])

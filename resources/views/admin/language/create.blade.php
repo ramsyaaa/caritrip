@@ -12,7 +12,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        {!! Form::open(['url' => $language_default . '/admin/language', 'class' => '', 'enctype' => 'multipart/form-data'])  !!}
+                        {!! Form::open(['url' => '/admin/language', 'class' => '', 'enctype' => 'multipart/form-data'])  !!}
                             @include ('admin.language.form', ['formMode' => 'create'])
                         {!! Form::close() !!}
                     </div>

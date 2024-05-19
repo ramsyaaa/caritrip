@@ -5,22 +5,25 @@
 </div>
 <div class="form-group{{ $errors->has('id_category') ? 'has-error' : ''}}">
     {!! Form::label('id_category', 'Id Category', ['class' => 'control-label']) !!}
-    {!! Form::number('id_category', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+    {!! Form::select('id_category', $blog_categories->pluck('category_name', 'id')->prepend('Choose Category', ''), null, ['class' => 'form-control']) !!}
     {!! $errors->first('id_category', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group{{ $errors->has('featured_image') ? 'has-error' : ''}}">
     {!! Form::label('featured_image', 'Featured Image', ['class' => 'control-label']) !!}
-    {!! Form::file('featured_image', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+    {!! Form::file('featured_image', ['class' => 'form-control', 'id' => 'featured_image', 'onchange' => 'previewImage(event)']) !!}
     {!! $errors->first('featured_image', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group">
+    <img id="image_preview" src="{{ isset($blog) && $blog->featured_image ? asset( $blog->featured_image) : '' }}" alt="Image Preview" style="max-height: 300px; display: {{ isset($blog) && $blog->featured_image ? 'block' : 'none' }};" />
 </div>
 <div class="form-group{{ $errors->has('slug') ? 'has-error' : ''}}">
     {!! Form::label('slug', 'Slug', ['class' => 'control-label']) !!}
     {!! Form::text('slug', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
     {!! $errors->first('slug', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group{{ $errors->has('content') ? 'has-error' : ''}}">
+<div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
     {!! Form::label('content', 'Content', ['class' => 'control-label']) !!}
-    {!! Form::textarea('content', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+    {!! Form::textarea('content', null, ['class' => 'form-control', 'id' => 'editor']) !!}
     {!! $errors->first('content', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group{{ $errors->has('meta_description') ? 'has-error' : ''}}">
@@ -33,10 +36,22 @@
     {!! Form::textarea('meta_keywords', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
     {!! $errors->first('meta_keywords', '<p class="help-block">:message</p>') !!}
 </div>
-
+</script>
 
 <div class="form-group" align="right">
     {!! Form::submit($formMode === 'edit' ? 'Update' : 'Create', ['class' => 'btn btn-primary']) !!}
     {!! Form::reset('Reset', ['class' => 'btn btn-warning']) !!}
     <a href="#" onClick="javascript:history.go(-1)" class="btn btn-danger">Cancel and Back</a>
 </div>
+
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function(){
+            var output = document.getElementById('image_preview');
+            output.src = reader.result;
+            output.style.display = 'block';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>

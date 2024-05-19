@@ -8,12 +8,12 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Add New BoatImage</h4>
+                            <h4 class="card-title">Add New Boat Image</h4>
                         </div>
                     </div>
                     <div class="card-body">
                         {!! Form::open(['url' => '/admin/boat-image', 'class' => '', 'enctype' => 'multipart/form-data'])  !!}
-                            @include ('admin.boat-image.form', ['formMode' => 'create'])
+                            @include ('admin.boat-image.form', ['formMode' => 'create', 'boats' => $boats])
                         {!! Form::close() !!}
                     </div>
                 </div>

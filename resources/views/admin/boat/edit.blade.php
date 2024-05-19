@@ -17,7 +17,7 @@
                             'url' => ['/admin/boat', $boat->id],
                             'class' => '','enctype' => 'multipart/form-data']) !!}
 
-                            @include ('admin.boat.form', ['formMode' => 'edit'])
+                            @include ('admin.boat.form', ['formMode' => 'edit', 'languages' => $languages])
                         {!! Form::close() !!}
                     </div>
                 </div>
