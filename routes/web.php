@@ -11,9 +11,28 @@
 |
 */
 
+use App\Http\Controllers\testApiController;
+use App\Http\Controllers\Traveller\BlogController;
+use App\Http\Controllers\Traveller\PackageController;
+use App\Models\Blog;
+use App\Models\BoatTravelPackage;
+use App\Models\BoatTravelTrip;
+
 Route::get('/', function () {
-    return view('auth.login');
+    $data['packages'] = BoatTravelPackage::get();
+    $data['trips'] = BoatTravelTrip::get();
+    $data['blogs'] = Blog::limit(9)->get();
+    return view('traveller.id.home', $data);
 });
+
+
+Route::get('/packages', function () {
+    $data['trips'] = BoatTravelTrip::get();
+    return view('traveller.id.packages.packages', $data);
+})->name('packages');
+Route::get('/packages/{id}', [PackageController::class, 'show'])->name('packages.detail');
+Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
+Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show');
 Route::get('/auth-user', 'Auth\AuthController@loginPage')->name('auth.page');
 Route::post('/auth-user', 'Auth\AuthController@loginUser')->name('auth.submit');
 
@@ -22,7 +41,7 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['user.info']], function () {
     Route::get('', 'Admin\AdminController@index')->name('index');
     Route::resource('page', 'Admin\\PageController');
     Route::resource('boat', 'Admin\\BoatController');
@@ -34,4 +53,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resource('blog', 'Admin\\BlogController');
     Route::resource('blog-category', 'Admin\\BlogCategoryController');
 });
+
 

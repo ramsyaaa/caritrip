@@ -17,7 +17,7 @@
 <script src="{{asset('vendor/sweetalert')}}/sweetalert.min.js"></script>
 <script src="{{asset('vendor/dashboard')}}/assets/js/plugins/circle-progress.js"></script>
 <script src="{{asset('vendor/dashboard')}}/assets/js/plugins/custom-circle-progress.js"defer=""></script>
-<script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script><script>
     CKEDITOR.replace('editor', {
         removePlugins: 'uploadimage,image2',
         extraPlugins: 'image',

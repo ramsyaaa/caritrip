@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
+use App\Models\Boat;
 use App\Models\BoatTravelPackage;
+use App\Models\Language;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BoatTravelPackageController extends Controller
 {
@@ -19,7 +22,7 @@ class BoatTravelPackageController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +43,9 @@ class BoatTravelPackageController extends Controller
      */
     public function create()
     {
-        return view('admin.boat-travel-package.create');
+        $data['boats'] = Boat::get();
+        $data['languages'] = Language::get();
+        return view('admin.boat-travel-package.create', $data);
     }
 
     /**
@@ -52,11 +57,28 @@ class BoatTravelPackageController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'package_name' => 'required',
+            'boat_id' => 'required',
+            'package_key_visual' => 'required',
+            'package_short_description' => 'required',
+            'package_description' => 'required',
+            'location' => 'required',
+            'have_itenary' => 'required',
+            'itenary_list' => 'required',
+            'include_list' => 'required',
+            'exclude_list' => 'required',
+            'seo_meta_description' => 'required',
+            'seo_meta_keywords' => 'required',
+            'highlight_video' => 'required',
+            'language_id' => 'required',
+        ]);
+
         $requestData = $request->all();
-                if ($request->hasFile('package_key_visual')) {
-            $requestData['package_key_visual'] = $request->file('package_key_visual')
-                ->store('', 'uploads');
+        if ($request->hasFile('package_key_visual')) {
+            $requestData['package_key_visual'] = $request->package_key_visual
+            ->store('uploads', 'public');
+            $requestData['package_key_visual'] = 'storage/' . $requestData['package_key_visual'];
         }
 
         BoatTravelPackage::create($requestData);
@@ -90,6 +112,8 @@ class BoatTravelPackageController extends Controller
     {
         $boattravelpackage = BoatTravelPackage::findOrFail($id);
         $data['boattravelpackage'] = $boattravelpackage;
+        $data['boats'] = Boat::get();
+        $data['languages'] = Language::get();
         return view('admin.boat-travel-package.edit', $data);
     }
 
@@ -103,14 +127,35 @@ class BoatTravelPackageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $request->validate([
+            'package_name' => 'required',
+            'boat_id' => 'required',
+            'package_short_description' => 'required',
+            'package_description' => 'required',
+            'location' => 'required',
+            'have_itenary' => 'required',
+            'itenary_list' => 'required',
+            'include_list' => 'required',
+            'exclude_list' => 'required',
+            'seo_meta_description' => 'required',
+            'seo_meta_keywords' => 'required',
+            'highlight_video' => 'required',
+            'language_id' => 'required',
+        ]);
+
         $requestData = $request->all();
-                if ($request->hasFile('package_key_visual')) {
-            $requestData['package_key_visual'] = $request->file('package_key_visual')
-                ->store('', 'uploads');
+        $boattravelpackage = BoatTravelPackage::findOrFail($id);
+        if ($request->hasFile('package_key_visual')) {
+            if ($boattravelpackage->package_key_visual) {
+                $oldImagePath = str_replace('storage/', '', $boattravelpackage->package_key_visual);
+                Storage::disk('public')->delete($oldImagePath);
+            }
+            $requestData['package_key_visual'] = $request->package_key_visual
+                ->store('uploads', 'public');
+            $requestData['package_key_visual'] = 'storage/' . $requestData['package_key_visual'];
         }
 
-        $boattravelpackage = BoatTravelPackage::findOrFail($id);
+
         alert()->success('Record Updated!' );
         $boattravelpackage->update($requestData);
 

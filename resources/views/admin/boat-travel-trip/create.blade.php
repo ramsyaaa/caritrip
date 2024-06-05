@@ -8,12 +8,12 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Add New BoatTravelTrip</h4>
+                            <h4 class="card-title">Add New Boat Travel Trip</h4>
                         </div>
                     </div>
                     <div class="card-body">
                         {!! Form::open(['url' => '/admin/boat-travel-trip', 'class' => '', 'enctype' => 'multipart/form-data'])  !!}
-                            @include ('admin.boat-travel-trip.form', ['formMode' => 'create'])
+                            @include ('admin.boat-travel-trip.form', ['formMode' => 'create', 'packages' => $packages, 'languages' => $languages])
                         {!! Form::close() !!}
                     </div>
                 </div>

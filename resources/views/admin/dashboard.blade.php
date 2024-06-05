@@ -1,123 +1,90 @@
 @extends('admin.layout.master')
 
 @section('content')
-<div class="content-inner container-fluid pb-0" id="page_layout">
-    <div class="row">
-        <div class="col-md-12 col-lg-12">
-            <div class="row row-cols-1">
-                <div class="overflow-hidden d-slider1">
-                    <ul class="p-0 m-0 mb-2 swiper-wrapper list-inline">
-                        <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="700">
-                            <div class="card-body">
-                                <div class="progress-widget">
-                                    <div id="circle-progress-01" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
-                                        <svg class="card-slie-arrow " width="24" height="24px" viewbox="0 0 24 24">
-                                            <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z"></path>
-                                        </svg>
-                                    </div>
-                                    <div class="progress-detail">
-                                        <p class="mb-2">Total Sales</p>
-                                        <h4 class="counter">$560K</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="800">
-                            <div class="card-body">
-                                <div class="progress-widget">
-                                    <div id="circle-progress-02" class="text-center circle-progress-01 circle-progress circle-progress-info" data-min-value="0" data-max-value="100" data-value="80" data-type="percent">
-                                        <svg class="card-slie-arrow " width="24" height="24" viewbox="0 0 24 24">
-                                            <path fill="currentColor" d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z"></path>
-                                        </svg>
-                                    </div>
-                                    <div class="progress-detail">
-                                        <p class="mb-2">Total Profit</p>
-                                        <h4 class="counter">$185K</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="900">
-                            <div class="card-body">
-                                <div class="progress-widget">
-                                    <div id="circle-progress-03" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="70" data-type="percent">
-                                        <svg class="card-slie-arrow " width="24" viewbox="0 0 24 24">
-                                            <path fill="currentColor" d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z"></path>
-                                        </svg>
-                                    </div>
-                                    <div class="progress-detail">
-                                        <p class="mb-2">Total Cost</p>
-                                        <h4 class="counter">$375K</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1000">
-                            <div class="card-body">
-                                <div class="progress-widget">
-                                    <div id="circle-progress-04" class="text-center circle-progress-01 circle-progress circle-progress-info" data-min-value="0" data-max-value="100" data-value="60" data-type="percent">
-                                        <svg class="card-slie-arrow " width="24px" height="24px" viewbox="0 0 24 24">
-                                            <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z"></path>
-                                        </svg>
-                                    </div>
-                                    <div class="progress-detail">
-                                        <p class="mb-2">Revenue</p>
-                                        <h4 class="counter">$742K</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1100">
-                            <div class="card-body">
-                                <div class="progress-widget">
-                                    <div id="circle-progress-05" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="50" data-type="percent">
-                                        <svg class="card-slie-arrow " width="24px" height="24px" viewbox="0 0 24 24">
-                                            <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z"></path>
-                                        </svg>
-                                    </div>
-                                    <div class="progress-detail">
-                                        <p class="mb-2">Net Income</p>
-                                        <h4 class="counter">$150K</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1200">
-                            <div class="card-body">
-                                <div class="progress-widget">
-                                    <div id="circle-progress-06" class="text-center circle-progress-01 circle-progress circle-progress-info" data-min-value="0" data-max-value="100" data-value="40" data-type="percent">
-                                        <svg class="card-slie-arrow " width="24" viewbox="0 0 24 24">
-                                            <path fill="currentColor" d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z"></path>
-                                        </svg>
-                                    </div>
-                                    <div class="progress-detail">
-                                        <p class="mb-2">Today</p>
-                                        <h4 class="counter">$4600</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1300">
-                            <div class="card-body">
-                                <div class="progress-widget">
-                                    <div id="circle-progress-07" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="30" data-type="percent">
-                                        <svg class="card-slie-arrow " width="24" viewbox="0 0 24 24">
-                                            <path fill="currentColor" d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z"></path>
-                                        </svg>
-                                    </div>
-                                    <div class="progress-detail">
-                                        <p class="mb-2">Members</p>
-                                        <h4 class="counter">11.2M</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="swiper-button swiper-button-next"></div>
-                    <div class="swiper-button swiper-button-prev"></div>
-                </div>
+<main class="main-content">
+    <div class="position-relative">
+    </div>
+    <div class="content-inner container-fluid pb-0" id="page_layout">
+        <div
+            class="d-flex justify-content-between align-items-center flex-wrap mb-4 gap-3"
+        >
+            <div class="d-flex flex-column">
+                <h3>Quick Insights</h3>
+                <p class="text-primary mb-0">Admin Dashboard</p>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-3">
+                <div class="card card-block card-stretch card-height">
+                    <div class="card-body">
+                        <div
+                            class="d-flex align-items-start justify-content-between mb-2"
+                        >
+                            <p class="mb-0 text-dark">Total Users</p>
+                            {{-- <a
+                                class="badge rounded-pill bg-soft-primary"
+                                href="javascript:void(0);"
+                            >
+                                View
+                            </a> --}}
+                        </div>
+                        <div class="mb-3">
+                            <h2 class="counter">{{ number_format($total_users, 0, ',', '.') }}</h2>
+                            {{-- <small>Last updated 1 hour ago.</small> --}}
+                        </div>
+                        <div>
+                            <div id="chart_div"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+            <script type="text/javascript">
+                // Load the Visualization API and the corechart package
+                google.charts.load('current', {'packages':['corechart']});
+
+                // Set a callback to run when the Google Visualization API is loaded
+                google.charts.setOnLoadCallback(drawChart);
+
+                // Fungsi untuk menggambar chart
+                function drawChart() {
+                    // Mengambil data dari PHP
+                    var days = JSON.parse('<?php echo json_encode(array_keys($last_users)); ?>');
+                    var values = JSON.parse('<?php echo json_encode(array_values($last_users)); ?>');
+
+                    // Format data untuk Google Charts
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Day');
+                    data.addColumn('number', 'Number of Users');
+
+                    for (var i = 0; i < days.length; i++) {
+                        data.addRow([days[i], values[i]]);
+                    }
+
+                    // Set options untuk chart
+                    var options = {
+                        title: 'User Access Over the Last 7 Days',
+                        hAxis: {title: 'Day'},
+                        vAxis: {title: 'Number of Users'},
+                        legend: 'none',
+                        series: {
+                            0: {
+                                // Menampilkan bar chart berupa garis
+                                type: 'line',
+                                lineWidth: 5,
+                                pointSize: 5
+                            }
+                        },
+                        bar: { groupWidth: '95%' }
+                    };
+
+                    // Instantiate and draw the chart
+                    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+                    chart.draw(data, options);
+                }
+            </script>
+        </div>
     </div>
-</div>
+</main>
 @endsection

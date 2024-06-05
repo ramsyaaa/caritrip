@@ -1,7 +1,7 @@
 <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title data-rightjoin="CRM">CRM</title>
+        <title data-rightjoin="CRM">Caritrip - Admin</title>
         {{-- <meta name="description" content="Hope UI Pro is a revolutionary Bootstrap Admin Dashboard Template and UI Components Library. The Admin Dashboard Template and UI Component features 8 modules.">
         <meta name="keywords" content="premium, admin, dashboard, template, bootstrap 5, clean ui, hope ui, admin dashboard,responsive dashboard, optimized dashboard,">
         <meta name="author" content="Iqonic Design"> --}}
@@ -11,7 +11,7 @@
         <meta name="google_font_api" content="AIzaSyBG58yNdAjc20_8jAvLNSVi9E4Xhwjau_k">
 
         <!-- Favicon -->
-        <link rel="shortcut icon" href="{{asset('vendor/dashboard')}}/assets/images/favicon.ico">
+        <link rel="shortcut icon" href="{{ asset('assets/logos/IMG_0859.PNG') }}">
         <!-- Library / Plugin Css Build -->
         <link rel="stylesheet" href="{{asset('vendor/dashboard')}}/assets/css/core/libs.min.css">
         <!-- Flatpickr css -->
@@ -37,4 +37,13 @@
         <link rel="stylesheet" href="{{asset('vendor/dashboard')}}/assets/vendor/swiperSlider/swiper-bundle.min.css"/>
         {{-- ckeditor --}}
         <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Fredoka', sans-serif !important;
+            }
+        </style>
     </head>

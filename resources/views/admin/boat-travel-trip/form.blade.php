@@ -1,6 +1,11 @@
-<div class="form-group{{ $errors->has('package_id') ? 'has-error' : ''}}">
+{{-- <div class="form-group{{ $errors->has('package_id') ? 'has-error' : ''}}">
     {!! Form::label('package_id', 'Package Id', ['class' => 'control-label']) !!}
     {!! Form::number('package_id', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+    {!! $errors->first('package_id', '<p class="help-block">:message</p>') !!}
+</div> --}}
+<div class="form-group{{ $errors->has('package_id') ? 'has-error' : ''}}">
+    {!! Form::label('package_id', 'Package', ['class' => 'control-label']) !!}
+    {!! Form::select('package_id', $packages->pluck('package_name', 'id')->prepend('Choose Package', ''), null, ['class' => 'form-control']) !!}
     {!! $errors->first('package_id', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group{{ $errors->has('trip_category') ? 'has-error' : ''}}">
@@ -33,9 +38,14 @@
     {!! Form::text('trip_note', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
     {!! $errors->first('trip_note', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group{{ $errors->has('language_id') ? 'has-error' : ''}}">
+{{-- <div class="form-group{{ $errors->has('language_id') ? 'has-error' : ''}}">
     {!! Form::label('language_id', 'Language Id', ['class' => 'control-label']) !!}
     {!! Form::number('language_id', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+    {!! $errors->first('language_id', '<p class="help-block">:message</p>') !!}
+</div> --}}
+<div class="form-group{{ $errors->has('language_id') ? 'has-error' : ''}}">
+    {!! Form::label('language_id', 'Language', ['class' => 'control-label']) !!}
+    {!! Form::select('language_id', $languages->pluck('language_name', 'id')->prepend('Choose Language', ''), null, ['class' => 'form-control']) !!}
     {!! $errors->first('language_id', '<p class="help-block">:message</p>') !!}
 </div>
 
