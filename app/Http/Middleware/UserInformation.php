@@ -44,15 +44,15 @@ class UserInformation
             ->first();
 
         // Jika belum ada, simpan data baru
-        if (!$existingLog) {
-            UserLog::create([
-                'ip_address' => $ip,
-                'country' => $location['country'] ?? 'Unknown',
-                'browser' => $browser,
-                'url' => $url,
-                'access_date' => $today,
-            ]);
-        }
+        // if (!$existingLog) {
+        //     UserLog::create([
+        //         'ip_address' => $ip,
+        //         'country' => $location['country'] ?? 'Unknown',
+        //         'browser' => $browser,
+        //         'url' => $url,
+        //         'access_date' => $today,
+        //     ]);
+        // }
 
         return $next($request);
     }

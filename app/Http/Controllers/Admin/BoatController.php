@@ -57,20 +57,20 @@ class BoatController extends Controller
     {
         $request->validate([
             'boat_name' => 'required',
-            'boat_length' => 'required',
-            'boat_width' => 'required',
-            'boat_depth' => 'required',
+            'boat_length' => 'required|numeric',
+            'boat_width' => 'required|numeric',
+            'boat_depth' => 'required|numeric',
             'boat_speed' => 'required',
-            'boat_year_built' => 'required',
-            'boat_fuel_capacity' => 'required',
-            'boat_water_capacity' => 'required',
+            'boat_year_built' => 'required|numeric',
+            'boat_fuel_capacity' => 'required|numeric',
+            'boat_water_capacity' => 'required|numeric',
             'boat_origin' => 'required',
             'boat_material' => 'required',
             'boat_main_engine' => 'required',
             'boat_dingy' => 'required',
             'boat_safety_equipment' => 'required',
             'boat_facility' => 'required',
-            'boat_capacity' => 'required',
+            'boat_capacity' => 'required|numeric',
             'boat_entertainment' => 'required',
             'boat_featured_image' => 'required',
             'seo_meta_description' => 'required',
@@ -81,7 +81,7 @@ class BoatController extends Controller
         $requestData = $request->all();
         if ($request->hasFile('boat_featured_image')) {
             $requestData['boat_featured_image'] = $request->boat_featured_image
-            ->store('uploads', 'public');
+            ->store('uploads/boats', 'public');
             $requestData['boat_featured_image'] = 'storage/' . $requestData['boat_featured_image'];
         }
 
@@ -132,25 +132,24 @@ class BoatController extends Controller
     {
         $request->validate([
             'boat_name' => 'required',
-            'boat_length' => 'required',
-            'boat_width' => 'required',
-            'boat_depth' => 'required',
+            'boat_length' => 'required|numeric',
+            'boat_width' => 'required|numeric',
+            'boat_depth' => 'required|numeric',
             'boat_speed' => 'required',
-            'boat_year_built' => 'required',
-            'boat_fuel_capacity' => 'required',
-            'boat_water_capacity' => 'required',
+            'boat_year_built' => 'required|numeric',
+            'boat_fuel_capacity' => 'required|numeric',
+            'boat_water_capacity' => 'required|numeric',
             'boat_origin' => 'required',
             'boat_material' => 'required',
             'boat_main_engine' => 'required',
             'boat_dingy' => 'required',
             'boat_safety_equipment' => 'required',
             'boat_facility' => 'required',
-            'boat_capacity' => 'required',
+            'boat_capacity' => 'required|numeric',
             'boat_entertainment' => 'required',
             'seo_meta_description' => 'required',
             'seo_meta_keywords' => 'required',
             'language_id' => 'required',
-
         ]);
 
         $boat = Boat::findOrFail($id);
@@ -162,7 +161,7 @@ class BoatController extends Controller
                 Storage::disk('public')->delete($oldImagePath);
             }
             $requestData['boat_featured_image'] = $request->boat_featured_image
-                ->store('uploads', 'public');
+                ->store('uploads/boats', 'public');
             $requestData['boat_featured_image'] = 'storage/' . $requestData['boat_featured_image'];
         }
 

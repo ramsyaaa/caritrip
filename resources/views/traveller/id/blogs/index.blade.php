@@ -12,10 +12,10 @@
     <main id="content" class="site-main">
        <!-- ***Inner Banner html start form here*** -->
        <div class="inner-banner-wrap">
-          <div class="inner-baner-container" style="background-image: url(assets/images/img7.jpg);">
+          <div class="inner-baner-container" style="background-image: url({{ asset('vendor/landing/assets/images/img7.jpg') }});">
              <div class="container">
                 <div class="inner-banner-content">
-                   <h1 class="page-title">All Blog</h1>
+                   <h1 class="font-bold text-white text-[32px]">All Blog</h1>
                 </div>
              </div>
           </div>
@@ -37,7 +37,7 @@
                                <div class="cat-meta">
                                   <a>{{ $blog->category ? $blog->category->category_name : '' }}</a>
                                </div>
-                               <h3><a href="{{ route('blogs.show', ['slug' => $blog->slug]) }}">{{ $blog->title }}</a></h3>
+                               <h3 class="font-bold text-[16px] mb-4"><a href="{{ route('blogs.show', ['slug' => $blog->slug]) }}">{{ $blog->title }}</a></h3>
                                {{-- <p>Laboris hac erat dolor, posuere volutpat fringilla gravida metus nonummy, blandit mi...</p> --}}
                                <div class="post-footer d-flex justify-content-between align-items-center">
                                   <div class="post-btn">

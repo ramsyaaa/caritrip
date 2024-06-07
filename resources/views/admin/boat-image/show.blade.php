@@ -20,7 +20,7 @@
                                     </td></tr>
                                 </tbody>
                             </table>
-                            <a href="{{ url('/admin/boat-image') }}"><button class="btn btn-warning btn-sm"><i class="fa fa-close" aria-hidden="true"></i> Back</button></a>
+                            <a href="{{ url('/admin/boat/' . $boat_id . '/images') }}"><button class="btn btn-warning btn-sm"><i class="fa fa-close" aria-hidden="true"></i> Back</button></a>
                         </div>
                     </div>
                 </div>

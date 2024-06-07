@@ -4,7 +4,7 @@
     {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group{{ $errors->has('id_category') ? 'has-error' : ''}}">
-    {!! Form::label('id_category', 'Id Category', ['class' => 'control-label']) !!}
+    {!! Form::label('id_category', 'Category', ['class' => 'control-label']) !!}
     {!! Form::select('id_category', $blog_categories->pluck('category_name', 'id')->prepend('Choose Category', ''), null, ['class' => 'form-control']) !!}
     {!! $errors->first('id_category', '<p class="help-block">:message</p>') !!}
 </div>

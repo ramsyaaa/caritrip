@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Alert;
 use App\Models\Boat;
 use App\Models\BoatTravelPackage;
+use App\Models\Destination;
 use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -45,6 +46,7 @@ class BoatTravelPackageController extends Controller
     {
         $data['boats'] = Boat::get();
         $data['languages'] = Language::get();
+        $data['destinations'] = Destination::get();
         return view('admin.boat-travel-package.create', $data);
     }
 
@@ -61,28 +63,26 @@ class BoatTravelPackageController extends Controller
             'package_name' => 'required',
             'boat_id' => 'required',
             'package_key_visual' => 'required',
-            'package_short_description' => 'required',
-            'package_description' => 'required',
-            'location' => 'required',
+            'destination_id' => 'required',
+            'trip_subcategory' => 'required',
             'have_itenary' => 'required',
             'itenary_list' => 'required',
             'include_list' => 'required',
             'exclude_list' => 'required',
             'seo_meta_description' => 'required',
             'seo_meta_keywords' => 'required',
-            'highlight_video' => 'required',
             'language_id' => 'required',
         ]);
 
         $requestData = $request->all();
         if ($request->hasFile('package_key_visual')) {
             $requestData['package_key_visual'] = $request->package_key_visual
-            ->store('uploads', 'public');
+            ->store('uploads/packages', 'public');
             $requestData['package_key_visual'] = 'storage/' . $requestData['package_key_visual'];
         }
 
         BoatTravelPackage::create($requestData);
-        alert()->success('New ' . 'BoatTravelPackage'. ' Created!' );
+        alert()->success('New ' . 'Boat Travel Package'. ' Created!' );
 
         return redirect('admin/boat-travel-package');
     }
@@ -114,6 +114,7 @@ class BoatTravelPackageController extends Controller
         $data['boattravelpackage'] = $boattravelpackage;
         $data['boats'] = Boat::get();
         $data['languages'] = Language::get();
+        $data['destinations'] = Destination::get();
         return view('admin.boat-travel-package.edit', $data);
     }
 
@@ -130,16 +131,14 @@ class BoatTravelPackageController extends Controller
         $request->validate([
             'package_name' => 'required',
             'boat_id' => 'required',
-            'package_short_description' => 'required',
-            'package_description' => 'required',
-            'location' => 'required',
+            'destination_id' => 'required',
+            'trip_subcategory' => 'required',
             'have_itenary' => 'required',
             'itenary_list' => 'required',
             'include_list' => 'required',
             'exclude_list' => 'required',
             'seo_meta_description' => 'required',
             'seo_meta_keywords' => 'required',
-            'highlight_video' => 'required',
             'language_id' => 'required',
         ]);
 
@@ -151,7 +150,7 @@ class BoatTravelPackageController extends Controller
                 Storage::disk('public')->delete($oldImagePath);
             }
             $requestData['package_key_visual'] = $request->package_key_visual
-                ->store('uploads', 'public');
+                ->store('uploads/packages', 'public');
             $requestData['package_key_visual'] = 'storage/' . $requestData['package_key_visual'];
         }
 

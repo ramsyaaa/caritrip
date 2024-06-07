@@ -1,9 +1,9 @@
 <!-- ***site footer html start form here*** -->
-<footer id="colophon" class="site-footer footer-primary">
+<footer id="colophon" class="site-footer footer-primary" style="background-color: #2C2D83">
     <div class="top-footer">
        <div class="container">
           <div class="upper-footer">
-             <div class="row">
+             <div class="row flex w-full justify-center">
                 <div class="col-lg-3 col-sm-6">
                    <aside class="widget widget_text">
                       <div class="footer-logo">
@@ -12,43 +12,6 @@
                       <div class="textwidget widget-text">
                          Urna ratione ante harum provident, eleifend, vulputate molestiae proin fringilla, praesentium magna conubia at perferendis, pretium, aenean aut ultrices.
                       </div>
-                   </aside>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                   <aside class="widget widget_latest_post widget-post-thumb">
-                      <h3 class="widget-title">RECENT POST</h3>
-                      <ul>
-                         <li>
-                            <figure class="post-thumb">
-                               <a href="blog-archive.html"><img src="assets/images/img21.jpg" alt=""></a>
-                            </figure>
-                            <div class="post-content">
-                               <h6>
-                                  <a href="blog-single.html">BEST JOURNEY TO PEACEFUL PLACES</a>
-                               </h6>
-                               <div class="entry-meta">
-                                  <span class="posted-on">
-                                     <a href="blog-archive.html">February 17, 2022</a>
-                                  </span>
-                               </div>
-                            </div>
-                         </li>
-                         <li>
-                            <figure class="post-thumb">
-                               <a href="blog-archive.html"><img src="assets/images/img22.jpg" alt=""></a>
-                            </figure>
-                            <div class="post-content">
-                               <h6>
-                                  <a href="blog-single.html">TRAVEL WITH FRIENDS IS BEST</a>
-                               </h6>
-                               <div class="entry-meta">
-                                  <span class="posted-on">
-                                     <a href="blog-archive.html">February 17, 2022</a>
-                                  </span>
-                               </div>
-                            </div>
-                         </li>
-                      </ul>
                    </aside>
                 </div>
                 <div class="col-lg-3 col-sm-6">
@@ -77,50 +40,13 @@
                       </div>
                    </aside>
                 </div>
-                <div class="col-lg-3 col-sm-6">
-                   <aside class="widget">
-                      <h3 class="widget-title">Gallery</h3>
-                      <div class="gallery gallery-colum-3">
-                         <figure class="gallery-item">
-                            <a href="assets/images/img10.jpg" data-fancybox="gallery-1">
-                               <img src="assets/images/img21.jpg" alt="">
-                            </a>
-                         </figure>
-                         <figure class="gallery-item">
-                            <a href="assets/images/img28.jpg" data-fancybox="gallery-1">
-                               <img src="assets/images/img22.jpg" alt="">
-                            </a>
-                         </figure>
-                         <figure class="gallery-item">
-                            <a href="assets/images/img14.jpg" data-fancybox="gallery-1">
-                               <img src="assets/images/img23.jpg" alt="">
-                            </a>
-                         </figure>
-                         <figure class="gallery-item">
-                            <a href="assets/images/img15.jpg" data-fancybox="gallery-1">
-                               <img src="assets/images/img24.jpg" alt="">
-                            </a>
-                         </figure>
-                         <figure class="gallery-item">
-                            <a href="assets/images/img12.jpg" data-fancybox="gallery-1">
-                               <img src="assets/images/img25.jpg" alt="">
-                            </a>
-                         </figure>
-                         <figure class="gallery-item">
-                            <a href="assets/images/img13.jpg" data-fancybox="gallery-1">
-                               <img src="assets/images/img26.jpg" alt="">
-                            </a>
-                         </figure>
-                      </div>
-                   </aside>
-                </div>
              </div>
           </div>
           <div class="lower-footer">
-             <div class="row align-items-center">
-                <div class="col-lg-6 text-right">
-                   <div class="social-icon">
-                      <ul>
+             <div class="row flex w-full justify-center">
+                <div class="">
+                   <div class="social-icon flex w-full justify-center">
+                      <ul class="flex w-full justify-center">
                          <li>
                             <a href="https://www.facebook.com/" target="_blank">
                                <i class="fab fa-facebook-f" aria-hidden="true"></i>
@@ -148,7 +74,7 @@
                          </li>
                       </ul>
                    </div>
-                   <div class="footer-menu">
+                   <div class="footer-menu flex w-full justify-center">
                       <ul>
                          <li>
                             <a href="policy.html">Privacy Policy</a>
@@ -166,9 +92,9 @@
           </div>
        </div>
     </div>
-    <div class="bottom-footer">
+    <div class="bottom-footer" style="background-color: #2C2D83">
        <div class="container">
-          <div class="copy-right text-center">Copyright &copy; 2022 Traveler. All rights reserved.</div>
+          <div class="copy-right text-center">Copyright &copy; {{ date('Y') }} Caritrip. All rights reserved.</div>
        </div>
     </div>
  </footer>
@@ -195,17 +121,17 @@
     <div class="offcanvas-inner">
        <div class="offcanvas-sidebar">
           <aside class="widget author_widget">
-             <h3 class="widget-title">OUR PROPRIETOR</h3>
+             <h3 class="widget-title">CariTrip</h3>
              <div class="widget-content text-center">
                 <div class="profile">
                    <figure class="avatar">
-                      <img src="assets/images/img21.jpg" alt="">
+                      <img src="{{ asset('assets/logos/caritrip.png') }}" alt="">
                    </figure>
                    <div class="text-content">
                       <div class="name-title">
-                         <h4> James Watson</h4>
+                         {{-- <h4> James Watson</h4> --}}
                       </div>
-                      <p>Accumsan? Aliquet nobis doloremque, aliqua? Inceptos voluptatem, duis tempore optio quae animi viverra distinctio cumque vivamus, earum congue, anim velit</p>
+                      {{-- <p>Accumsan? Aliquet nobis doloremque, aliqua? Inceptos voluptatem, duis tempore optio quae animi viverra distinctio cumque vivamus, earum congue, anim velit</p> --}}
                    </div>
                    <div class="socialgroup">
                       <ul>

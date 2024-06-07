@@ -33,11 +33,16 @@
     {!! Form::number('trip_price', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
     {!! $errors->first('trip_price', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group{{ $errors->has('trip_note') ? 'has-error' : ''}}">
+<div class="form-group{{ $errors->has('trip_note') ? ' has-error' : '' }}">
+    {!! Form::label('trip_note', 'Trip Note', ['class' => 'control-label']) !!}
+    {!! Form::textarea('trip_note', null, ['class' => 'form-control', 'id' => 'editor']) !!}
+    {!! $errors->first('trip_note', '<p class="help-block">:message</p>') !!}
+</div>
+{{-- <div class="form-group{{ $errors->has('trip_note') ? 'has-error' : ''}}">
     {!! Form::label('trip_note', 'Trip Note', ['class' => 'control-label']) !!}
     {!! Form::text('trip_note', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
     {!! $errors->first('trip_note', '<p class="help-block">:message</p>') !!}
-</div>
+</div> --}}
 {{-- <div class="form-group{{ $errors->has('language_id') ? 'has-error' : ''}}">
     {!! Form::label('language_id', 'Language Id', ['class' => 'control-label']) !!}
     {!! Form::number('language_id', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}

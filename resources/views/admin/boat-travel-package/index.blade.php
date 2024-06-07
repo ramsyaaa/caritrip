@@ -23,7 +23,7 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Package Name</th><th>Boat</th><th>Package Key Visual</th><th>Package Short Description</th><th>Package Description</th><th>Location</th><th>Have Itenary</th><th>Itenary List</th><th>Include List</th><th>Exclude List</th><th>Seo Meta Description</th><th>Seo Meta Keywords</th><th>Highlight Video</th><th>Language</th>
+                                        <th>Package Name</th><th>Boat</th><th>Language</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -31,7 +31,7 @@
                                     @foreach($boattravelpackage as $i => $item)
                                     <tr>
                                         <td>{{ $i+1 }}</td>
-                                        <td>{{ $item->package_name }}</td><td>{{ $item->boat ? $item->boat->boat_name : '' }}</td><td>{{ $item->package_key_visual }}</td><td>{{ $item->package_short_description }}</td><td>{{ $item->package_description }}</td><td>{{ $item->location }}</td><td>{{ $item->have_itenary ? 'Yes' : 'No' }}</td><td>{{ $item->itenary_list }}</td><td>{{ $item->include_list }}</td><td>{{ $item->exclude_list }}</td><td>{{ $item->seo_meta_description }}</td><td>{{ $item->seo_meta_keywords }}</td><td>{{ $item->highlight_video }}</td><td>{{ $item->language ? $item->language->language_name : '' }}</td>
+                                        <td>{{ $item->package_name }}</td><td>{{ $item->boat ? $item->boat->boat_name : '' }}</td><td>{{ $item->language ? $item->language->language_name : '' }}</td>
                                         <td>
                                             <div class="flex align-items-center list-user-action">
                                                 <a class="btn btn-sm btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="View" href="{{ url('/admin/boat-travel-package/' . $item->id) }}">

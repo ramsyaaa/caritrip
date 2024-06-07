@@ -12,10 +12,10 @@
           <section class="inner-page-wrap">
              <!-- ***Inner Banner html start form here*** -->
              <div class="inner-banner-wrap">
-                <div class="inner-baner-container" style="background-image: url(assets/images/img7.jpg);">
+                <div class="inner-baner-container" style="background-image: url({{ asset('vendor/landing/assets/images/img7.jpg') }});">
                    <div class="container">
                       <div class="inner-banner-content">
-                         <h1 class="page-title">Tour Packages</h1>
+                         <h1 class="font-bold text-[32px] text-white">Tour Packages @if($category) ({{ $category }}) @endif</h1>
                       </div>
                    </div>
                 </div>
@@ -26,32 +26,28 @@
                 <div class="container">
                     @foreach ($trips as $trip)
                     <article class="package-item">
-                       <figure class="package-image" style="background-image: url({{ asset($trip->package->package_key_visual) }});"></figure>
+                       <figure class="package-image" style="background-image: url({{ asset($trip->package_key_visual) }});"></figure>
                        <div class="package-content">
                           <h3>
-                             <a href="package-detail.html">
-                                {{ $trip->trip_name }}
-                             </a>
+                             <div class="font-bold text-[24px]">
+                                {{ $trip->package_name }}
+                             </div>
                           </h3>
-                          <p>{{ $trip->trip_note }}</p>
+                          <p>{!! $trip->trip_note !!}</p>
                           <div class="package-meta">
-                             <ul>
-                                <li>
-                                   <i class="fas fa-clock"></i>
-                                   {{ $trip->trip_days }} {{ $trip->trip_days > 1 ? 'days' : 'day' }}
+                            <ul>
+                                <li style="margin-bottom: 4px">
+                                    <i style="color: #2C2D83" class="fas fa-ship"></i>
+                                    {{ $trip->trip_subcategory }}
                                 </li>
-                                {{-- <li>
-                                   <i class="fas fa-user-friends"></i>
-                                   pax: 10
-                                </li> --}}
-                                {{-- <li>
-                                   <i class="fas fa-map-marker-alt"></i>
-                                   Malaysia
-                                </li> --}}
+                                <li style="margin-bottom: 4px">
+                                   <i style="color: #2C2D83" class="fas fa-map-marker-alt"></i>
+                                   {{ $trip->destination->name }}
+                                </li>
                              </ul>
                           </div>
                        </div>
-                       <div class="package-price">
+                       <div style="background-color: #2C2D83" class="package-price">
                           <div class="review-area">
                              <span class="review-text">Start From</span>
                              {{-- <div class="rating-start-wrap d-inline-block">
@@ -61,9 +57,14 @@
                              </div> --}}
                           </div>
                           <h6 class="price-list">
-                             <span>Rp{{ number_format($trip->trip_price, 0, ',', '.') }}</span>
+                             <span>Rp @if(count($trip->openTrips) > 0) {{ number_format($trip->openTrips[0]->price, 0, ',', '.') }} @elseif(count($trip->privateTrips) > 0) {{ number_format($trip->privateTrips[0]->price, 0, ',', '.') }} @elseif(count($trip->fullDayCruises) > 0) {{ number_format($trip->fullDayCruises[0]->price, 0, ',', '.') }} @else 0 @endif </span>
                           </h6>
-                          <a href="{{ route('packages.detail', ['id' => $trip->id]) }}" class="outline-btn outline-btn-white">Book now</a>
+                          <a href="{{ route('packages.detail', ['id' => $trip->id, 'category' => $category]) }}"
+                            style="border-radius: 20px; border: 2px solid white; font-size: 16px; padding: 10px 20px; color: white; display: inline-block; text-align: center;"
+                            onMouseOver="this.style.backgroundColor='#F6B334'; this.style.color='white';"
+                            onMouseOut="this.style.backgroundColor='transparent'; this.style.color='white';">
+                            Detail
+                         </a>
                        </div>
                     </article>
                     @endforeach

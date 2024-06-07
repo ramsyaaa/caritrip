@@ -27,10 +27,11 @@ class BoatImageController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request, $id)
     {
         $perPage = 25;
-        $boatimage = BoatImage::latest()->paginate($perPage);
+        $data['boat_id'] = $id;
+        $boatimage = BoatImage::where('boat_id', $id)->latest()->paginate($perPage);
         $data['boatimage'] = $boatimage;
         return view('admin.boat-image.index', $data);
     }
@@ -40,9 +41,10 @@ class BoatImageController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create($id)
     {
         $data['boats'] = Boat::get();
+        $data['boat_id'] = $id;
         return view('admin.boat-image.create', $data);
     }
 
@@ -53,26 +55,26 @@ class BoatImageController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         $request->validate([
-            'boat_id' => 'required',
             'image_name' => 'required',
             'image_description' => 'required',
             'key_visual' => 'required'
         ]);
 
         $requestData = $request->all();
+        $requestData['boat_id'] = $id;
         if ($request->hasFile('key_visual')) {
             $requestData['key_visual'] = $request->key_visual
-                ->store('uploads', 'public');
+                ->store('uploads/boats', 'public');
                 $requestData['key_visual'] = 'storage/' . $requestData['key_visual'];
         }
 
         BoatImage::create($requestData);
         alert()->success('New ' . 'BoatImage'. ' Created!' );
 
-        return redirect('admin/boat-image');
+        return redirect('admin/boat/' . $id . '/images');
     }
 
     /**
@@ -82,11 +84,12 @@ class BoatImageController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function show($id)
+    public function show($boat_id, $id)
     {
-        $boatimage = BoatImage::findOrFail($id);
+        $data['boatimage'] = BoatImage::findOrFail($id);
+        $data['boat_id'] = $boat_id;
 
-        return view('admin.boat-image.show', compact('boatimage'));
+        return view('admin.boat-image.show', $data);
     }
 
     /**
@@ -96,11 +99,12 @@ class BoatImageController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit($boat_id, $id)
     {
         $boatimage = BoatImage::findOrFail($id);
         $data['boatimage'] = $boatimage;
         $data['boats'] = Boat::get();
+        $data['boat_id'] = $boat_id;
         return view('admin.boat-image.edit', $data);
     }
 
@@ -112,10 +116,9 @@ class BoatImageController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $boat_id, $id)
     {
         $request->validate([
-            'boat_id' => 'required',
             'image_name' => 'required',
             'image_description' => 'required',
         ]);
@@ -129,14 +132,14 @@ class BoatImageController extends Controller
                 Storage::disk('public')->delete($oldImagePath);
             }
             $requestData['key_visual'] = $request->key_visual
-                ->store('uploads', 'public');
+                ->store('uploads/boats', 'public');
             $requestData['key_visual'] = 'storage/' . $requestData['key_visual'];
         }
 
         alert()->success('Record Updated!' );
         $boatimage->update($requestData);
 
-        return redirect('admin/boat-image');
+        return redirect('admin/boat/'. $boat_id . '/images');
     }
 
     /**
@@ -146,11 +149,16 @@ class BoatImageController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy($id)
+    public function destroy($boat_id, $id)
     {
         alert()->success('Record Deleted!' );
+        $boatimage = BoatImage::findOrFail($id);
+        if ($boatimage->key_visual) {
+            $oldImagePath = str_replace('storage/', '', $boatimage->key_visual);
+            Storage::disk('public')->delete($oldImagePath);
+        }
         BoatImage::destroy($id);
 
-        return redirect('admin/boat-image');
+        return redirect('admin/boat/' . $boat_id . '/images');
     }
 }

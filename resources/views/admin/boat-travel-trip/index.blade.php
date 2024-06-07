@@ -23,7 +23,7 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Package</th><th>Trip Category</th><th>Trip Subcategory</th><th>Trip Name</th><th>Trip Days</th><th>Trip Price</th><th>Trip Note</th><th>Language</th>
+                                        <th>Package</th><th>Trip Category</th><th>Trip Subcategory</th><th>Trip Name</th><th>Trip Days</th><th>Trip Price</th><th>Language</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -31,7 +31,7 @@
                                     @foreach($boattraveltrip as $i => $item)
                                     <tr>
                                         <td>{{ $i+1 }}</td>
-                                        <td>{{ $item->package ? $item->package->package_name : '' }}</td><td>{{ $item->trip_category }}</td><td>{{ $item->trip_subcategory }}</td><td>{{ $item->trip_name }}</td><td>{{ $item->trip_days }}</td><td>{{ $item->trip_price }}</td><td>{{ $item->trip_note }}</td><td>{{ $item->language ? $item->language->language_name : '' }}</td>
+                                        <td>{{ $item->package ? $item->package->package_name : '' }}</td><td>{{ $item->trip_category }}</td><td>{{ $item->trip_subcategory }}</td><td>{{ $item->trip_name }}</td><td>{{ $item->trip_days }}</td><td>{{ $item->trip_price }}</td><td>{{ $item->language ? $item->language->language_name : '' }}</td>
                                         <td>
                                             <div class="flex align-items-center list-user-action">
                                                 <a class="btn btn-sm btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="View" href="{{ url('/admin/boat-travel-trip/' . $item->id) }}">

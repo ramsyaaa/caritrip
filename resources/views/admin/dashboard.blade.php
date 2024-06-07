@@ -38,6 +38,26 @@
                     </div>
                 </div>
             </div>
+            <div class="card-body px-0">
+                <div class="table-responsive">
+                    <table id="user-list-table" class="table table-striped" role="grid" data-toggle="data-table">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Country</th><th>Browser</th><th>URL</th><th>Group</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($today_logs as $i => $item)
+                            <tr>
+                                <td>{{ $i+1 }}</td>
+                                <td>{{ $item->country }}</td><td>{{ $item->browser }}</td><td>{{ $item->url }}</td><td>{{ $item->group_page }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
             <script type="text/javascript">

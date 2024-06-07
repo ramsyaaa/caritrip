@@ -121,7 +121,6 @@ class BoatTravelTripImageController extends Controller
         $requestData = $request->all();
         $request->validate([
             'trip_id' => 'required',
-            'images' => 'required',
         ]);
 
         $boattraveltripimage = BoatTravelTripImage::findOrFail($id);

@@ -23,7 +23,7 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Boat Name</th><th>Boat Length</th><th>Boat Width</th><th>Boat Depth</th><th>Boat Speed</th><th>Boat Year Built</th><th>Boat Fuel Capacity</th><th>Boat Water Capacity</th><th>Boat Origin</th><th>Boat Material</th><th>Boat Main Engine</th><th>Boat Dingy</th><th>Boat Safety Equipment</th><th>Boat Facility</th><th>Boat Capacity</th><th>Boat Entertainment</th><th>Boat Featured Image</th><th>Seo Meta Description</th><th>Seo Meta Keywords</th><th>Language</th>
+                                        <th>Boat Name</th><th>Boat Origin</th><th>Language</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -31,7 +31,7 @@
                                     @foreach($boat as $i => $item)
                                     <tr>
                                         <td>{{ $i+1 }}</td>
-                                        <td>{{ $item->boat_name }}</td><td>{{ $item->boat_length }}</td><td>{{ $item->boat_width }}</td><td>{{ $item->boat_depth }}</td><td>{{ $item->boat_speed }}</td><td>{{ $item->boat_year_built }}</td><td>{{ $item->boat_fuel_capacity }}</td><td>{{ $item->boat_water_capacity }}</td><td>{{ $item->boat_origin }}</td><td>{{ $item->boat_material }}</td><td>{{ $item->boat_main_engine }}</td><td>{{ $item->boat_dingy }}</td><td>{{ $item->boat_safety_equipment }}</td><td>{{ $item->boat_facility }}</td><td>{{ $item->boat_capacity }}</td><td>{{ $item->boat_entertainment }}</td><td>{{ $item->boat_featured_image }}</td><td>{{ $item->seo_meta_description }}</td><td>{{ $item->seo_meta_keywords }}</td><td>{{ $item->language ? $item->language->language_name : '' }}</td>
+                                        <td>{{ $item->boat_name }}</td><td>{{ $item->boat_origin }}</td><td>{{ $item->language ? $item->language->language_name : '' }}</td>
                                         <td>
                                             <div class="flex align-items-center list-user-action">
                                                 <a class="btn btn-sm btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="View" href="{{ url('/admin/boat/' . $item->id) }}">

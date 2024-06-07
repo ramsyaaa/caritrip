@@ -55,6 +55,7 @@ class AdminController extends Controller
             ->orderBy('date')
             ->get();
 
+        $data['today_logs'] = UserLog::whereDate('created_at', Carbon::today())->get();
         // Isi data yang ada dalam query
         foreach ($logs as $log) {
             $datetime = new DateTime($log->date);

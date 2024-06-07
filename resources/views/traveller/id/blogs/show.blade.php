@@ -15,7 +15,7 @@
           <div class="inner-baner-container" style="background-image: url({{ asset($blog->featured_image) }});">
              <div class="container">
                 <div class="inner-banner-content">
-                   <h1 class="page-title">{{ $blog->title }}</h1>
+                   <h1 class="font-bold text-white text-[32px]">{{ $blog->title }}</h1>
                 </div>
              </div>
           </div>
