@@ -30,7 +30,7 @@
                 <div class="row">
                    <div class="col-lg-8 primary right-sidebar">
                       <div >
-                        <div class="slider">
+                        <div class="slider h-[200px] md:h-[300px] lg:h-[600px]">
                             @php
                                 $isActive = false;
                             @endphp
