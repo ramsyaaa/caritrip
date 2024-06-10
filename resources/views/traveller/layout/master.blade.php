@@ -46,7 +46,26 @@
             .hide-scrollbar::-webkit-scrollbar {
                 display: none;  /* Chrome, Safari, and Edge */
             }
+            .slider {
+                position: relative;
+                width: 100%;
+                height: 600px;
+                overflow: hidden;
+            }
+            .slider img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                transition: opacity 1s ease-in-out;
+            }
+            .slider img.active {
+                opacity: 1;
+            }
         </style>
+
      </head>
    <body class="home">
       <main class="">

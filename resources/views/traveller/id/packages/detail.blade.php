@@ -30,27 +30,25 @@
                 <div class="row">
                    <div class="col-lg-8 primary right-sidebar">
                       <div >
-
-                        <div class="flex justify-center">
-                            <div class="image-container carousel-center w-full p-4 space-x-4 rounded-box flex relative overflow-hidden" >
-                                @if(count($package->images) > 0)
+                        <div class="slider">
+                            @php
+                                $isActive = false;
+                            @endphp
+                            @if(count($package->images) > 0)
                                 @foreach ($package->images as $image)
-                                <div class="carousel-item w-full rounded-box bg-white">
-                                  <img src="{{ asset($image->images) }}" class="" style="transition: transform 0.5s ease-in-out;" />
-                                </div>
+                                <img src="{{ asset($image->image) }}" class="@if ($loop->iteration == 1) active @php $isActive = true; @endphp @endif">
                                 @endforeach
-                                @endif
-                                @if(count($package->boat->images) > 0)
+                            @endif
+                            @if(count($package->boat->images) > 0)
                                 @foreach ($package->boat->images as $image)
-                                <div class="carousel-item w-full rounded-box bg-white">
-                                  <img src="{{ asset($image->key_visual) }}" class="" style="transition: transform 0.5s ease-in-out;" />
-                                </div>
+                                <img src="{{ asset($image->key_visual) }}" class="@if ($loop->iteration == 1 && !$isActive) active @php $isActive = true; @endphp @endif">
                                 @endforeach
-                                @endif
-                            </div>
+                            @endif
                         </div>
 
-                         <div class="package-content-detail">
+
+
+                         <div class="package-content-detail my-6">
                             <article class="text-[16px] mb-[20px]">
                                 <h3 class="font-bold text-[32px]">Detail :</h3>
                                 Boat Length : {{ $package->boat->boat_length }} m, Boat Width : {{ $package->boat->boat_width }} m, Boat Depth : {{ $package->boat->boat_depth }} m, Boat Speed : {{ $package->boat->boat_length }} knots, Boat Year Build : {{ $package->boat->boat_year_built }}, Boat Fuel Capacity : {{ $package->boat->boat_fuel_capacity }} L, Boat Water Capacity : {{ $package->boat->boat_water_capacity }} L, Boat Origin : {{ $package->boat->boat_origin }}, Boat Material : {{ $package->boat->boat_material }}, Boat Engine : {{ $package->boat->boat_main_engine }}, Boat Dingy : {{ $package->boat->boat_dingy }}, Boat Capacity : {{ $package->boat->boat_capacity }} pax, Boat Entertaiment : {{ $package->boat->boat_entertainment }}
@@ -166,7 +164,7 @@
                                         @foreach ($package->openTrips as $item)
                                         <div x-show="openTrip{{ $loop->iteration }}">
                                             <div class="w-full flex justify-center">
-                                                <img src="{{ asset($item->cabin->image) }}" class="max-h-[150px]" alt="">
+                                                <img src="{{ asset($item->cabin->image) }}" class="w-full" alt="">
                                             </div>
                                             <div class="mt-4 flex justify-center text-[20px] font-bold">
                                                 {{ $item->cabin->name }} ({{ $item->duration }})
@@ -211,7 +209,7 @@
                                         @foreach ($package->privateTrips as $item)
                                         <div x-show="privateTrip{{ $loop->iteration }}">
                                             <div class="w-full flex justify-center">
-                                                <img src="{{ asset($item->boatTravelPackage->package_key_visual) }}" class="max-h-[150px]" alt="">
+                                                <img src="{{ asset($item->boatTravelPackage->package_key_visual) }}" class="w-full" alt="">
                                             </div>
                                             <div class="mt-4 flex justify-center text-[20px] font-bold">
                                                 ({{ $item->duration }})
@@ -256,7 +254,7 @@
                                         @foreach ($package->fullDayCruises as $item)
                                         <div x-show="fullDayCruise{{ $loop->iteration }}">
                                             <div class="w-full flex justify-center">
-                                                <img src="{{ asset($item->boatTravelPackage->package_key_visual) }}" class="max-h-[150px]" alt="">
+                                                <img src="{{ asset($item->boatTravelPackage->package_key_visual) }}" class="w-full" alt="">
                                             </div>
                                             <div class="mt-4 text-[24px]">
                                                 Start From : Rp{{ number_format($item->price, 0, ',', '.') }}
@@ -286,20 +284,17 @@
  </div>
 
  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const container = document.querySelector('.image-container');
-        const items = container.querySelectorAll('.carousel-item');
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const images = document.querySelectorAll('.slider img');
         let currentIndex = 0;
-        const totalItems = items.length;
 
-        function showNextItem() {
-            items[currentIndex].style.transform = `translateX(0)`;
-            currentIndex = (currentIndex + 1) % totalItems;
-            items[currentIndex].style.transform = `translateX(-100%)`;
-            container.appendChild(items[currentIndex]);
-        }
-
-        setInterval(showNextItem, 1500);
+        setInterval(() => {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+        }, 2000);
     });
 </script>
 @endsection
