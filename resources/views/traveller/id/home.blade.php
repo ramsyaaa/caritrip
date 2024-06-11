@@ -11,40 +11,45 @@
     <main id="content" class="site-main">
        <!-- ***home banner html start form here*** -->
        <section class="home-banner-section home-banner-slider">
-          <div class="home-banner d-flex flex-wrap align-items-center" style="background-image: url({{ asset('vendor/landing/assets/images/banner-img1.jpg') }});">
-             <div class="overlay"></div>
-             <div class="container">
-                <div class="banner-content text-center">
-                   <div class="row">
-                      <div class="col-lg-8 offset-lg-2">
-                         <h2 class="banner-title">JOURNEY TO EXPLORE WORLD</h2>
-                         <p>Ac mi duis mollis. Sapiente? Scelerisque quae, penatibus? Suscipit class corporis nostra rem quos voluptatibus habitant? Fames, vivamus minim nemo enim, gravida lobortis quasi, eum.</p>
-                         <div class="banner-btn">
-                            {{-- <a href="about.html" class="round-btn">LEARN MORE</a> --}}
-                            <a href="booking.html" class="outline-btn outline-btn-white">BOOK NOW</a>
-                         </div>
-                      </div>
-                   </div>
+          <div class="relative flex items-center">
+            <img class="w-full h-[800px] md:h-[800px] object-cover" src="{{ asset('assets/images/gambar 10.jpeg') }}" alt="">
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="container">
+                    <div class="banner-content text-center text-white">
+                        <div class="row">
+                            <div class="col-lg-8 offset-lg-2">
+                                <h2 class="banner-title text-4xl md:text-5xl font-bold">CariTrip</h2>
+                                <p class="mt-4">Kami percaya bahwa setiap perjalanan & petualangan adalah sebuah rangkaian cerita dan kami berkomitmen untuk membuat cerita Anda menjadi lebih menarik dan menyenangkan.</p>
+                                <div class="banner-btn mt-6">
+                                {{-- <a href="about.html" class="round-btn">LEARN MORE</a> --}}
+                                    <a href="booking.html" class="bg-[#2C2D83] text-white font-bold px-4 py-2 rounded">BOOK NOW</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-             </div>
-          </div>
-          <div class="home-banner d-flex flex-wrap align-items-center" style="background-image: url({{ asset('vendor/landing/assets/images/banner-img1.jpg') }});">
-             <div class="overlay"></div>
-             <div class="container">
-                <div class="banner-content text-center">
-                   <div class="row">
-                      <div class="col-lg-8 offset-lg-2">
-                         <h2 class="banner-title">BEAUTIFUL PLACE TO VISIT</h2>
-                         <p>Ac mi duis mollis. Sapiente? Scelerisque quae, penatibus? Suscipit class corporis nostra rem quos voluptatibus habitant? Fames, vivamus minim nemo enim, gravida lobortis quasi, eum.</p>
-                         <div class="banner-btn">
-                            {{-- <a href="about.html" class="round-btn">LEARN MORE</a> --}}
-                            <a href="booking.html" class="outline-btn outline-btn-white">BOOK NOW</a>
-                         </div>
-                      </div>~
-                   </div>
+            </div>
+        </div>
+
+          <div class="relative flex items-center">
+            <img class="w-full h-[800px] md:h-[800px] object-cover" src="{{ asset('assets/images/gambar 14.jpeg') }}" alt="">
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="container">
+                    <div class="banner-content text-center text-white">
+                        <div class="row">
+                            <div class="col-lg-8 offset-lg-2">
+                                <h2 class="banner-title text-4xl md:text-5xl font-bold">Perjalanan Seru</h2>
+                                <p class="mt-4">Yukk buat cerita petualangan liburanmu bersama CariTrip. Kami siap membawamu berkeliling menikmati pesona alam labuan bajo yang cantik dan unik. Tunggu apa lagi, ayo pesan sekarang!!</p>
+                                <div class="banner-btn mt-6">
+                                {{-- <a href="about.html" class="round-btn">LEARN MORE</a> --}}
+                                    <a href="booking.html" class="bg-[#2C2D83] text-white font-bold px-4 py-2 rounded">BOOK NOW</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-             </div>
-          </div>
+            </div>
+        </div>
        </section>
        <!-- ***home banner html end here*** -->
        <!-- ***Home package html start from here*** -->
