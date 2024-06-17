@@ -12,7 +12,7 @@
        <!-- ***home banner html start form here*** -->
        <section class="home-banner-section home-banner-slider">
           <div class="relative flex items-center">
-            <img class="w-full h-[800px] md:h-[800px] object-cover" src="{{ asset('assets/images/gambar 10.jpeg') }}" alt="">
+            <img class="w-full h-[800px] md:h-[800px] object-cover" src="{{ asset('assets/images/landscape 1.jpg') }}" alt="">
             <div class="absolute inset-0 flex items-center justify-center">
                 <div class="container">
                     <div class="banner-content text-center text-white">
@@ -32,7 +32,7 @@
         </div>
 
           <div class="relative flex items-center">
-            <img class="w-full h-[800px] md:h-[800px] object-cover" src="{{ asset('assets/images/gambar 14.jpeg') }}" alt="">
+            <img class="w-full h-[800px] md:h-[800px] object-cover" src="{{ asset('assets/images/landscape 2.jpg') }}" alt="">
             <div class="absolute inset-0 flex items-center justify-center">
                 <div class="container">
                     <div class="banner-content text-center text-white">

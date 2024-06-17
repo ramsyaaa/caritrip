@@ -12,14 +12,16 @@
           <section class="inner-page-wrap">
              <!-- ***Inner Banner html start form here*** -->
              <div class="inner-banner-wrap">
-                <div class="inner-baner-container" style="background-image: url({{ asset('vendor/landing/assets/images/img7.jpg') }});">
-                   <div class="container">
-                      <div class="inner-banner-content">
-                         <h1 class="font-bold text-[32px] text-white">Tour Packages @if($category) ({{ $category }}) @endif</h1>
-                      </div>
-                   </div>
+                <div class="">
+                    <div class="relative w-full">
+                        <img class="w-full h-[500px] md:h-[400px] object-cover" src="{{ asset('assets/images/landscape 3.jpg') }}" alt="">
+                        <div class="flex items-center justify-center w-full h-full absolute top-0 left-0">
+                        <h1 class="font-bold text-white text-[32px]">Tour Packages @if($category) ({{ $category }}) @endif</h1>
+                        </div>
+                    </div>
                 </div>
-             </div>
+
+            </div>
              <!-- ***Inner Banner html end here*** -->
              <!-- ***package section html start form here*** -->
              <div class="package-item-wrap">

@@ -14,7 +14,7 @@
           <div class="inner-banner-wrap">
             <div class="">
                 <div class="relative w-full">
-                    <img class="w-full h-[500px] md:h-[400px] object-cover" src="{{ asset('assets/images/gambar 11.jpg') }}" alt="">
+                    <img class="w-full h-[500px] md:h-[400px] object-cover" src="{{ asset('assets/images/landscape 3.jpg') }}" alt="">
                     <div class="flex items-center justify-center w-full h-full absolute top-0 left-0">
                     <h1 class="font-bold text-white text-[32px]">About Us</h1>
                     </div>
@@ -92,7 +92,7 @@
           <!-- ***about section html start form here*** -->
           <!-- ***callback section html start form here*** -->
           <div class="relative">
-            <img src="{{ asset('assets/images/gambar 11.jpg') }}" alt="">
+            <img src="{{ asset('assets/images/landscape 4.jpg') }}" alt="">
             <div class="flex items-center justify-center w-full h-full absolute top-0 left-0">
                 <div class="overlay"></div>
                 <div class="container">
