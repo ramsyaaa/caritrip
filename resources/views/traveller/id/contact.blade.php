@@ -26,7 +26,7 @@
           <!-- ***contact section html start form here*** -->
           <div class="inner-contact-wrap">
              <div class="container">
-                <div class="row">
+                <div class="row flex justify-center">
                    <div class="col-lg-6">
                       <div class="section-heading">
                          <h5 class="sub-title">GET IN TOUCH</h5>
@@ -64,27 +64,6 @@
                       </div>
                       <div class="contact-map">
                          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.540423056448!2d-0.12174238402827448!3d51.50330061882345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604b900d26973%3A0x4291f3172409ea92!2slastminute.com%20London%20Eye!5e0!3m2!1sen!2snp!4v1646314586610!5m2!1sen!2snp" width="600" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                      </div>
-                   </div>
-                   <div class="col-lg-6">
-                      <div class="contact-from-wrap primary-bg">
-                         <form method="get" class="contact-from">
-                            <p>
-                               <label>First Name..</label>
-                               <input type="text" name="name" placeholder="Your Name*">
-                            </p>
-                            <p>
-                               <label>Email Address</label>
-                               <input type="email" name="email" placeholder="Your Email*">
-                            </p>
-                            <p>
-                               <label>Comments / Questions</label>
-                               <textarea rows="8" placeholder="Your Message*"></textarea>
-                            </p>
-                            <p>
-                               <input type="submit" name="submit" value="SUBMIT MESSAGE">
-                            </p>
-                         </form>
                       </div>
                    </div>
                 </div>

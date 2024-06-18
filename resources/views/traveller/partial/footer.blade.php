@@ -21,9 +21,9 @@
                          <p>Feel free to contact and<br> reach us !!</p>
                          <ul>
                             <li>
-                               <a href="tel:+01988256203">
+                               <a target="_blank" href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan yang tersedia.">
                                   <i aria-hidden="true" class="icon icon-phone1"></i>
-                                  +01(988) 256 203
+                                  +62 822 3679 2273
                                </a>
                             </li>
                             <li>
@@ -34,7 +34,7 @@
                             </li>
                             <li>
                                <i aria-hidden="true" class="icon icon-map-marker1"></i>
-                               3146 Koontz, California
+                               Indonesia
                             </li>
                          </ul>
                       </div>
@@ -151,20 +151,20 @@
                 <p>Feel free to contact and<br> reach us !!</p>
                 <ul>
                    <li>
-                      <a href="tel:+01988256203">
+                      <a target="_blank" href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan yang tersedia.">
                          <i aria-hidden="true" class="icon icon-phone1"></i>
-                         +01(988) 256 203
+                         +62 822 3679 2273
                       </a>
                    </li>
                    <li>
                       <a href="mailtop:info@domain.com">
                          <i aria-hidden="true" class="icon icon-envelope1"></i>
-                         info@domain.com
+                         caritrip@domain.com
                       </a>
                    </li>
                    <li>
                       <i aria-hidden="true" class="icon icon-map-marker1"></i>
-                      3146 Koontz, California
+                      Indonesia
                    </li>
                 </ul>
              </div>

@@ -32,4 +32,13 @@ class TravelPackage extends Model
     {
         return $this->hasMany(TravelPackageImage::class, 'travel_package_id');
     }
+
+    public function openTrips()
+    {
+        return $this->hasMany(TravelOpenTrip::class, 'travel_package_id');
+    }
+    public function privateTrips()
+    {
+        return $this->hasMany(TravelPrivateTrip::class, 'travel_package_id');
+    }
 }

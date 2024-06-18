@@ -11,4 +11,9 @@ class TravelOpenTrip extends Model
         'duration',
         'price',
     ];
+
+    public function travelPackage()
+    {
+        return $this->belongsTo(TravelPackage::class, 'travel_package_id');
+    }
 }

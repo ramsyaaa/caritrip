@@ -12,4 +12,9 @@ class TravelPrivateTrip extends Model
         'price',
         'pax',
     ];
+
+    public function travelPackage()
+    {
+        return $this->belongsTo(TravelPackage::class, 'travel_package_id');
+    }
 }

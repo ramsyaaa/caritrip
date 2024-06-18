@@ -2,146 +2,123 @@
 
 namespace App\Http\Controllers\Traveller;
 
+use App\Helpers\TripHelper;
+use App\Helpers\UserLogHelper;
 use App\Http\Controllers\Controller;
 use App\Models\BoatTravelPackage;
-use App\Models\BoatTravelTrip;
 use App\Models\FullDayCruise;
 use App\Models\OpenTrip;
 use App\Models\PrivateTrip;
+use App\Models\TravelOpenTrip;
+use App\Models\TravelPackage;
+use App\Models\TravelPrivateTrip;
 use Illuminate\Http\Request;
-use Jenssegers\Agent\Agent;
-use Illuminate\Support\Facades\Http;
-use App\Models\UserLog;
-use Carbon\Carbon;
 
 class PackageController extends Controller
 {
     public function index(Request $request){
+        UserLogHelper::userLog($request, 'package');
+        $data = TripHelper::getNavbarTripsData();
+
         $boatTravelPackageIds = [];
         $data['category'] = null;
-        $openTripBoatTravelPackageIds = OpenTrip::distinct()
-            ->pluck('boat_travel_package_id');
-        $privateBoatTravelPackageIds = PrivateTrip::distinct()
-            ->pluck('boat_travel_package_id');
-        $FullDayCruiseBoatTravelPackageIds = FullDayCruise::distinct()
-            ->pluck('boat_travel_package_id');
+        $data['type'] = null;
 
-        $data['navbarOpenTrips'] = BoatTravelPackage::whereIn('id', $openTripBoatTravelPackageIds)->get();
-        $data['navbarPrivateTrips'] = BoatTravelPackage::whereIn('id', $privateBoatTravelPackageIds)->get();
-        $data['navbarFullDayCruises'] = BoatTravelPackage::whereIn('id', $FullDayCruiseBoatTravelPackageIds)->get();
+        // Check for the category in the request
         if ($request->has('category')) {
             $data['category'] = $request->input('category');
-            if($data['category'] == 'Open Trip'){
+
+            if($data['category'] == 'Open Trip') {
                 $boatTravelPackageIds = OpenTrip::distinct()
                     ->pluck('boat_travel_package_id');
-            }elseif($data['category'] == 'Private Trip'){
+                $travelPackageIds = TravelOpenTrip::distinct()
+                    ->pluck('travel_package_id');
+            } elseif($data['category'] == 'Private Trip') {
                 $boatTravelPackageIds = PrivateTrip::distinct()
                     ->pluck('boat_travel_package_id');
-            }elseif($data['category'] == 'Full Day Cruise'){
+                $travelPackageIds = TravelPrivateTrip::distinct()
+                    ->pluck('travel_package_id');
+            } elseif($data['category'] == 'Full Day Cruise') {
                 $boatTravelPackageIds = FullDayCruise::distinct()
                     ->pluck('boat_travel_package_id');
             }
+        }
 
-            if(count($boatTravelPackageIds) > 0){
+        // Initialize empty arrays if they are not set
+        $boatTravelPackageIds = $boatTravelPackageIds ?? [];
+        $travelPackageIds = $travelPackageIds ?? [];
+
+        // Check for the type in the request
+        if ($request->has('type')) {
+            $data['type'] = $request->input('type');
+
+            // Filter trips based on the type
+            if ($data['type'] == 'Boat Trip') {
+                if(count($boatTravelPackageIds) > 0) {
+                    $data['trips'] = BoatTravelPackage::whereIn('id', $boatTravelPackageIds)->get();
+                } else {
+                    $data['trips'] = BoatTravelPackage::get();
+                }
+                // Set travels to an empty collection as type is boat trip
+                $data['travels'] = collect();
+            } elseif ($data['type'] == 'Travel Trip') {
+                if(count($travelPackageIds) > 0) {
+                    $data['travels'] = TravelPackage::whereIn('id', $travelPackageIds)->get();
+                } else {
+                    $data['travels'] = TravelPackage::get();
+                }
+                // Set trips to an empty collection as type is travel trip
+                $data['trips'] = collect();
+            } else {
+                // If type is not specified or invalid, set both
+                if(count($boatTravelPackageIds) > 0) {
+                    $data['trips'] = BoatTravelPackage::whereIn('id', $boatTravelPackageIds)->get();
+                } else {
+                    $data['trips'] = BoatTravelPackage::get();
+                }
+                if(count($travelPackageIds) > 0) {
+                    $data['travels'] = TravelPackage::whereIn('id', $travelPackageIds)->get();
+                } else {
+                    $data['travels'] = TravelPackage::get();
+                }
+            }
+        } else {
+            // If type is not specified, set both trips and travels
+            if(count($boatTravelPackageIds) > 0) {
                 $data['trips'] = BoatTravelPackage::whereIn('id', $boatTravelPackageIds)->get();
-            }else{
-                $data['trips'] = [];
+            } else {
+                $data['trips'] = BoatTravelPackage::get();
+            }
+            if(count($travelPackageIds) > 0) {
+                $data['travels'] = TravelPackage::whereIn('id', $travelPackageIds)->get();
+            } else {
+                $data['travels'] = TravelPackage::get();
             }
         }
-        else{
-            $data['trips'] = BoatTravelPackage::get();
-        }
 
-        // Mendapatkan IP pengguna
-        $ip = $request->ip();
-
-        // Mendapatkan data lokasi berdasarkan IP
-        $response = Http::get("http://ipinfo.io/{$ip}/json");
-        $location = $response->json();
-
-        // Mendapatkan informasi browser pengguna
-        $agent = new Agent();
-        $browser = $agent->browser();
-
-        // Mendapatkan URL yang diakses
-        $url = $request->url();
-
-        // Mendapatkan tanggal hari ini
-        $today = Carbon::today()->toDateString();
-
-        // Mengecek apakah sudah ada entri untuk IP, URL, dan tanggal hari ini
-        $existingLog = UserLog::where('ip_address', $ip)
-            ->where('url', $url)
-            ->where('browser', $browser)
-            ->whereDate('access_date', $today)
-            ->first();
-
-        // Jika belum ada, simpan data baru
-        if ($existingLog == null) {
-            UserLog::create([
-                'ip_address' => $ip,
-                'country' => $location['country'] ?? 'Unknown',
-                'browser' => $browser,
-                'group_page' => "package",
-                'url' => $url,
-                'access_date' => $today,
-            ]);
-        }
         return view('traveller.id.packages.packages', $data);
     }
     public function show(Request $request, $id){
-        $data['package'] = BoatTravelPackage::findOrFail($id);
+        UserLogHelper::userLog($request, 'package');
+        $data = TripHelper::getNavbarTripsData();
+
+        // $data['package'] = BoatTravelPackage::findOrFail($id);
         $data['category'] = "";
         if ($request->has('category')) {
             $data['category'] = $request->input('category');
         }
-
-        $openTripBoatTravelPackageIds = OpenTrip::distinct()
-            ->pluck('boat_travel_package_id');
-        $privateBoatTravelPackageIds = PrivateTrip::distinct()
-            ->pluck('boat_travel_package_id');
-        $FullDayCruiseBoatTravelPackageIds = FullDayCruise::distinct()
-            ->pluck('boat_travel_package_id');
-
-        $data['navbarOpenTrips'] = BoatTravelPackage::whereIn('id', $openTripBoatTravelPackageIds)->get();
-        $data['navbarPrivateTrips'] = BoatTravelPackage::whereIn('id', $privateBoatTravelPackageIds)->get();
-        $data['navbarFullDayCruises'] = BoatTravelPackage::whereIn('id', $FullDayCruiseBoatTravelPackageIds)->get();
-
-        // Mendapatkan IP pengguna
-        $ip = $request->ip();
-
-        // Mendapatkan data lokasi berdasarkan IP
-        $response = Http::get("http://ipinfo.io/{$ip}/json");
-        $location = $response->json();
-
-        // Mendapatkan informasi browser pengguna
-        $agent = new Agent();
-        $browser = $agent->browser();
-
-        // Mendapatkan URL yang diakses
-        $url = $request->url();
-
-        // Mendapatkan tanggal hari ini
-        $today = Carbon::today()->toDateString();
-
-        // Mengecek apakah sudah ada entri untuk IP, URL, dan tanggal hari ini
-        $existingLog = UserLog::where('ip_address', $ip)
-            ->where('url', $url)
-            ->where('browser', $browser)
-            ->whereDate('access_date', $today)
-            ->first();
-
-        // Jika belum ada, simpan data baru
-        if ($existingLog == null) {
-            UserLog::create([
-                'ip_address' => $ip,
-                'country' => $location['country'] ?? 'Unknown',
-                'browser' => $browser,
-                'group_page' => "package",
-                'url' => $url,
-                'access_date' => $today,
-            ]);
+        if ($request->has('type')) {
+            $data['type'] = $request->input('type');
+            if($data['type'] == 'Boat Trip'){
+                $data['package'] = BoatTravelPackage::findOrFail($id);
+            }
+            elseif($data['type'] == 'Travel Trip'){
+                $data['package'] = TravelPackage::findOrFail($id);
+            }
+        }else{
+            return abort(404);
         }
+
         return view('traveller.id.packages.detail', $data);
     }
 }

@@ -75,7 +75,7 @@
                                         <h6>
                                             <span class="font-bold text-[24px] text-white">Rp @if(count($item1->openTrips) > 0) {{ number_format($item1->openTrips[0]->price, 0, ',', '.') }} @elseif(count($item1->privateTrips) > 0) {{ number_format($item1->privateTrips[0]->price, 0, ',', '.') }} @elseif(count($item1->fullDayCruises) > 0) {{ number_format($item1->fullDayCruises[0]->price, 0, ',', '.') }} @else 0 @endif </span>
                                         </h6>
-                                        <a href="{{ route('packages.detail', ['id' => $item1->id]) }}"
+                                        <a href="{{ route('packages.detail', ['id' => $item1->id, 'type' => 'Boat Trip']) }}"
                                             style="border-radius: 20px; border: 2px solid white; font-size: 16px; padding: 10px 20px; color: white; display: inline-block; text-align: center;"
                                             onMouseOver="this.style.backgroundColor='#F6B334'; this.style.color='white';"
                                             onMouseOut="this.style.backgroundColor='transparent'; this.style.color='white';">

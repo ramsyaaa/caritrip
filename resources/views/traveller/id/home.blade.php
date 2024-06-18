@@ -100,7 +100,7 @@
                           <h6 class="price-list">
                              <span>Rp @if(count($trip->openTrips) > 0) {{ number_format($trip->openTrips[0]->price, 0, ',', '.') }} @elseif(count($trip->privateTrips) > 0) {{ number_format($trip->privateTrips[0]->price, 0, ',', '.') }} @elseif(count($trip->fullDayCruises) > 0) {{ number_format($trip->fullDayCruises[0]->price, 0, ',', '.') }} @else 0 @endif </span>
                           </h6>
-                          <a href="{{ route('packages.detail', ['id' => $trip->id]) }}"
+                          <a href="{{ route('packages.detail', ['id' => $trip->id, 'type' => 'Boat Trip']) }}"
                             style="border-radius: 20px; border: 2px solid white; font-size: 16px; padding: 10px 20px; color: white; display: inline-block; text-align: center;"
                             onMouseOver="this.style.backgroundColor='#F6B334'; this.style.color='white';"
                             onMouseOut="this.style.backgroundColor='transparent'; this.style.color='white';">
@@ -110,7 +110,62 @@
                     </article>
                     @endforeach
                 <div class="section-btn-wrap text-center">
-                   <a style="background-color: #2C2D83" href="{{ route('packages') }}" class="round-btn">VIEW ALL PACKAGES</a>
+                   <a style="background-color: #2C2D83" href="{{ route('packages', ['type' => 'Boat Trip']) }}" class="round-btn">VIEW ALL PACKAGES</a>
+                </div>
+             </div>
+
+             <div class="row">
+                <div class="col-lg-8 offset-lg-2 text-sm-center">
+                   <div class="section-heading">
+                      <h5 class="mt-4 font-bold text-[32px]">POPULAR TRAVEL PACKAGES</h5>
+                      {{-- <h2 class="section-title">CHECKOUT OUR TRIP PACKAGES</h2> --}}
+                      {{-- <p>Fusce hic augue velit wisi quibusdam pariatur, iusto primis, nec nemo, rutrum. Vestibulum cumque laudantium. Sit ornare mollitia tenetur, aptent.</p> --}}
+                   </div>
+                </div>
+             </div>
+             <div class="package-section">
+                @foreach ($travels as $trip)
+                    <article class="package-item">
+                       <figure class="package-image" style="background-image: url({{ asset($trip->package_key_visual) }});"></figure>
+                       <div class="package-content">
+                          <h3>
+                             <div class="font-bold text-[24px]">
+                                {{ $trip->package_name }}
+                             </div>
+                          </h3>
+                          <p>{!! $trip->trip_note !!}</p>
+                          <div class="package-meta">
+                            <ul>
+                                <li style="margin-bottom: 4px">
+                                   <i style="color: #2C2D83" class="fas fa-map-marker-alt"></i>
+                                   {{ $trip->destination->name }}
+                                </li>
+                             </ul>
+                          </div>
+                       </div>
+                       <div style="background-color: #2C2D83" class="package-price">
+                          <div class="review-area">
+                             <span class="review-text">Start From</span>
+                             {{-- <div class="rating-start-wrap d-inline-block">
+                                <div class="rating-start">
+                                   <span style="width: 80%"></span>
+                                </div>
+                             </div> --}}
+                          </div>
+                          <h6 class="price-list">
+                             <span>Rp @if(count($trip->openTrips) > 0) {{ number_format($trip->openTrips[0]->price, 0, ',', '.') }} @elseif(count($trip->privateTrips) > 0) {{ number_format($trip->privateTrips[0]->price, 0, ',', '.') }} @else 0 @endif </span>
+                          </h6>
+                          <a href="{{ route('packages.detail', ['id' => $trip->id, 'type' => 'Travel Trip']) }}"
+                            style="border-radius: 20px; border: 2px solid white; font-size: 16px; padding: 10px 20px; color: white; display: inline-block; text-align: center;"
+                            onMouseOver="this.style.backgroundColor='#F6B334'; this.style.color='white';"
+                            onMouseOut="this.style.backgroundColor='transparent'; this.style.color='white';">
+                            Detail
+                         </a>
+                       </div>
+                    </article>
+                    @endforeach
+                <div class="section-btn-wrap text-center">
+                   <a style="background-color: #2C2D83" href="{{ route('packages', ['type' => 'Travel Trip']) }}" class="round-btn">VIEW ALL PACKAGES</a>
                 </div>
              </div>
           </div>

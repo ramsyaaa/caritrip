@@ -15,8 +15,8 @@
              <div class="inner-baner-container" style="background-image: url({{ asset($package->package_key_visual) }});">
                 <div class="container">
                    <div class="inner-banner-content">
-                      <h1 class="font-bold text-[40px] text-white mb-4">{{ $package->boat->boat_name }}</h1>
-                      <a href="" class="px-4 py-2 bg-[#2C2D83] text-white rounded-lg mt-4 hover:scale-110">
+                      <h1 class="font-bold text-[40px] text-white mb-4">@if($type == 'Boat Trip'){{ $package->boat->boat_name }} @elseif($type == 'Travel Trip') {{ $package->package_name }} @endif</h1>
+                      <a target="_blank" href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan paket {{ $package->package_name }}" class="px-4 py-2 bg-[#2C2D83] text-white rounded-lg mt-4 hover:scale-110">
                         Book Now
                        </a>
                    </div>
@@ -39,16 +39,19 @@
                                 <img src="{{ asset($image->image) }}" class="@if ($loop->iteration == 1) active @php $isActive = true; @endphp @endif">
                                 @endforeach
                             @endif
+                            @if($type == 'Boat Trip')
                             @if(count($package->boat->images) > 0)
                                 @foreach ($package->boat->images as $image)
                                 <img src="{{ asset($image->key_visual) }}" class="@if ($loop->iteration == 1 && !$isActive) active @php $isActive = true; @endphp @endif">
                                 @endforeach
+                            @endif
                             @endif
                         </div>
 
 
 
                          <div class="package-content-detail my-6">
+                            @if($type == 'Boat Trip')
                             <article class="text-[16px] mb-[20px]">
                                 <h3 class="font-bold text-[32px]">Detail :</h3>
                                 Boat Length : {{ $package->boat->boat_length }} m, Boat Width : {{ $package->boat->boat_width }} m, Boat Depth : {{ $package->boat->boat_depth }} m, Boat Speed : {{ $package->boat->boat_length }} knots, Boat Year Build : {{ $package->boat->boat_year_built }}, Boat Fuel Capacity : {{ $package->boat->boat_fuel_capacity }} L, Boat Water Capacity : {{ $package->boat->boat_water_capacity }} L, Boat Origin : {{ $package->boat->boat_origin }}, Boat Material : {{ $package->boat->boat_material }}, Boat Engine : {{ $package->boat->boat_main_engine }}, Boat Dingy : {{ $package->boat->boat_dingy }}, Boat Capacity : {{ $package->boat->boat_capacity }} pax, Boat Entertaiment : {{ $package->boat->boat_entertainment }}
@@ -73,6 +76,7 @@
                                 <h3 class="text-[32px] font-bold"><i class="fas fa-check text-[32px] font-bold mb-4"></i> Boat Safety Equipments  :</h3>
                                 {!! $package->boat->boat_safety_equipment !!}
                              </article>
+                             @endif
                             <article class="bg-light-grey mb-[20px] px-4 py-4  text-[16px]">
                                <h3 class="text-[32px] font-bold"><i class="fas fa-check text-[32px] font-bold mb-4"></i> INCLUDE  :</h3>
                                {!! $package->include_list !!}
@@ -87,10 +91,12 @@
                                {!! $package->itenary_list !!}
                             </article>
                             @endif
+                            @if($type == 'Boat Trip')
                             <iframe width="560" height="560" src="{{ $package->boat->highlight_video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             <div class="flex justify-center w-full">
-                                <a class="px-4 py-2 text-white text-center text-[24px] rounded-lg bg-[#2C2D83] mt-4" href="">Book Now</a>
+                                <a class="px-4 py-2 text-white text-center text-[24px] rounded-lg bg-[#2C2D83] mt-4" target="_blank" href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan paket {{ $package->package_name }}">Book Now</a>
                             </div>
+                            @endif
                         </div>
                       </div>
                    </div>
@@ -102,10 +108,12 @@
                             </div>
                             <div class="border-t border-b py-4 flex justify-center">
                                 <div class="flex gap-4 items-center">
+                                    @if($type == 'Boat Trip')
                                     <div style="font-family: 'Fredoka', sans-serif !important;" class="px-4 border-r-[3px]">
                                         <i style="color: #2C2D83" class="fas fa-ship"></i>
                                         {{ $package->trip_subcategory }}
                                     </div>
+                                    @endif
                                     <div style="font-family: 'Fredoka', sans-serif !important;" class="px-4">
                                        <i style="color: #2C2D83" class="fas fa-map-marker-alt"></i>
                                        {{ $package->destination ? $package->destination->name : '' }}
@@ -130,10 +138,12 @@
                                     Private Trip
                                 </div>
                                 @endif
+                                @if($type == 'Boat Trip')
                                 @if(($category == 'Full Day Cruise' || !$category) && count($package->openTrips) > 0)
                                 <div @click="openTrip=false;privateTrip=false;fullDayCruise=true" :class="fullDayCruise ? ' bg-[#2C2D83] text-white' : ''" class="w-full px-4 py-2 font-bold text-[16px] flex justify-center rounded-t-lg cursor-pointer duration-500">
                                     Full Day Cruise
                                 </div>
+                                @endif
                                 @endif
                             </div>
 
@@ -164,20 +174,24 @@
                                         @foreach ($package->openTrips as $item)
                                         <div x-show="openTrip{{ $loop->iteration }}">
                                             <div class="w-full flex justify-center">
-                                                <img src="{{ asset($item->cabin->image) }}" class="w-full" alt="">
+                                                <img src="@if($type == 'Boat Trip') {{ asset($item->cabin->image) }} @elseif($type == 'Travel Trip') {{ asset($item->travelPackage->package_key_visual) }}  @endif" class="w-full" alt="">
                                             </div>
                                             <div class="mt-4 flex justify-center text-[20px] font-bold">
-                                                {{ $item->cabin->name }} ({{ $item->duration }})
+                                                @if($type == 'Boat Trip') {{ $item->cabin->name }} @endif ({{ $item->duration }})
                                             </div>
+                                            @if($type == 'Boat Trip')
                                             <div class="mt-4">
                                                 {{ $item->cabin->description }}
                                             </div>
+                                            @endif
                                             <div class="mt-4 text-[24px]">
                                                 Start From : Rp{{ number_format($item->price, 0, ',', '.') }} / pax
                                             </div>
+                                            @if($type == 'Boat Trip')
                                             <div class="mt-4 text-[16px]">
                                                 Extra Bed : Rp{{ number_format($item->extra_bed_price, 0, ',', '.') }}
                                             </div>
+                                            @endif
                                         </div>
                                         @endforeach
                                     </div>
@@ -209,7 +223,7 @@
                                         @foreach ($package->privateTrips as $item)
                                         <div x-show="privateTrip{{ $loop->iteration }}">
                                             <div class="w-full flex justify-center">
-                                                <img src="{{ asset($item->boatTravelPackage->package_key_visual) }}" class="w-full" alt="">
+                                                <img src="@if($type == 'Boat Trip') {{ asset($item->boatTravelPackage->package_key_visual) }} @elseif($type == 'Travel Trip') {{ asset($item->travelPackage->package_key_visual) }}  @endif" class="w-full" alt="">
                                             </div>
                                             <div class="mt-4 flex justify-center text-[20px] font-bold">
                                                 ({{ $item->duration }})
@@ -228,6 +242,7 @@
                                     </div>
                                 </div>
                                 @endif
+                                @if($type == 'Boat Trip')
                                 @if(($category == 'Full Day Cruise' || !$category) && count($package->openTrips) > 0)
                                 <div x-show="fullDayCruise" class="p-2 bg-[#2C2D83] rounded-b-lg"
                                     x-data="{
@@ -264,10 +279,11 @@
                                     </div>
                                 </div>
                                 @endif
+                                @endif
                             </div>
                         </div>
                         <div class="w-full flex justify-center">
-                            <a href="" class="px-4 py-2 rounded-lg text-white bg-[#2C2D83] hover:scale-110 duration-500">
+                            <a target="_blank" href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan paket {{ $package->package_name }}" class="px-4 py-2 rounded-lg text-white bg-[#2C2D83] hover:scale-110 duration-500">
                                 Book Now
                             </a>
                         </div>
