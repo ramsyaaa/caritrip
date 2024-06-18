@@ -107,8 +107,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resource('boat-travel-package/{id}/private-trip', 'Admin\\PrivateTripController');
     Route::resource('boat-travel-package/{id}/full-day-cruise', 'Admin\\FullDayCruiseController');
     Route::resource('boat-travel-package', 'Admin\\BoatTravelPackageController');
-    Route::resource('boat-travel-trip', 'Admin\\BoatTravelTripController');
-    Route::resource('boat-travel-trip-image', 'Admin\\BoatTravelTripImageController');
+    Route::resource('travel-package/{id}/images', 'Admin\\TravelPackageImageController');
+    Route::resource('travel-package/{id}/open-trip', 'Admin\\TravelOpenTripController');
+    Route::resource('travel-package/{id}/private-trip', 'Admin\\TravelPrivateTripController');
+    Route::resource('travel-package', 'Admin\\TravelPackageController');
     Route::resource('language', 'Admin\\LanguageController');
     Route::resource('blog', 'Admin\\BlogController');
     Route::resource('destination', 'Admin\\DestinationController');

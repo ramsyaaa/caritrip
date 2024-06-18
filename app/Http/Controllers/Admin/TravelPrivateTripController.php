@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\BoatTravelPackage;
-use App\Models\PrivateTrip;
+use App\Models\TravelPrivateTrip;
 use Illuminate\Http\Request;
 
-class PrivateTripController extends Controller
+class TravelPrivateTripController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,10 +26,10 @@ class PrivateTripController extends Controller
     public function index(Request $request, $id)
     {
         $perPage = 25;
-        $data['boat_travel_package_id'] = $id;
-        $private_trips = PrivateTrip::where('boat_travel_package_id', $id)->latest()->paginate($perPage);
+        $data['travel_package_id'] = $id;
+        $private_trips = TravelPrivateTrip::where('travel_package_id', $id)->latest()->paginate($perPage);
         $data['private_trips'] = $private_trips;
-        return view('admin.private-trip.index', $data);
+        return view('admin.travel-private-trip.index', $data);
     }
 
     /**
@@ -40,8 +39,8 @@ class PrivateTripController extends Controller
      */
     public function create($id)
     {
-        $data['boat_travel_package_id'] = $id;
-        return view('admin.private-trip.create', $data);
+        $data['travel_package_id'] = $id;
+        return view('admin.travel-private-trip.create', $data);
     }
 
     /**
@@ -61,13 +60,13 @@ class PrivateTripController extends Controller
         ]);
 
         $requestData = $request->all();
-        $requestData['boat_travel_package_id'] = $id;
+        $requestData['travel_package_id'] = $id;
         $requestData['duration'] = $request->days . 'D' . $request->nights . 'N';
 
-        PrivateTrip::create($requestData);
-        alert()->success('New ' . 'Private Trip'. ' Created!' );
+        TravelPrivateTrip::create($requestData);
+        alert()->success('New ' . 'Travel Private Trip'. ' Created!' );
 
-        return redirect('admin/boat-travel-package/' . $id . '/private-trip');
+        return redirect('admin/travel-package/' . $id . '/private-trip');
     }
 
     /**
@@ -77,12 +76,12 @@ class PrivateTripController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function show($boat_travel_package_id, $id)
+    public function show($travel_package_id, $id)
     {
-        $data['private_trip'] = PrivateTrip::findOrFail($id);
-        $data['boat_travel_package_id'] = $boat_travel_package_id;
+        $data['private_trip'] = TravelPrivateTrip::findOrFail($id);
+        $data['travel_package_id'] = $travel_package_id;
 
-        return view('admin.private-trip.show', $data);
+        return view('admin.travel-private-trip.show', $data);
     }
 
     /**
@@ -92,9 +91,9 @@ class PrivateTripController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function edit($boat_travel_package_id, $id)
+    public function edit($travel_package_id, $id)
     {
-        $private_trip = PrivateTrip::findOrFail($id);
+        $private_trip = TravelPrivateTrip::findOrFail($id);
         $durationString = $private_trip->duration;
         preg_match('/(\d+)D(\d+)N/', $durationString, $matches);
 
@@ -103,9 +102,9 @@ class PrivateTripController extends Controller
         $data['private_trip'] = $private_trip;
         $data['private_trip']->days = $days;
         $data['private_trip']->nights = $nights;
-        $data['boat_travel_package_id'] = $boat_travel_package_id;
+        $data['travel_package_id'] = $travel_package_id;
 
-        return view('admin.private-trip.edit', $data);
+        return view('admin.travel-private-trip.edit', $data);
     }
 
     /**
@@ -116,7 +115,7 @@ class PrivateTripController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, $boat_travel_package_id, $id)
+    public function update(Request $request, $travel_package_id, $id)
     {
         $request->validate([
             'days' => 'required|numeric',
@@ -127,12 +126,12 @@ class PrivateTripController extends Controller
 
         $requestData = $request->all();
         $requestData['duration'] = $request->days . 'D' . $request->nights . 'N';
-        $open_trip = PrivateTrip::findOrFail($id);
+        $open_trip = TravelPrivateTrip::findOrFail($id);
 
         alert()->success('Record Updated!' );
         $open_trip->update($requestData);
 
-        return redirect('admin/boat-travel-package/' . $boat_travel_package_id . '/private-trip');
+        return redirect('admin/travel-package/' . $travel_package_id . '/private-trip');
     }
 
     /**
@@ -142,11 +141,12 @@ class PrivateTripController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy($boat_travel_package_id, $id)
+    public function destroy($travel_package_id, $id)
     {
         alert()->success('Record Deleted!' );
-        PrivateTrip::destroy($id);
+        TravelPrivateTrip::destroy($id);
 
-        return redirect('admin/boat-travel-package/' . $boat_travel_package_id . '/private-trip');
+        return redirect('admin/travel-package/' . $travel_package_id . '/private-trip');
     }
 }
+

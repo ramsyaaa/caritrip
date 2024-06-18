@@ -48,18 +48,7 @@
                      <div class="card card-transparent shadow-none d-flex justify-content-center mb-0 auth-card iq-auth-form">
                         <div class="card-body">
                            <a href="../index.html" class="navbar-brand d-flex align-items-center mb-3">
-                              
-                              <!--Logo start-->
-                              {{-- <div class="logo-main">
-                                  <div class="logo-normal">
-                                      <img src="{{asset('logo.png')}}" style="width: 165px;">
-                                  </div>
-                                  <div class="logo-mini">
-                                      <img src="{{asset('logo.png')}}" style="width: 165px;">
-                                  </div>
-                              </div> --}}
-                              <!--logo End-->                              
-                              <h4 class="logo-title ms-3 mb-0" data-setting="app_name">Cari Trip</h4>
+                              <h4 class="logo-title ms-3 mb-0">Cari Trip</h4>
                            </a>
                            <h2 class="mb-2 text-center">Sign In</h2>
                            <form method="post" action="{{route('auth.submit')}}">

@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Private Trip Detail</h4>
+                            <h4 class="card-title">Travel Private Trip Detail</h4>
                         </div>
                     </div>
                     <div class="card-body px-0">
@@ -20,7 +20,7 @@
                                     <tr><th> Price </th><td>{{ number_format($private_trip->price, 0, ',', '.') }}</td></tr>
                                 </tbody>
                             </table>
-                            <a href="{{ url('/admin/boat-travel-package/' . $boat_travel_package_id . '/private-trip') }}"><button class="btn btn-warning btn-sm"><i class="fa fa-close" aria-hidden="true"></i> Back</button></a>
+                            <a href="{{ url('/admin/travel-package/' . $travel_package_id . '/private-trip') }}"><button class="btn btn-warning btn-sm"><i class="fa fa-close" aria-hidden="true"></i> Back</button></a>
                         </div>
                     </div>
                 </div>

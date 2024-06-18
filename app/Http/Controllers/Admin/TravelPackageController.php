@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Alert;
-use App\Models\Boat;
-use App\Models\BoatTravelPackage;
 use App\Models\Destination;
 use App\Models\Language;
+use App\Models\TravelPackage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Storage;
 
-class BoatTravelPackageController extends Controller
+class TravelPackageController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -32,9 +29,9 @@ class BoatTravelPackageController extends Controller
     public function index(Request $request)
     {
         $perPage = 25;
-        $boattravelpackage = BoatTravelPackage::latest()->paginate($perPage);
-        $data['boattravelpackage'] = $boattravelpackage;
-        return view('admin.boat-travel-package.index', $data);
+        $travelpackage = TravelPackage::latest()->paginate($perPage);
+        $data['travelpackage'] = $travelpackage;
+        return view('admin.travel-package.index', $data);
     }
 
     /**
@@ -44,10 +41,9 @@ class BoatTravelPackageController extends Controller
      */
     public function create()
     {
-        $data['boats'] = Boat::get();
         $data['languages'] = Language::get();
         $data['destinations'] = Destination::get();
-        return view('admin.boat-travel-package.create', $data);
+        return view('admin.travel-package.create', $data);
     }
 
     /**
@@ -61,10 +57,8 @@ class BoatTravelPackageController extends Controller
     {
         $request->validate([
             'package_name' => 'required',
-            'boat_id' => 'required',
             'package_key_visual' => 'required',
             'destination_id' => 'required',
-            'trip_subcategory' => 'required',
             'have_itenary' => 'required',
             'itenary_list' => 'required',
             'include_list' => 'required',
@@ -81,10 +75,10 @@ class BoatTravelPackageController extends Controller
             $requestData['package_key_visual'] = 'storage/' . $requestData['package_key_visual'];
         }
 
-        BoatTravelPackage::create($requestData);
-        alert()->success('New ' . 'Boat Travel Package'. ' Created!' );
+        TravelPackage::create($requestData);
+        alert()->success('New ' . 'Travel Package'. ' Created!' );
 
-        return redirect('admin/boat-travel-package');
+        return redirect('admin/travel-package');
     }
 
     /**
@@ -96,9 +90,9 @@ class BoatTravelPackageController extends Controller
      */
     public function show($id)
     {
-        $boattravelpackage = BoatTravelPackage::findOrFail($id);
+        $travelpackage = TravelPackage::findOrFail($id);
 
-        return view('admin.boat-travel-package.show', compact('boattravelpackage'));
+        return view('admin.travel-package.show', compact('travelpackage'));
     }
 
     /**
@@ -110,12 +104,11 @@ class BoatTravelPackageController extends Controller
      */
     public function edit($id)
     {
-        $boattravelpackage = BoatTravelPackage::findOrFail($id);
-        $data['boattravelpackage'] = $boattravelpackage;
-        $data['boats'] = Boat::get();
+        $travelpackage = TravelPackage::findOrFail($id);
+        $data['travelpackage'] = $travelpackage;
         $data['languages'] = Language::get();
         $data['destinations'] = Destination::get();
-        return view('admin.boat-travel-package.edit', $data);
+        return view('admin.travel-package.edit', $data);
     }
 
     /**
@@ -130,9 +123,7 @@ class BoatTravelPackageController extends Controller
     {
         $request->validate([
             'package_name' => 'required',
-            'boat_id' => 'required',
             'destination_id' => 'required',
-            'trip_subcategory' => 'required',
             'have_itenary' => 'required',
             'itenary_list' => 'required',
             'include_list' => 'required',
@@ -143,10 +134,10 @@ class BoatTravelPackageController extends Controller
         ]);
 
         $requestData = $request->all();
-        $boattravelpackage = BoatTravelPackage::findOrFail($id);
+        $travelpackage = TravelPackage::findOrFail($id);
         if ($request->hasFile('package_key_visual')) {
-            if ($boattravelpackage->package_key_visual) {
-                $oldImagePath = str_replace('storage/', '', $boattravelpackage->package_key_visual);
+            if ($travelpackage->package_key_visual) {
+                $oldImagePath = str_replace('storage/', '', $travelpackage->package_key_visual);
                 Storage::disk('public')->delete($oldImagePath);
             }
             $requestData['package_key_visual'] = $request->package_key_visual
@@ -156,9 +147,9 @@ class BoatTravelPackageController extends Controller
 
 
         alert()->success('Record Updated!' );
-        $boattravelpackage->update($requestData);
+        $travelpackage->update($requestData);
 
-        return redirect('admin/boat-travel-package');
+        return redirect('admin/travel-package');
     }
 
     /**
@@ -171,14 +162,13 @@ class BoatTravelPackageController extends Controller
     public function destroy($id)
     {
         alert()->success('Record Deleted!' );
-        $boattravelpackage = BoatTravelPackage::findOrFail($id);
-        if ($boattravelpackage->package_key_visual) {
-            $oldImagePath = str_replace('storage/', '', $boattravelpackage->package_key_visual);
+        $travelpackage = TravelPackage::findOrFail($id);
+        if ($travelpackage->package_key_visual) {
+            $oldImagePath = str_replace('storage/', '', $travelpackage->package_key_visual);
             Storage::disk('public')->delete($oldImagePath);
-        }
+        };
+        TravelPackage::destroy($id);
 
-        BoatTravelPackage::destroy($id);
-
-        return redirect('admin/boat-travel-package');
+        return redirect('admin/travel-package');
     }
 }
