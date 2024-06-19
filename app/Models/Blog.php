@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
 {
-    
+
 
     /**
      * The database table used by the model.
@@ -22,6 +22,11 @@ class Blog extends Model
     */
     protected $primaryKey = 'id';
 
+    public function category()
+    {
+        return $this->belongsTo(BlogCategory::class, 'id_category');
+    }
+
     /**
      * Attributes that should be mass-assignable.
      *
@@ -29,6 +34,6 @@ class Blog extends Model
      */
     protected $fillable = ['title', 'id_category', 'featured_image', 'slug', 'content', 'meta_description', 'meta_keywords'];
 
-    
+
 
 }

@@ -19,7 +19,31 @@ class LanguageController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
+    public function checkLang($lang, $url){
+        $checkLang = Language::where([
+            'language_code' => $lang,
+            'is_active' => true,
+        ])->first();
+
+        if($checkLang == null){
+            $checkLang = Language::where([
+                'is_default' => true,
+                'is_active' => true,
+            ])->first();
+
+            if($checkLang == null){
+                $checkLang = Language::latest()->first();
+                if($checkLang == null){
+                    return abort(404);
+                }
+            }
+
+            return redirect($checkLang->language_code . $url);
+        }
+        return null;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -52,13 +76,36 @@ class LanguageController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        Language::create($requestData);
+        $request->validate([
+            'language_name' => 'required|string|unique:languages',
+            'language_code' => 'required|string|unique:languages',
+            'is_default' => 'required',
+            'is_active' => 'required'
+        ]);
+
+        if($request->is_active && $request->is_default){
+            Language::where([
+                'is_active' => true,
+                'is_default' => true,
+            ])->update([
+                'is_default' => false,
+            ]);
+        }
+
+        $is_default = $request->is_default;
+        if($request->is_active == false && $request->is_default){
+            $is_default = false;
+        }
+
+        Language::create([
+            'language_name' => $request->language_name,
+            'language_code' => strtolower($request->language_code),
+            'is_default' => $is_default,
+            'is_active' => $request->is_active
+        ]);
         alert()->success('New ' . 'Language'. ' Created!' );
 
-        return redirect('admin/language');
+        return redirect('/admin/language');
     }
 
     /**
@@ -70,9 +117,9 @@ class LanguageController extends Controller
      */
     public function show($id)
     {
-        $language = Language::findOrFail($id);
+        $data['language'] = Language::findOrFail($id);
 
-        return view('admin.language.show', compact('language'));
+        return view('admin.language.show', $data);
     }
 
     /**
@@ -99,14 +146,69 @@ class LanguageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $requestData = $request->all();
-        
         $language = Language::findOrFail($id);
-        alert()->success('Record Updated!' );
-        $language->update($requestData);
 
-        return redirect('admin/language');
+        $language_name = 'required|string|unique:languages';
+        if($language->language_name == $request->language_name){
+            $language_name = 'required|string';
+        }
+        $language_code = 'required|string|unique:languages';
+        if($language->language_code == $request->language_code){
+            $language_code = 'required|string';
+        }
+
+        $request->validate([
+            'language_name' => $language_name,
+            'language_code' => $language_code,
+            'is_default' => 'required',
+            'is_active' => 'required'
+        ]);
+
+        if($request->is_active && $request->is_default){
+            Language::where([
+                'is_active' => true,
+                'is_default' => true,
+            ])->update([
+                'is_default' => false,
+            ]);
+
+            Language::where('id', $id)->update([
+                'language_name' => $request->language_name,
+                'language_code' => strtolower($request->language_code),
+                'is_default' => $request->is_default,
+                'is_active' => $request->is_active
+            ]);
+        }else{
+            $is_default = $request->is_default;
+            $is_active = $request->is_active;
+            if($request->is_active == false && $request->is_default){
+                $is_default = false;
+            }
+
+            Language::where('id', $id)->update([
+                'language_name' => $request->language_name,
+                'language_code' => strtolower($request->language_code),
+                'is_default' => $is_default,
+                'is_active' => $is_active
+            ]);
+
+            $checkLang = Language::where([
+                'is_active' => true,
+                'is_default' => true,
+            ])->first();
+
+            if($checkLang == null){
+                $checkLang = Language::where([
+                    'is_active' => true,
+                ])->latest()->first()->update([
+                    'is_default' => true,
+                ]);
+            }
+        }
+
+        alert()->success('Record Updated!' );
+
+        return redirect('/admin/language');
     }
 
     /**
@@ -118,9 +220,15 @@ class LanguageController extends Controller
      */
     public function destroy($id)
     {
+        $checkLang = Language::count();
+        if($checkLang <= 1){
+            alert()->error('Cannot delete the latest date' );
+            return redirect('/admin/language');
+        }
+
         alert()->success('Record Deleted!' );
         Language::destroy($id);
 
-        return redirect('admin/language');
+        return redirect('/admin/language');
     }
 }

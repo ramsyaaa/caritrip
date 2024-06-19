@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
+use App\Models\BoatTravelPackage;
 use App\Models\BoatTravelTrip;
+use App\Models\Language;
 use Illuminate\Http\Request;
 
 class BoatTravelTripController extends Controller
@@ -19,7 +21,7 @@ class BoatTravelTripController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +42,9 @@ class BoatTravelTripController extends Controller
      */
     public function create()
     {
-        return view('admin.boat-travel-trip.create');
+        $data['packages'] = BoatTravelPackage::get();
+        $data['languages'] = Language::get();
+        return view('admin.boat-travel-trip.create', $data);
     }
 
     /**
@@ -52,9 +56,18 @@ class BoatTravelTripController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'package_id' => 'required',
+            'trip_category' => 'required',
+            'trip_name' => 'required',
+            'trip_subcategory' => 'required',
+            'trip_days' => 'required',
+            'trip_price' => 'required',
+            'trip_note' => 'required',
+            'language_id' => 'required',
+        ]);
         $requestData = $request->all();
-        
+
         BoatTravelTrip::create($requestData);
         alert()->success('New ' . 'BoatTravelTrip'. ' Created!' );
 
@@ -86,6 +99,8 @@ class BoatTravelTripController extends Controller
     {
         $boattraveltrip = BoatTravelTrip::findOrFail($id);
         $data['boattraveltrip'] = $boattraveltrip;
+        $data['packages'] = BoatTravelPackage::get();
+        $data['languages'] = Language::get();
         return view('admin.boat-travel-trip.edit', $data);
     }
 
@@ -99,9 +114,19 @@ class BoatTravelTripController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $request->validate([
+            'package_id' => 'required',
+            'trip_category' => 'required',
+            'trip_name' => 'required',
+            'trip_subcategory' => 'required',
+            'trip_days' => 'required',
+            'trip_price' => 'required',
+            'trip_note' => 'required',
+            'language_id' => 'required',
+        ]);
+
         $requestData = $request->all();
-        
+
         $boattraveltrip = BoatTravelTrip::findOrFail($id);
         alert()->success('Record Updated!' );
         $boattraveltrip->update($requestData);

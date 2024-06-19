@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TripHelper;
+use App\Helpers\UserLogHelper;
+use App\Models\Blog;
+use App\Models\BoatTravelPackage;
+use App\Models\TravelPackage;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,8 +26,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        UserLogHelper::userLog($request, 'home');
+        $data = TripHelper::getNavbarTripsData();
+
+        $data['packages'] = BoatTravelPackage::get();
+        $data['travels'] = TravelPackage::get();
+        $data['blogs'] = Blog::limit(9)->get();
+
+        return view('traveller.id.home', $data);
     }
 }

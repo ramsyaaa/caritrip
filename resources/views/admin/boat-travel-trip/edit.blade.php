@@ -17,7 +17,7 @@
                             'url' => ['/admin/boat-travel-trip', $boattraveltrip->id],
                             'class' => '','enctype' => 'multipart/form-data']) !!}
 
-                            @include ('admin.boat-travel-trip.form', ['formMode' => 'edit'])
+                            @include ('admin.boat-travel-trip.form', ['formMode' => 'edit', 'packages' => $packages, 'languages' => $languages])
                         {!! Form::close() !!}
                     </div>
                 </div>

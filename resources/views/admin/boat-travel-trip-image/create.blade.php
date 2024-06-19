@@ -13,7 +13,7 @@
                     </div>
                     <div class="card-body">
                         {!! Form::open(['url' => '/admin/boat-travel-trip-image', 'class' => '', 'enctype' => 'multipart/form-data'])  !!}
-                            @include ('admin.boat-travel-trip-image.form', ['formMode' => 'create'])
+                            @include ('admin.boat-travel-trip-image.form', ['formMode' => 'create', 'trips' => $trips])
                         {!! Form::close() !!}
                     </div>
                 </div>

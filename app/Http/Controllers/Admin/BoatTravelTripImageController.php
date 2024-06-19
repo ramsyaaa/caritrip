@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
+use App\Models\BoatTravelTrip;
 use App\Models\BoatTravelTripImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BoatTravelTripImageController extends Controller
 {
@@ -19,7 +21,7 @@ class BoatTravelTripImageController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +42,8 @@ class BoatTravelTripImageController extends Controller
      */
     public function create()
     {
-        return view('admin.boat-travel-trip-image.create');
+        $data['trips'] = BoatTravelTrip::get();
+        return view('admin.boat-travel-trip-image.create', $data);
     }
 
     /**
@@ -52,9 +55,23 @@ class BoatTravelTripImageController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'trip_id' => 'required',
+            'images' => 'required',
+        ]);
         $requestData = $request->all();
-        
+
+        if ($request->hasFile('images')) {
+            $requestData['images'] = $request->images
+                ->store('uploads', 'public');
+                $requestData['images'] = 'storage/' . $requestData['images'];
+        }
+
+        $get_trip = BoatTravelTrip::where([
+            'id' => $request->trip_id,
+        ])->first();
+        $requestData['package_id'] = $get_trip->package_id;
+
         BoatTravelTripImage::create($requestData);
         alert()->success('New ' . 'BoatTravelTripImage'. ' Created!' );
 
@@ -86,6 +103,7 @@ class BoatTravelTripImageController extends Controller
     {
         $boattraveltripimage = BoatTravelTripImage::findOrFail($id);
         $data['boattraveltripimage'] = $boattraveltripimage;
+        $data['trips'] = BoatTravelTrip::get();
         return view('admin.boat-travel-trip-image.edit', $data);
     }
 
@@ -99,10 +117,29 @@ class BoatTravelTripImageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $requestData = $request->all();
-        
+        $request->validate([
+            'trip_id' => 'required',
+        ]);
+
         $boattraveltripimage = BoatTravelTripImage::findOrFail($id);
+
+        if ($request->hasFile('images')) {
+            if ($boattraveltripimage->images) {
+                $oldImagePath = str_replace('storage/', '', $boattraveltripimage->images);
+                Storage::disk('public')->delete($oldImagePath);
+            }
+            $requestData['images'] = $request->images
+                ->store('uploads', 'public');
+            $requestData['images'] = 'storage/' . $requestData['images'];
+        }
+
+        $get_trip = BoatTravelTrip::where([
+            'id' => $request->trip_id,
+        ])->first();
+        $requestData['package_id'] = $get_trip->package_id;
+
         alert()->success('Record Updated!' );
         $boattraveltripimage->update($requestData);
 

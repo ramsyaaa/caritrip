@@ -6,7 +6,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
 use App\Models\Boat;
+use App\Models\Language;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BoatController extends Controller
 {
@@ -19,7 +21,7 @@ class BoatController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +42,8 @@ class BoatController extends Controller
      */
     public function create()
     {
-        return view('admin.boat.create');
+        $data['languages'] = Language::get();
+        return view('admin.boat.create', $data);
     }
 
     /**
@@ -52,11 +55,34 @@ class BoatController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'boat_name' => 'required',
+            'boat_length' => 'required|numeric',
+            'boat_width' => 'required|numeric',
+            'boat_depth' => 'required|numeric',
+            'boat_speed' => 'required',
+            'boat_year_built' => 'required|numeric',
+            'boat_fuel_capacity' => 'required|numeric',
+            'boat_water_capacity' => 'required|numeric',
+            'boat_origin' => 'required',
+            'boat_material' => 'required',
+            'boat_main_engine' => 'required',
+            'boat_dingy' => 'required',
+            'boat_safety_equipment' => 'required',
+            'boat_facility' => 'required',
+            'boat_capacity' => 'required|numeric',
+            'boat_entertainment' => 'required',
+            'boat_featured_image' => 'required',
+            'seo_meta_description' => 'required',
+            'seo_meta_keywords' => 'required',
+            'language_id' => 'required',
+
+        ]);
         $requestData = $request->all();
-                if ($request->hasFile('boat_featured_image')) {
-            $requestData['boat_featured_image'] = $request->file('boat_featured_image')
-                ->store('', 'uploads');
+        if ($request->hasFile('boat_featured_image')) {
+            $requestData['boat_featured_image'] = $request->boat_featured_image
+            ->store('uploads/boats', 'public');
+            $requestData['boat_featured_image'] = 'storage/' . $requestData['boat_featured_image'];
         }
 
         Boat::create($requestData);
@@ -90,6 +116,7 @@ class BoatController extends Controller
     {
         $boat = Boat::findOrFail($id);
         $data['boat'] = $boat;
+        $data['languages'] = Language::get();
         return view('admin.boat.edit', $data);
     }
 
@@ -103,14 +130,42 @@ class BoatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $requestData = $request->all();
-                if ($request->hasFile('boat_featured_image')) {
-            $requestData['boat_featured_image'] = $request->file('boat_featured_image')
-                ->store('', 'uploads');
-        }
+        $request->validate([
+            'boat_name' => 'required',
+            'boat_length' => 'required|numeric',
+            'boat_width' => 'required|numeric',
+            'boat_depth' => 'required|numeric',
+            'boat_speed' => 'required',
+            'boat_year_built' => 'required|numeric',
+            'boat_fuel_capacity' => 'required|numeric',
+            'boat_water_capacity' => 'required|numeric',
+            'boat_origin' => 'required',
+            'boat_material' => 'required',
+            'boat_main_engine' => 'required',
+            'boat_dingy' => 'required',
+            'boat_safety_equipment' => 'required',
+            'boat_facility' => 'required',
+            'boat_capacity' => 'required|numeric',
+            'boat_entertainment' => 'required',
+            'seo_meta_description' => 'required',
+            'seo_meta_keywords' => 'required',
+            'language_id' => 'required',
+        ]);
 
         $boat = Boat::findOrFail($id);
+
+        $requestData = $request->all();
+        if ($request->hasFile('boat_featured_image')) {
+            if ($boat->boat_featured_image) {
+                $oldImagePath = str_replace('storage/', '', $boat->boat_featured_image);
+                Storage::disk('public')->delete($oldImagePath);
+            }
+            $requestData['boat_featured_image'] = $request->boat_featured_image
+                ->store('uploads/boats', 'public');
+            $requestData['boat_featured_image'] = 'storage/' . $requestData['boat_featured_image'];
+        }
+
+
         alert()->success('Record Updated!' );
         $boat->update($requestData);
 

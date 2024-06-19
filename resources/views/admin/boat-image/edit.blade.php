@@ -14,10 +14,10 @@
                     <div class="card-body">
                        {!! Form::model($boatimage, [
                             'method' => 'PATCH',
-                            'url' => ['/admin/boat-image', $boatimage->id],
+                            'url' => ['/admin/boat/' . $boat_id . '/images', $boatimage->id],
                             'class' => '','enctype' => 'multipart/form-data']) !!}
 
-                            @include ('admin.boat-image.form', ['formMode' => 'edit'])
+                            @include ('admin.boat-image.form', ['formMode' => 'edit', 'boats' => $boats])
                         {!! Form::close() !!}
                     </div>
                 </div>

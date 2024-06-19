@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BoatTravelTripImage extends Model
 {
-    
+
 
     /**
      * The database table used by the model.
@@ -27,8 +27,19 @@ class BoatTravelTripImage extends Model
      *
      * @var array
      */
+
+    public function package()
+    {
+        return $this->belongsTo(BoatTravelPackage::class, 'package_id');
+    }
+
+    public function trip()
+    {
+        return $this->belongsTo(BoatTravelTrip::class, 'trip_id');
+    }
+
     protected $fillable = ['package_id', 'trip_id', 'images'];
 
-    
+
 
 }

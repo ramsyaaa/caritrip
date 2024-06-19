@@ -6,7 +6,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
 use App\Models\Blog;
+use App\Models\BlogCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -19,7 +21,7 @@ class BlogController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +42,8 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('admin.blog.create');
+        $data['blog_categories'] = BlogCategory::get();
+        return view('admin.blog.create', $data);
     }
 
     /**
@@ -52,11 +55,21 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'title' => 'required',
+            'id_category' => 'required',
+            'featured_image' => 'required',
+            'slug' => 'required|unique:blogs',
+            'content' => 'required',
+            'meta_description' => 'required',
+            'meta_keywords' => 'required',
+        ]);
+
         $requestData = $request->all();
-                if ($request->hasFile('featured_image')) {
-            $requestData['featured_image'] = $request->file('featured_image')
-                ->store('', 'uploads');
+        if ($request->hasFile('featured_image')) {
+            $requestData['featured_image'] = $request->featured_image
+                ->store('uploads', 'public');
+                $requestData['featured_image'] = 'storage/' . $requestData['featured_image'];
         }
 
         Blog::create($requestData);
@@ -90,6 +103,7 @@ class BlogController extends Controller
     {
         $blog = Blog::findOrFail($id);
         $data['blog'] = $blog;
+        $data['blog_categories'] = BlogCategory::get();
         return view('admin.blog.edit', $data);
     }
 
@@ -103,11 +117,31 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $blog = Blog::findOrFail($id);
+
+        if($request->slug == $blog->slug){
+            $slug = 'required';
+        }else{
+            $slug = 'required|unique:blogs';
+        }
+
+        $request->validate([
+            'title' => 'required',
+            'id_category' => 'required',
+            'slug' => $slug,
+            'content' => 'required',
+            'meta_description' => 'required',
+            'meta_keywords' => 'required',
+        ]);
         $requestData = $request->all();
-                if ($request->hasFile('featured_image')) {
-            $requestData['featured_image'] = $request->file('featured_image')
-                ->store('', 'uploads');
+        if ($request->hasFile('featured_image')) {
+            if ($blog->featured_image) {
+                $oldImagePath = str_replace('storage/', '', $blog->featured_image);
+                Storage::disk('public')->delete($oldImagePath);
+            }
+            $requestData['featured_image'] = $request->featured_image
+                ->store('uploads', 'public');
+            $requestData['featured_image'] = 'storage/' . $requestData['featured_image'];
         }
 
         $blog = Blog::findOrFail($id);

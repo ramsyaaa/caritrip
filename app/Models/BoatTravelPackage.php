@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BoatTravelPackage extends Model
 {
-    
+
 
     /**
      * The database table used by the model.
@@ -27,8 +27,53 @@ class BoatTravelPackage extends Model
      *
      * @var array
      */
-    protected $fillable = ['package_name', 'boat_id', 'package_key_visual', 'package_short_description', 'package_description', 'location', 'have_itenary', 'itenary_list', 'include_list', 'exclude_list', 'seo_meta_description', 'seo_meta_keywords', 'highlight_video', 'language_id'];
 
-    
+    public function language()
+    {
+        return $this->belongsTo(Language::class, 'language_id');
+    }
+    public function boat()
+    {
+        return $this->belongsTo(Boat::class, 'boat_id');
+    }
+    public function destination()
+    {
+        return $this->belongsTo(Destination::class, 'destination_id');
+    }
+
+    public function images()
+    {
+        return $this->hasMany(BoatTravelPackageImage::class, 'boat_travel_package_id');
+    }
+
+    public function openTrips()
+    {
+        return $this->hasMany(OpenTrip::class, 'boat_travel_package_id');
+    }
+    public function privateTrips()
+    {
+        return $this->hasMany(PrivateTrip::class, 'boat_travel_package_id');
+    }
+    public function fullDayCruises()
+    {
+        return $this->hasMany(FullDayCruise::class, 'boat_travel_package_id');
+    }
+
+    protected $fillable = [
+        'package_name',
+        'boat_id',
+        'destination_id',
+        'package_key_visual',
+        'trip_subcategory',
+        'have_itenary',
+        'itenary_list',
+        'include_list',
+        'exclude_list',
+        'seo_meta_description',
+        'seo_meta_keywords',
+        'language_id',
+    ];
+
+
 
 }

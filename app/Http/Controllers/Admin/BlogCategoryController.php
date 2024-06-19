@@ -19,7 +19,7 @@ class BlogCategoryController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -52,10 +52,14 @@ class BlogCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        BlogCategory::create($requestData);
+        $request->validate([
+            'category_name' => 'required|unique:blog_categories',
+        ]);
+
+        BlogCategory::create([
+            'category_name' => $request->category_name,
+        ]);
+
         alert()->success('New ' . 'BlogCategory'. ' Created!' );
 
         return redirect('admin/blog-category');
@@ -99,12 +103,22 @@ class BlogCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $requestData = $request->all();
-        
         $blogcategory = BlogCategory::findOrFail($id);
+
+        if($request->category_name == $blogcategory->category_name){
+            $request->validate([
+                'category_name' => 'required'
+            ]);
+        }else{
+            $request->validate([
+                'category_name' => 'required|unique:blog_categories',
+            ]);
+        }
+
         alert()->success('Record Updated!' );
-        $blogcategory->update($requestData);
+        $blogcategory->update([
+            'category_name' => $request->category_name
+        ]);
 
         return redirect('admin/blog-category');
     }

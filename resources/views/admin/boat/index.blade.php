@@ -12,7 +12,7 @@
                             <a href="{{ url('/admin/boat'. '/create') }}" class="btn btn-success mr-2">
                                 <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                                </svg>    
+                                </svg>
                                 Add New
                             </a>
                         </div>
@@ -23,7 +23,7 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Boat Name</th><th>Boat Length</th><th>Boat Width</th><th>Boat Depth</th><th>Boat Speed</th><th>Boat Year Built</th><th>Boat Fuel Capacity</th><th>Boat Water Capacity</th><th>Boat Origin</th><th>Boat Material</th><th>Boat Main Engine</th><th>Boat Dingy</th><th>Boat Safety Equipment</th><th>Boat Facility</th><th>Boat Capacity</th><th>Boat Entertainment</th><th>Boat Featured Image</th><th>Seo Meta Description</th><th>Seo Meta Keywords</th><th>Language Id</th>
+                                        <th>Boat Name</th><th>Boat Origin</th><th>Language</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -31,14 +31,14 @@
                                     @foreach($boat as $i => $item)
                                     <tr>
                                         <td>{{ $i+1 }}</td>
-                                        <td>{{ $item->boat_name }}</td><td>{{ $item->boat_length }}</td><td>{{ $item->boat_width }}</td><td>{{ $item->boat_depth }}</td><td>{{ $item->boat_speed }}</td><td>{{ $item->boat_year_built }}</td><td>{{ $item->boat_fuel_capacity }}</td><td>{{ $item->boat_water_capacity }}</td><td>{{ $item->boat_origin }}</td><td>{{ $item->boat_material }}</td><td>{{ $item->boat_main_engine }}</td><td>{{ $item->boat_dingy }}</td><td>{{ $item->boat_safety_equipment }}</td><td>{{ $item->boat_facility }}</td><td>{{ $item->boat_capacity }}</td><td>{{ $item->boat_entertainment }}</td><td>{{ $item->boat_featured_image }}</td><td>{{ $item->seo_meta_description }}</td><td>{{ $item->seo_meta_keywords }}</td><td>{{ $item->language_id }}</td>
+                                        <td>{{ $item->boat_name }}</td><td>{{ $item->boat_origin }}</td><td>{{ $item->language ? $item->language->language_name : '' }}</td>
                                         <td>
                                             <div class="flex align-items-center list-user-action">
                                                 <a class="btn btn-sm btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="View" href="{{ url('/admin/boat/' . $item->id) }}">
                                                     <span class="btn-inner">
                                                     <svg fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-32" width="32" height="32" viewBox="0 0 24 24">
                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8.09756 12C8.09756 14.1333 9.8439 15.8691 12 15.8691C14.1463 15.8691 15.8927 14.1333 15.8927 12C15.8927 9.85697 14.1463 8.12121 12 8.12121C9.8439 8.12121 8.09756 9.85697 8.09756 12ZM17.7366 6.04606C19.4439 7.36485 20.8976 9.29455 21.9415 11.7091C22.0195 11.8933 22.0195 12.1067 21.9415 12.2812C19.8537 17.1103 16.1366 20 12 20H11.9902C7.86341 20 4.14634 17.1103 2.05854 12.2812C1.98049 12.1067 1.98049 11.8933 2.05854 11.7091C4.14634 6.88 7.86341 4 11.9902 4H12C14.0683 4 16.0293 4.71758 17.7366 6.04606ZM12.0012 14.4124C13.3378 14.4124 14.4304 13.3264 14.4304 11.9979C14.4304 10.6597 13.3378 9.57362 12.0012 9.57362C11.8841 9.57362 11.767 9.58332 11.6597 9.60272C11.6207 10.6694 10.7426 11.5227 9.65971 11.5227H9.61093C9.58166 11.6779 9.56215 11.833 9.56215 11.9979C9.56215 13.3264 10.6548 14.4124 12.0012 14.4124Z" fill="currentColor"></path>
-                                                    </svg>                             
+                                                    </svg>
                                                     </span>
                                                 </a>
                                                 <a class="btn btn-sm btn-icon btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-original-title="Edit" href="{{ url('/admin/boat/' . $item->id . '/edit') }}">
