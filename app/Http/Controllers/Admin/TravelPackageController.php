@@ -57,6 +57,7 @@ class TravelPackageController extends Controller
     {
         $request->validate([
             'package_name' => 'required',
+            'description' => 'required',
             'package_key_visual' => 'required',
             'destination_id' => 'required',
             'have_itenary' => 'required',
@@ -123,6 +124,7 @@ class TravelPackageController extends Controller
     {
         $request->validate([
             'package_name' => 'required',
+            'description' => 'required',
             'destination_id' => 'required',
             'have_itenary' => 'required',
             'itenary_list' => 'required',

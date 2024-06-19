@@ -10,6 +10,11 @@
         {!! $errors->first('nights', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
+<div class="form-group{{ $errors->has('date') ? 'has-error' : ''}}">
+    {!! Form::label('date', 'Date', ['class' => 'control-label']) !!}
+    {!! Form::date('date', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+    {!! $errors->first('date', '<p class="help-block">:message</p>') !!}
+</div>
 <div class="form-group{{ $errors->has('price') ? 'has-error' : ''}}">
     {!! Form::label('price', 'Price', ['class' => 'control-label']) !!}
     {!! Form::text('price', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}

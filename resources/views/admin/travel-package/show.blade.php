@@ -16,6 +16,7 @@
                             <table class="table table-striped" role="grid">
                                 <tbody>
                                     <tr><th> Package Name </th><td> {{ $travelpackage->package_name }} </td></tr><tr><th> Destination </th><td> {{ $travelpackage->destination ? $travelpackage->destination->name : "" }} </td></tr>
+                                    <tr><th> Description </th><td> {!! $travelpackage->description !!} </td></tr>
                                     <tr><th> Package Image </th><td>
                                         <img id="image_preview" src="{{ asset( $travelpackage->package_key_visual) }}" alt="Image Preview" style="max-height: 300px; display: {{ isset($travelpackage) ? 'block' : 'none' }};" />
                                     </td></tr>

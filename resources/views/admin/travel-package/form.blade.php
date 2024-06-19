@@ -8,6 +8,11 @@
     {!! Form::select('destination_id', $destinations->pluck('name', 'id')->prepend('Choose Destination', ''), null, ['class' => 'form-control']) !!}
     {!! $errors->first('destination_id', '<p class="help-block">:message</p>') !!}
 </div>
+<div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+    {!! Form::label('description', 'Description', ['class' => 'control-label']) !!}
+    {!! Form::textarea('description', null, ['class' => 'form-control', 'id' => 'editor']) !!}
+    {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
+</div>
 <div class="form-group{{ $errors->has('package_key_visual') ? 'has-error' : ''}}">
     {!! Form::label('package_key_visual', 'Key Visual', ['class' => 'control-label']) !!}
     {!! Form::file('package_key_visual', ['class' => 'form-control', 'id' => 'package_key_visual', 'onchange' => 'previewImage(event)']) !!}

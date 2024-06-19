@@ -16,6 +16,7 @@ class CreateTravelPackagesTable extends Migration
         Schema::create('travel_packages', function (Blueprint $table) {
             $table->id();
             $table->string('package_name')->nullable();
+            $table->string('description')->nullable();
             $table->foreignId('destination_id');
             $table->string('package_key_visual');
             $table->boolean('have_itenary')->nullable();

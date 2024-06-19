@@ -8,6 +8,7 @@ class TravelOpenTrip extends Model
 {
     protected $fillable = [
         'travel_package_id',
+        'date',
         'duration',
         'price',
     ];

@@ -8,6 +8,7 @@ class TravelPackage extends Model
 {
     protected $fillable = [
         'package_name',
+        'description',
         'destination_id',
         'package_key_visual',
         'have_itenary',

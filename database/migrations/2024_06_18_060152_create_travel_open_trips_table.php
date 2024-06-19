@@ -16,6 +16,7 @@ class CreateTravelOpenTripsTable extends Migration
         Schema::create('travel_open_trips', function (Blueprint $table) {
             $table->id();
             $table->foreignId('travel_package_id');
+            $table->date('date');
             $table->string('duration');
             $table->string('price');
             $table->timestamps();

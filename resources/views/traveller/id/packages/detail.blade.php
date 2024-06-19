@@ -51,6 +51,12 @@
 
 
                          <div class="package-content-detail my-6">
+                            @if($type == 'Travel Trip')
+                            <article class="text-[16px] mb-[20px]">
+                                <h3 class="font-bold text-[32px]">Description :</h3>
+                                {!! $package->description !!}
+                            </article>
+                            @endif
                             @if($type == 'Boat Trip')
                             <article class="text-[16px] mb-[20px]">
                                 <h3 class="font-bold text-[32px]">Detail :</h3>
@@ -166,7 +172,11 @@
                                             <div :class="openTrip{{ $loop->iteration }} ? 'bg-gray-200' : 'text-white'"
                                                 @click="setActiveTrip({{ $loop->iteration }})"
                                                 class="px-4 py-2 font-bold text-[16px] flex justify-center rounded-t-lg cursor-pointer duration-500">
+                                                @if($type == 'Boat Trip')
                                                 Cabin {{ $loop->iteration }}
+                                                @elseif ($type == 'Travel Trip')
+                                                {{ date("d M y", strtotime($item->date)) }}
+                                                @endif
                                             </div>
                                         @endforeach
                                     </div>

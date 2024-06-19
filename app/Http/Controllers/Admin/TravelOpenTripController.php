@@ -58,6 +58,7 @@ class TravelOpenTripController extends Controller
             'days' => 'required|numeric',
             'nights' => 'required|numeric',
             'price' => 'required|numeric',
+            'date' => 'required'
         ]);
 
         $requestData = $request->all();
@@ -123,6 +124,7 @@ class TravelOpenTripController extends Controller
             'days' => 'required|numeric',
             'nights' => 'required|numeric',
             'price' => 'required|numeric',
+            'date' => 'required'
         ]);
 
         $requestData = $request->all();

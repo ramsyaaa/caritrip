@@ -15,6 +15,7 @@
                         <div class="table-responsive">
                             <table class="table table-striped" role="grid">
                                 <tbody>
+                                    <tr><th> Date </th><td>{{ $open_trip->date }}</td></tr>
                                     <tr><th> Duration </th><td>{{ $open_trip->duration }}</td></tr>
                                     <tr><th> Price </th><td>{{ number_format($open_trip->price, 0, ',', '.') }}</td></tr>
                                 </tbody>
