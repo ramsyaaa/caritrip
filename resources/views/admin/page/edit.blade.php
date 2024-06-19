@@ -17,7 +17,7 @@
                             'url' => ['/admin/page', $page->id],
                             'class' => '','enctype' => 'multipart/form-data']) !!}
 
-                            @include ('admin.page.form', ['formMode' => 'edit'])
+                            @include ('admin.page.form', ['formMode' => 'edit', 'languages' => $languages])
                         {!! Form::close() !!}
                     </div>
                 </div>

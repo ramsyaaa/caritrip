@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
+use App\Models\Language;
 use App\Models\Page;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,7 @@ class PageController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +41,8 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view('admin.page.create');
+        $data['languages'] = Language::get();
+        return view('admin.page.create', $data);
     }
 
     /**
@@ -52,15 +54,18 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $requestData = $request->all();
-                if ($request->hasFile('page_og_image')) {
-            $requestData['page_og_image'] = $request->file('page_og_image')
-                ->store('', 'uploads');
+
+        if ($request->hasFile('page_og_image')) {
+            $requestData['page_og_image'] = $request->page_og_image
+            ->store('uploads/pages', 'public');
+            $requestData['page_og_image'] = 'storage/' . $requestData['page_og_image'];
         }
         if ($request->hasFile('page_banner_image')) {
-            $requestData['page_banner_image'] = $request->file('page_banner_image')
-                ->store('', 'uploads');
+            $requestData['page_banner_image'] = $request->page_banner_image
+            ->store('uploads/pages', 'public');
+            $requestData['page_banner_image'] = 'storage/' . $requestData['page_banner_image'];
         }
 
         Page::create($requestData);
@@ -94,6 +99,7 @@ class PageController extends Controller
     {
         $page = Page::findOrFail($id);
         $data['page'] = $page;
+        $data['languages'] = Language::get();
         return view('admin.page.edit', $data);
     }
 
@@ -107,7 +113,7 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $requestData = $request->all();
                 if ($request->hasFile('page_og_image')) {
             $requestData['page_og_image'] = $request->file('page_og_image')

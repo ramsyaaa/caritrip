@@ -40,7 +40,6 @@
 
 <div class="form-group" align="right">
     {!! Form::submit($formMode === 'edit' ? 'Update' : 'Create', ['class' => 'btn btn-primary']) !!}
-    {!! Form::reset('Reset', ['class' => 'btn btn-warning']) !!}
     <a href="#" onClick="javascript:history.go(-1)" class="btn btn-danger">Cancel and Back</a>
 </div>
 

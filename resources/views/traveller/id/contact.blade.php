@@ -1,4 +1,10 @@
-@extends('traveller.layout.master')
+@extends('traveller.layout.master', [
+    'page_title' => $page_title,
+    'meta_page_breadcrumbs_title' => $meta_page_breadcrumbs_title,
+    'meta_page_og_image' => $meta_page_og_image,
+    'meta_page_description' => $meta_page_description,
+    'meta_page_keywords' => $meta_page_keywords,
+])
 
 @section('content')
 <div id="siteLoader" class="site-loader">
@@ -14,7 +20,7 @@
           <div class="inner-banner-wrap">
             <div class="">
                 <div class="relative w-full">
-                    <img class="w-full h-[500px] md:h-[400px] object-cover" src="{{ asset('assets/images/landscape 3.jpg') }}" alt="">
+                    <img class="w-full h-[500px] md:h-[400px] object-cover" src="@isset($meta_page_banner_image) @if($meta_page_banner_image != null) {{ asset($meta_page_banner_image) }} @else {{ asset('assets/images/landscape 3.jpg') }} @endif @else {{ asset('assets/images/landscape 3.jpg') }} @endisset" alt="">
                     <div class="flex items-center justify-center w-full h-full absolute top-0 left-0">
                     <h1 class="font-bold text-white text-[32px]">Contact Us</h1>
                     </div>
@@ -35,27 +41,27 @@
                          <div class="social-icon">
                             <ul>
                                <li>
-                                  <a href="https://www.facebook.com" target="_blank">
+                                  <a href="https://www.facebook.com" style="background-color: #2C2D83" target="_blank">
                                      <i class="fab fa-facebook-f" aria-hidden="true"></i>
                                   </a>
                                </li>
                                <li>
-                                  <a href="https://www.twitter.com" target="_blank">
+                                  <a href="https://www.twitter.com" style="background-color: #2C2D83" target="_blank">
                                      <i class="fab fa-twitter" aria-hidden="true"></i>
                                   </a>
                                </li>
                                <li>
-                                  <a href="https://www.youtube.com" target="_blank">
+                                  <a href="https://www.youtube.com" style="background-color: #2C2D83" target="_blank">
                                      <i class="fab fa-youtube" aria-hidden="true"></i>
                                   </a>
                                </li>
                                <li>
-                                  <a href="https://www.instagram.com" target="_blank">
+                                  <a href="https://www.instagram.com" style="background-color: #2C2D83" target="_blank">
                                      <i class="fab fa-instagram" aria-hidden="true"></i>
                                   </a>
                                </li>
                                <li>
-                                  <a href="https://www.pinterest.com" target="_blank">
+                                  <a href="https://www.pinterest.com" style="background-color: #2C2D83" target="_blank">
                                      <i class="fab fa-pinterest" aria-hidden="true"></i>
                                   </a>
                                </li>
@@ -76,18 +82,12 @@
                 <div class="row align-items-center">
                    <div class="col-lg-4">
                       <div class="icon-box border-icon-box">
-                         <div class="box-icon">
+                         <div class="box-icon" style="background-color: #2C2D83">
                             <i aria-hidden="true" class="fas fa-envelope-open-text"></i>
                          </div>
                          <div class="icon-box-content">
                             <h4>EMAIL ADDRESS</h4>
                             <ul>
-                               <li>
-                                  <a href="mailto:support@gmail.com">support@gmail.com</a>
-                               </li>
-                               <li>
-                                  <a href="mailto:name@comapny.com">name@comapny.com</a>
-                               </li>
                                <li>
                                   <a href="mailto:info@domain.com">info@domain.com</a>
                                </li>
@@ -97,41 +97,35 @@
                    </div>
                    <div class="col-lg-4">
                       <div class="icon-box border-icon-box">
-                         <div class="box-icon">
+                         <div class="box-icon" style="background-color: #2C2D83">
                             <i aria-hidden="true" class="fas fa-phone-alt"></i>
                          </div>
                          <div class="icon-box-content">
                             <h4>PHONE NUMBER</h4>
                             <ul>
                                <li>
-                                  <a href="tell:+132599254669">+132 (599) 254 669</a>
+                                  <a href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan yang tersedia." target="_blank">+62 822 3679 2273</a>
                                </li>
-                               <li>
+                               {{-- <li>
                                   <a href="callto:123669255587">+123 (669) 255 587</a>
                                </li>
                                <li>
                                   <a href="callto:01977259912">+01 (977) 2599 12</a>
-                               </li>
+                               </li> --}}
                             </ul>
                          </div>
                       </div>
                    </div>
                    <div class="col-lg-4">
                       <div class="icon-box border-icon-box">
-                         <div class="box-icon">
+                         <div class="box-icon" style="background-color: #2C2D83">
                             <i aria-hidden="true" class="fas fa-map-marker-alt"></i>
                          </div>
                          <div class="icon-box-content">
                             <h4>ADDRESS LOCATION</h4>
                             <ul>
                                <li>
-                                  3146 Koontz, California
-                               </li>
-                               <li>
-                                  Quze.24 Second floor
-                               </li>
-                               <li>
-                                  36 Street, Melbourne
+                                    Indonesia
                                </li>
                             </ul>
                          </div>

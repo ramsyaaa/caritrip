@@ -15,11 +15,14 @@
                         <div class="table-responsive">
                             <table class="table table-striped" role="grid">
                                 <tbody>
-                                    <tr>
-                                        <th>ID</th>
-                                        <td>{{ $page->id }}</td>
-                                    </tr>
-                                    <tr><th> Page Title </th><td> {{ $page->page_title }} </td></tr><tr><th> Page Breadcrumbs Title </th><td> {{ $page->page_breadcrumbs_title }} </td></tr><tr><th> Page Og Image </th><td> {{ $page->page_og_image }} </td></tr><tr><th> Page Banner Image </th><td> {{ $page->page_banner_image }} </td></tr><tr><th> Page Meta Description </th><td> {{ $page->page_meta_description }} </td></tr><tr><th> Page Friendly Url </th><td> {{ $page->page_friendly_url }} </td></tr><tr><th> Page Meta Keywords </th><td> {{ $page->page_meta_keywords }} </td></tr><tr><th> Page Category </th><td> {{ $page->page_category }} </td></tr><tr><th> Language Id </th><td> {{ $page->language_id }} </td></tr>
+                                    <tr><th> Page Title </th><td> {{ $page->page_title }} </td></tr><tr><th> Page Breadcrumbs Title </th><td> {{ $page->page_breadcrumbs_title }} </td></tr>
+                                    <tr><th> Page Og Image </th><td>
+                                        <img id="og_image_preview" src="{{ asset( $page->page_og_image) }}" alt="Og Image Preview" style="max-height: 300px; display: {{ isset($page) ? 'block' : 'none' }};" />
+                                    </td></tr>
+                                    <tr><th> Page Og Image </th><td>
+                                        <img id="banner_image_preview" src="{{ asset( $page->page_banner_image) }}" alt="Banner Image Preview" style="max-height: 300px; display: {{ isset($page) ? 'block' : 'none' }};" />
+                                    </td></tr>
+                                    <tr><th> Page Meta Description </th><td> {{ $page->page_meta_description }} </td></tr><tr><th> Page Friendly Url </th><td> {{ $page->page_friendly_url }} </td></tr><tr><th> Page Meta Keywords </th><td> {{ $page->page_meta_keywords }} </td></tr><tr><th> Page Category </th><td> {{ $page->page_category }} </td></tr><tr><th> Language </th><td> {{ $page->language ? $page->language->language_name : '' }} </td></tr>
                                 </tbody>
                             </table>
                             <a href="{{ url('/admin/page') }}"><button class="btn btn-warning btn-sm"><i class="fa fa-close" aria-hidden="true"></i> Back</button></a>

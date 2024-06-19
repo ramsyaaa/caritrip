@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BoatTravelPackage;
 use App\Models\FullDayCruise;
 use App\Models\OpenTrip;
+use App\Models\Page;
 use App\Models\PrivateTrip;
 use App\Models\TravelOpenTrip;
 use App\Models\TravelPackage;
@@ -96,6 +97,14 @@ class PackageController extends Controller
             }
         }
 
+        $page = Page::where(['page_category' => 'Packages'])->first();
+        $data['page_title'] = $page ? $page->page_title : '';
+        $data['meta_page_breadcrumbs_title'] = $page ? $page->page_breadcrumbs_title : '';
+        $data['meta_page_og_image'] = $page ? $page->page_og_image : '';
+        $data['meta_page_banner_image'] = $page ? $page->page_banner_image : '';
+        $data['meta_page_description'] = $page ? $page->page_meta_description : '';
+        $data['meta_page_keywords'] = $page ? $page->page_meta_keywords : '';
+
         return view('traveller.id.packages.packages', $data);
     }
     public function show(Request $request, $id){
@@ -118,6 +127,13 @@ class PackageController extends Controller
         }else{
             return abort(404);
         }
+
+        $data['page_title'] = $data['package'] ? $data['package']->package_name : '';
+        $data['meta_page_breadcrumbs_title'] = $data['package'] ? $data['package']->package_name : '';
+        $data['meta_page_og_image'] = $data['package'] ? $data['package']->package_key_visual : '';
+        $data['meta_page_banner_image'] = $data['package'] ? $data['package']->package_key_visual : '';
+        $data['meta_page_description'] = $data['package'] ? $data['package']->seo_meta_description : '';
+        $data['meta_page_keywords'] = $data['package'] ? $data['package']->seo_meta_keywords : '';
 
         return view('traveller.id.packages.detail', $data);
     }

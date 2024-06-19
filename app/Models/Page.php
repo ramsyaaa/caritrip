@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
 {
-    
+
 
     /**
      * The database table used by the model.
@@ -29,6 +29,10 @@ class Page extends Model
      */
     protected $fillable = ['page_title', 'page_breadcrumbs_title', 'page_og_image', 'page_banner_image', 'page_meta_description', 'page_friendly_url', 'page_meta_keywords', 'page_category', 'language_id'];
 
-    
+    public function language()
+    {
+        return $this->belongsTo(Language::class, 'language_id');
+    }
+
 
 }
