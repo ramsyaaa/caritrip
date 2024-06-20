@@ -8,6 +8,7 @@ use Alert;
 use App\Models\Language;
 use App\Models\Page;
 use Illuminate\Http\Request;
+use Storage;
 
 class PageController extends Controller
 {
@@ -115,16 +116,28 @@ class PageController extends Controller
     {
 
         $requestData = $request->all();
-                if ($request->hasFile('page_og_image')) {
-            $requestData['page_og_image'] = $request->file('page_og_image')
-                ->store('', 'uploads');
-        }
-        if ($request->hasFile('page_banner_image')) {
-            $requestData['page_banner_image'] = $request->file('page_banner_image')
-                ->store('', 'uploads');
+        $page = Page::findOrFail($id);
+        if ($request->hasFile('page_og_image')) {
+            if ($page->page_og_image) {
+                $oldImagePath = str_replace('storage/', '', $page->page_og_image);
+                Storage::disk('public')->delete($oldImagePath);
+            }
+            $requestData['page_og_image'] = $request->page_og_image
+                ->store('uploads/pages', 'public');
+            $requestData['page_og_image'] = 'storage/' . $requestData['page_og_image'];
         }
 
-        $page = Page::findOrFail($id);
+        if ($request->hasFile('page_banner_image')) {
+            if ($page->page_banner_image) {
+                $oldImagePath = str_replace('storage/', '', $page->page_banner_image);
+                Storage::disk('public')->delete($oldImagePath);
+            }
+            $requestData['page_banner_image'] = $request->page_banner_image
+                ->store('uploads/pages', 'public');
+            $requestData['page_banner_image'] = 'storage/' . $requestData['page_banner_image'];
+        }
+
+
         alert()->success('Record Updated!' );
         $page->update($requestData);
 
@@ -141,6 +154,16 @@ class PageController extends Controller
     public function destroy($id)
     {
         alert()->success('Record Deleted!' );
+        $page = Page::findOrFail($id);
+        if ($page->page_og_image) {
+            $oldImagePath = str_replace('storage/', '', $page->page_og_image);
+            Storage::disk('public')->delete($oldImagePath);
+        }
+        if ($page->page_banner_image) {
+                $oldImagePath = str_replace('storage/', '', $page->page_banner_image);
+                Storage::disk('public')->delete($oldImagePath);
+            }
+
         Page::destroy($id);
 
         return redirect('admin/page');
