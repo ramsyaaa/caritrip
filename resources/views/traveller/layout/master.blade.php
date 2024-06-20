@@ -5,6 +5,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+        <meta property="og:title" content="@isset($meta_page_breadcrumbs_title) @if($meta_page_breadcrumbs_title != null){{  $meta_page_breadcrumbs_title }} @else CariTrip @endif @else Caritrip @endisset">
+        <meta property="og:description" content="@isset($meta_page_description) @if($meta_page_description != null) {{ $meta_page_description }} @else CariTrip @endif @endisset">
+        <meta property="og:image" content="@isset($meta_page_og_image) @if($meta_page_og_image != null) {{ asset($meta_page_og_image) }} @else {{ asset('assets/logos/caritrip.png') }} @endif @endisset">
+        <meta property="og:url" content="https://caritrip.com">
+        <meta property="og:type" content="website">
+        <meta name="keywords" content="@isset($meta_page_keywords) @if($meta_page_keywords != null) {{ $meta_page_keywords }} @else CariTrip @endif @endisset">
+
         <!-- favicon -->
         <link rel="icon" type="image/png" href="{{ asset('assets/logos/IMG_0859.PNG') }}">
         <!-- Bootstrap CSS -->
@@ -27,7 +34,7 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.2/dist/full.min.css" rel="stylesheet" type="text/css" />
         <script src="https://cdn.tailwindcss.com"></script>
-        <title>Caritrip</title>
+        <title>@isset($page_title) {{ $page_title }} @else Caritrip @endisset</title>
 
         <script src="//unpkg.com/alpinejs" defer></script>
 

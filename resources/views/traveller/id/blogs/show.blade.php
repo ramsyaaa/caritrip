@@ -1,4 +1,10 @@
-@extends('traveller.layout.master')
+@extends('traveller.layout.master', [
+    'page_title' => $page_title,
+    'meta_page_breadcrumbs_title' => $meta_page_breadcrumbs_title,
+    'meta_page_og_image' => $meta_page_og_image,
+    'meta_page_description' => $meta_page_description,
+    'meta_page_keywords' => $meta_page_keywords,
+])
 
 @section('content')
 <div id="siteLoader" class="site-loader">

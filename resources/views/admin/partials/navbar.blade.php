@@ -1,13 +1,13 @@
 <aside class="sidebar sidebar-base sidebar-color" id="first-tour" data-toggle="main-sidebar" data-sidebar="responsive">
    <div class="sidebar-header d-flex align-items-center justify-content-start" style="background-color:white !important;">
-      <a href="index.html" class="navbar-brand">
+      <a href="/" class="navbar-brand">
          <!--Logo start-->
          <div class="logo-main">
             <div class="logo-normal">
-               <img src="{{asset('logo.png')}}" style="width: 165px;">
+               <img src="{{ asset('assets/logos/caritrip.png') }}" style="width: 165px;">
             </div>
             <div class="logo-mini">
-               <img src="{{asset('logo.png')}}" style="width: 165px;">
+               <img src="{{ asset('assets/logos/caritrip.png') }}" style="width: 165px;">
             </div>
          </div>
          <!--logo End-->
