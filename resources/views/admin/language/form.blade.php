@@ -1,10 +1,10 @@
 <div class="form-group{{ $errors->has('language_name') ? 'has-error' : ''}}">
-    {!! Form::label('language_name', 'Language Name', ['class' => 'control-label']) !!}
+    {!! Form::label('language_name', 'Nama Bahasa', ['class' => 'control-label']) !!}
     {!! Form::text('language_name', null, ['class' => 'form-control']) !!}
     {!! $errors->first('language_name', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group{{ $errors->has('language_code') ? 'has-error' : ''}}">
-    {!! Form::label('language_code', 'Language Code', ['class' => 'control-label']) !!}
+    {!! Form::label('language_code', 'Kode', ['class' => 'control-label']) !!}
     {!! Form::text('language_code', null, ['class' => 'form-control']) !!}
     {!! $errors->first('language_code', '<p class="help-block">:message</p>') !!}
 </div>
@@ -21,8 +21,7 @@
 
 <div class="form-group" align="right">
     {!! Form::submit($formMode === 'edit' ? 'Update' : 'Create', ['class' => 'btn btn-primary']) !!}
-    <button type="button" class="btn btn-warning" id="resetForm">Reset</button>
-    <a href="#" onClick="javascript:history.go(-1)" class="btn btn-danger">Cancel and Back</a>
+    <a href="#" onClick="javascript:history.go(-1)" class="btn btn-danger">Batal dan Kembali</a>
 </div>
 
 <script>

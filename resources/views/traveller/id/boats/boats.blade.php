@@ -22,7 +22,7 @@
                     <div class="relative w-full">
                         <img class="w-full h-[500px] md:h-[400px] object-cover" src="@isset($meta_page_banner_image) @if($meta_page_banner_image != null) {{ asset($meta_page_banner_image) }} @else {{ asset('assets/images/landscape 3.jpg') }} @endif @else {{ asset('assets/images/landscape 3.jpg') }} @endisset" alt="">
                         <div class="flex items-center justify-center w-full h-full absolute top-0 left-0">
-                        <h1 class="font-bold text-white text-[32px]">Boat List</h1>
+                        <h1 class="font-bold text-white text-[32px]">Daftar Kapal Kami</h1>
                         </div>
                     </div>
                 </div>
@@ -42,11 +42,11 @@
                              </div>
                           </h3>
                           <div class="my-4">
-                            Boat Length : {{ $item->boat_length }} m, Boat Width : {{ $item->boat_width }} m, Boat Depth : {{ $item->boat_depth }} m, Boat Speed : {{ $item->boat_length }} knots, Boat Year Build : {{ $item->boat_year_built }}, Boat Fuel Capacity : {{ $item->boat_fuel_capacity }} L, Boat Water Capacity : {{ $item->boat_water_capacity }} L, Boat Origin : {{ $item->boat_origin }}, Boat Material : {{ $item->boat_material }}, Boat Engine : {{ $item->boat_main_engine }}, Boat Dingy : {{ $item->boat_dingy }}, Boat Capacity : {{ $item->boat_capacity }} pax, Boat Entertaiment : {{ $item->boat_entertainment }}
+                            Panjang Kapal : {{ $item->boat_length }} m, Lebar Kapal : {{ $item->boat_width }} m, Kedalaman Kapal : {{ $item->boat_depth }} m, Kecepatan : {{ $item->boat_length }} knots, Tahun Pembuatan : {{ $item->boat_year_built }}, Kapasitas Bensin : {{ $item->boat_fuel_capacity }} L, Kapasitas Air : {{ $item->boat_water_capacity }} L, Asal Kapal : {{ $item->boat_origin }}, Material Kapal : {{ $item->boat_material }}, Mesin Utama : {{ $item->boat_main_engine }}, Dinghy : {{ $item->boat_dingy }}, Kapasitas Kapal : {{ $item->boat_capacity }} penumpang, Hiburan : {{ $item->boat_entertainment }}
                           </div>
 
                           <div class="font-bold text-[20px] my-4">
-                            Package Lists for this boat :
+                            Daftar Paket untuk kapal ini :
                           </div>
 
                             @foreach ($item->packages as $item1)
@@ -76,7 +76,7 @@
                                 <div style="background-color: #2C2D83" class="p-4 w-full flex justify-center rounded-lg">
                                     <div class="flex flex-col gap-4">
                                         <div>
-                                            <span class="font-bold text-[24px] text-white">Start From</span>
+                                            <span class="font-bold text-[24px] text-white">Mulai dari</span>
                                         </div>
                                         <h6>
                                             <span class="font-bold text-[24px] text-white">Rp @if(count($item1->openTrips) > 0) {{ number_format($item1->openTrips[0]->price, 0, ',', '.') }} @elseif(count($item1->privateTrips) > 0) {{ number_format($item1->privateTrips[0]->price, 0, ',', '.') }} @elseif(count($item1->fullDayCruises) > 0) {{ number_format($item1->fullDayCruises[0]->price, 0, ',', '.') }} @else 0 @endif </span>

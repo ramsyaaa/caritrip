@@ -18,4 +18,9 @@ class OpenTrip extends Model
     {
         return $this->belongsTo(Cabin::class, 'cabin_id');
     }
+
+    public function boatTravelPackage()
+    {
+        return $this->belongsTo(BoatTravelPackage::class, 'boat_travel_package_id');
+    }
 }

@@ -8,12 +8,12 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Blog List</h4>
+                            <h4 class="card-title">List Blog</h4>
                             <a href="{{ url('/admin/blog'. '/create') }}" class="btn btn-success mr-2">
                                 <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                 </svg>
-                                Add New
+                                Tambah
                             </a>
                         </div>
                     </div>
@@ -23,15 +23,15 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Title</th><th>Category</th><th>Slug</th><th>Meta Description</th><th>Meta Keywords</th>
-                                        <th>Actions</th>
+                                        <th>Judul</th><th>Kategori</th><th>Slug</th><
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($blog as $i => $item)
                                     <tr>
                                         <td>{{ $i+1 }}</td>
-                                        <td>{{ $item->title }}</td><td>{{ $item->category ? $item->category->category_name : '' }}</td><td>{{ $item->slug }}</td><td>{{ $item->meta_description }}</td><td>{{ $item->meta_keywords }}</td>
+                                        <td>{{ $item->title }}</td><td>{{ $item->category ? $item->category->category_name : '' }}</td><td>{{ $item->slug }}</td>
                                         <td>
                                             <div class="flex align-items-center list-user-action">
                                                 <a class="btn btn-sm btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="View" href="{{ url('/admin/blog/' . $item->id) }}">

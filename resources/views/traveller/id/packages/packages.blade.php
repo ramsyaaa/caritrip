@@ -22,7 +22,7 @@
                     <div class="relative w-full">
                         <img class="w-full h-[500px] md:h-[400px] object-cover" src="@isset($meta_page_banner_image) @if($meta_page_banner_image != null) {{ asset($meta_page_banner_image) }} @else {{ asset('assets/images/landscape 3.jpg') }} @endif @else {{ asset('assets/images/landscape 3.jpg') }} @endisset" alt="">
                         <div class="flex items-center justify-center w-full h-full absolute top-0 left-0">
-                        <h1 class="font-bold text-white text-[32px]">Tour Packages @if($category) ({{ $category }}) @endif</h1>
+                        <h1 class="font-bold text-white text-[32px]">List Paket Perjalanan @if($category) ({{ $category }}) @endif</h1>
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
              <!-- ***package section html start form here*** -->
              <div class="package-item-wrap">
                 <div class="w-full text-center mb-4 font-bold text-[24px]">
-                    Boat Trip Packages
+                    Paket Perjalanan Kapal
                 </div>
                 <div class="container">
                     @foreach ($trips as $trip)
@@ -61,7 +61,7 @@
                        </div>
                        <div style="background-color: #2C2D83" class="package-price">
                           <div class="review-area">
-                             <span class="review-text">Start From</span>
+                             <span class="review-text">Mulai dari</span>
                              {{-- <div class="rating-start-wrap d-inline-block">
                                 <div class="rating-start">
                                    <span style="width: 80%"></span>
@@ -89,7 +89,7 @@
              <!-- ***package section html start form here*** -->
              <div class="package-item-wrap">
                 <div class="w-full text-center mb-4 font-bold text-[24px]">
-                    Travel Trip Packages
+                    Paket Travel
                 </div>
                 <div class="container">
                     @foreach ($travels as $trip)
@@ -113,7 +113,7 @@
                        </div>
                        <div style="background-color: #2C2D83" class="package-price">
                           <div class="review-area">
-                             <span class="review-text">Start From</span>
+                             <span class="review-text">Mulai Dari</span>
                              {{-- <div class="rating-start-wrap d-inline-block">
                                 <div class="rating-start">
                                    <span style="width: 80%"></span>

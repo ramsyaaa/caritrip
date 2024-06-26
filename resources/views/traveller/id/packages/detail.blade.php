@@ -23,7 +23,7 @@
                    <div class="inner-banner-content">
                       <h1 class="font-bold text-[40px] text-white mb-4">@if($type == 'Boat Trip'){{ $package->boat->boat_name }} @elseif($type == 'Travel Trip') {{ $package->package_name }} @endif</h1>
                       <a target="_blank" href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan paket {{ $package->package_name }}" class="px-4 py-2 bg-[#2C2D83] text-white rounded-lg mt-4 hover:scale-110">
-                        Book Now
+                        Pesan Sekarang
                        </a>
                    </div>
                 </div>
@@ -59,21 +59,21 @@
                          <div class="package-content-detail my-6">
                             @if($type == 'Travel Trip')
                             <article class="text-[16px] mb-[20px]">
-                                <h3 class="font-bold text-[32px]">Description :</h3>
+                                <h3 class="font-bold text-[32px]">Deskripsi :</h3>
                                 {!! $package->description !!}
                             </article>
                             @endif
                             @if($type == 'Boat Trip')
                             <article class="text-[16px] mb-[20px]">
                                 <h3 class="font-bold text-[32px]">Detail :</h3>
-                                Boat Length : {{ $package->boat->boat_length }} m, Boat Width : {{ $package->boat->boat_width }} m, Boat Depth : {{ $package->boat->boat_depth }} m, Boat Speed : {{ $package->boat->boat_length }} knots, Boat Year Build : {{ $package->boat->boat_year_built }}, Boat Fuel Capacity : {{ $package->boat->boat_fuel_capacity }} L, Boat Water Capacity : {{ $package->boat->boat_water_capacity }} L, Boat Origin : {{ $package->boat->boat_origin }}, Boat Material : {{ $package->boat->boat_material }}, Boat Engine : {{ $package->boat->boat_main_engine }}, Boat Dingy : {{ $package->boat->boat_dingy }}, Boat Capacity : {{ $package->boat->boat_capacity }} pax, Boat Entertaiment : {{ $package->boat->boat_entertainment }}
+                                Panjang Kapal : {{ $package->boat->boat_length }} m, Lebar Kapal : {{ $package->boat->boat_width }} m, Kedalaman Kapal : {{ $package->boat->boat_depth }} m, Kecepatan : {{ $package->boat->boat_length }} knots, Tahun Pembuatan : {{ $package->boat->boat_year_built }}, Kapasitas Bensin : {{ $package->boat->boat_fuel_capacity }} L, Kapasitas Air : {{ $package->boat->boat_water_capacity }} L, Asal Kapal : {{ $package->boat->boat_origin }}, Material Kapal : {{ $package->boat->boat_material }}, Mesin Utama : {{ $package->boat->boat_main_engine }}, Dinghy : {{ $package->boat->boat_dingy }}, Kapasitas : {{ $package->boat->boat_capacity }} penumpang, Hiburan : {{ $package->boat->boat_entertainment }}
                              </article>
                             <article class="">
                                {{-- <h3>OVERVIEW :</h3> --}}
                                {{-- {!! $package->trip_note !!} --}}
                             </article>
                             <article class="bg-light-grey mb-[20px] px-4 py-4 font-bold text-[32px]">
-                                <h3><i class="fas fa-check text-[32px]"></i> Cabin  :</h3>
+                                <h3><i class="fas fa-check text-[32px]"></i> Kabin  :</h3>
                                 <ol class="text-[16px] font-normal">
                                     @foreach ($package->boat->cabins as $cabin)
                                     <li class="my-4">{{ $loop->iteration }}. @if ($cabin->amount > 1){{ $cabin->amount }} Unit @endif{{ $cabin->name }} : {{ $cabin->description }}</li>
@@ -81,16 +81,16 @@
                                 </ol>
                              </article>
                             <article class="bg-light-grey mb-[20px] px-4 py-4  text-[16px]">
-                                <h3 class="text-[32px] font-bold"><i class="fas fa-check text-[32px] font-bold mb-4"></i> Boat Facilities  :</h3>
+                                <h3 class="text-[32px] font-bold"><i class="fas fa-check text-[32px] font-bold mb-4"></i> Fasilitas  :</h3>
                                 {!! $package->boat->boat_facility !!}
                              </article>
                              <article class="bg-light-grey mb-[20px] px-4 py-4  text-[16px]">
-                                <h3 class="text-[32px] font-bold"><i class="fas fa-check text-[32px] font-bold mb-4"></i> Boat Safety Equipments  :</h3>
+                                <h3 class="text-[32px] font-bold"><i class="fas fa-check text-[32px] font-bold mb-4"></i> Peralatan Keselamatan  :</h3>
                                 {!! $package->boat->boat_safety_equipment !!}
                              </article>
                              @endif
                             <article class="bg-light-grey mb-[20px] px-4 py-4  text-[16px]">
-                               <h3 class="text-[32px] font-bold"><i class="fas fa-check text-[32px] font-bold mb-4"></i> INCLUDE  :</h3>
+                               <h3 class="text-[32px] font-bold"><i class="fas fa-check text-[32px] font-bold mb-4"></i> Include  :</h3>
                                {!! $package->include_list !!}
                             </article>
                             <article class="bg-light-grey mb-[20px] px-4 py-4  text-[16px]">
@@ -99,14 +99,14 @@
                              </article>
                              @if($package->have_itenary)
                             <article class="mb-[20px] px-4 py-4  text-[16px]">
-                               <h3 class="text-[32px] font-bold mb-4">ITENARY (OPEN TRIP) :</h3>
+                               <h3 class="text-[32px] font-bold mb-4">Itinerary :</h3>
                                {!! $package->itenary_list !!}
                             </article>
                             @endif
                             @if($type == 'Boat Trip')
                             <iframe width="560" height="560" src="{{ $package->boat->highlight_video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             <div class="flex justify-center w-full">
-                                <a class="px-4 py-2 text-white text-center text-[24px] rounded-lg bg-[#2C2D83] mt-4" target="_blank" href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan paket {{ $package->package_name }}">Book Now</a>
+                                <a class="px-4 py-2 text-white text-center text-[24px] rounded-lg bg-[#2C2D83] mt-4" target="_blank" href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan paket {{ $package->package_name }}">Pesan Sekarang</a>
                             </div>
                             @endif
                         </div>
@@ -179,7 +179,7 @@
                                                 @click="setActiveTrip({{ $loop->iteration }})"
                                                 class="px-4 py-2 font-bold text-[16px] flex justify-center rounded-t-lg cursor-pointer duration-500">
                                                 @if($type == 'Boat Trip')
-                                                Cabin {{ $loop->iteration }}
+                                                Kabin {{ $loop->iteration }}
                                                 @elseif ($type == 'Travel Trip')
                                                 {{ date("d M y", strtotime($item->date)) }}
                                                 @endif
@@ -201,11 +201,11 @@
                                             </div>
                                             @endif
                                             <div class="mt-4 text-[24px]">
-                                                Start From : Rp{{ number_format($item->price, 0, ',', '.') }} / pax
+                                                Mulai dari : Rp{{ number_format($item->price, 0, ',', '.') }} / pax
                                             </div>
                                             @if($type == 'Boat Trip')
                                             <div class="mt-4 text-[16px]">
-                                                Extra Bed : Rp{{ number_format($item->extra_bed_price, 0, ',', '.') }}
+                                                Extra kasur : Rp{{ number_format($item->extra_bed_price, 0, ',', '.') }}
                                             </div>
                                             @endif
                                         </div>
@@ -231,7 +231,7 @@
                                             <div :class="privateTrip{{ $loop->iteration }} ? 'bg-gray-200' : 'text-white'"
                                                 @click="setActiveTrip({{ $loop->iteration }})"
                                                 class="px-4 py-2 font-bold text-[16px] flex justify-center rounded-t-lg cursor-pointer duration-500">
-                                                {{ $item->pax }} pax
+                                                {{ $item->pax }} penumpang
                                             </div>
                                         @endforeach
                                     </div>
@@ -248,7 +248,7 @@
                                                 {{-- {{ $item->cabin->description }} --}}
                                             </div>
                                             <div class="mt-4 text-[24px]">
-                                                Start From : Rp{{ number_format($item->price, 0, ',', '.') }}
+                                                Mulai Dari : Rp{{ number_format($item->price, 0, ',', '.') }}
                                             </div>
                                             <div class="mt-4 text-[16px]">
                                                 {{-- Extra Bed : Rp{{ number_format($item->extra_bed_price, 0, ',', '.') }} --}}
@@ -277,7 +277,7 @@
                                             <div :class="fullDayCruise{{ $loop->iteration }} ? 'bg-gray-200' : 'text-white'"
                                                 @click="setActiveTrip({{ $loop->iteration }})"
                                                 class="px-4 py-2 font-bold text-[16px] flex justify-center rounded-t-lg cursor-pointer duration-500">
-                                                {{ $item->pax }} pax
+                                                {{ $item->pax }} penumpang
                                             </div>
                                         @endforeach
                                     </div>
@@ -288,7 +288,7 @@
                                                 <img src="{{ asset($item->boatTravelPackage->package_key_visual) }}" class="w-full" alt="">
                                             </div>
                                             <div class="mt-4 text-[24px]">
-                                                Start From : Rp{{ number_format($item->price, 0, ',', '.') }}
+                                                Mulai Dari : Rp{{ number_format($item->price, 0, ',', '.') }}
                                             </div>
                                         </div>
                                         @endforeach
@@ -300,7 +300,7 @@
                         </div>
                         <div class="w-full flex justify-center">
                             <a target="_blank" href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan paket {{ $package->package_name }}" class="px-4 py-2 rounded-lg text-white bg-[#2C2D83] hover:scale-110 duration-500">
-                                Book Now
+                                Pesan Sekarang
                             </a>
                         </div>
                       </div>

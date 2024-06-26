@@ -20,7 +20,7 @@
                         <div
                             class="d-flex align-items-start justify-content-between mb-2"
                         >
-                            <p class="mb-0 text-dark">Total Users</p>
+                            <p class="mb-0 text-dark">Total Pengguna</p>
                             {{-- <a
                                 class="badge rounded-pill bg-soft-primary"
                                 href="javascript:void(0);"
@@ -44,7 +44,7 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Country</th><th>Browser</th><th>URL</th><th>Group</th>
+                                <th>Negara</th><th>Browser</th><th>URL</th><th>Grup</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -84,9 +84,9 @@
 
                     // Set options untuk chart
                     var options = {
-                        title: 'User Access Over the Last 7 Days',
-                        hAxis: {title: 'Day'},
-                        vAxis: {title: 'Number of Users'},
+                        title: 'Pengguna yang mengakses dalam 7 hari terakhir',
+                        hAxis: {title: 'Hari'},
+                        vAxis: {title: 'Jumlah Pengguna'},
                         legend: 'none',
                         series: {
                             0: {

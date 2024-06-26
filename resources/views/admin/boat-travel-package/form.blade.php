@@ -66,7 +66,7 @@
     {!! $errors->first('language_id', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group{{ $errors->has('seo_meta_description') ? 'has-error' : ''}}">
-    {!! Form::label('seo_meta_description', 'Seo Meta Description', ['class' => 'control-label']) !!}
+    {!! Form::label('seo_meta_description', 'Seo Meta Deskripsi', ['class' => 'control-label']) !!}
     {!! Form::textarea('seo_meta_description', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
     {!! $errors->first('seo_meta_description', '<p class="help-block">:message</p>') !!}
 </div>

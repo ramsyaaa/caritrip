@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Edit Travel Open Trip</h4>
+                            <h4 class="card-title">Edit List Open Trip Travel</h4>
                         </div>
                     </div>
                     <div class="card-body">

@@ -22,7 +22,7 @@
                 <div class="relative w-full">
                     <img class="w-full h-[500px] md:h-[400px] object-cover" src="@isset($meta_page_banner_image) @if($meta_page_banner_image != null) {{ asset($meta_page_banner_image) }} @else {{ asset('assets/images/landscape 3.jpg') }} @endif @else {{ asset('assets/images/landscape 3.jpg') }} @endisset" alt="">
                     <div class="flex items-center justify-center w-full h-full absolute top-0 left-0">
-                    <h1 class="font-bold text-white text-[32px]">Contact Us</h1>
+                    <h1 class="font-bold text-white text-[32px]">Kontak</h1>
                     </div>
                 </div>
             </div>
@@ -36,9 +36,9 @@
                    <div class="col-lg-6">
                       <div class="section-heading">
                          <h5 class="sub-title">GET IN TOUCH</h5>
-                         <h2 class="section-title">REACH & CONTACT US!</h2>
-                         <p>Fusce hic augue velit wisi quibusdam pariatur, iusto primis, nec nemo, rutrum. Vestibulum cumque laudantium. Sit ornare mollitia tenetur, aptent. Eget feugiat error necessitatibus taciti..</p>
-                         <div class="social-icon">
+                         <h2 class="section-title">HUBUNGI KAMI!</h2>
+                         <p>CariTrip siap membantu Anda merencanakan perjalanan impian, baik wisata bahari dengan kapal maupun darat ke berbagai destinasi domestik dan internasional. Tim profesional kami siap menjawab pertanyaan Anda, memberikan saran, dan membantu Anda memesan perjalanan yang sesuai dengan kebutuhan dan anggaran Anda.</p>
+                         <div class="social-icon mt-4">
                             <ul>
                                <li>
                                   <a href="https://www.facebook.com" style="background-color: #2C2D83" target="_blank">
@@ -86,7 +86,7 @@
                             <i aria-hidden="true" class="fas fa-envelope-open-text"></i>
                          </div>
                          <div class="icon-box-content">
-                            <h4>EMAIL ADDRESS</h4>
+                            <h4>ALAMAT EMAIL</h4>
                             <ul>
                                <li>
                                   <a href="mailto:info@domain.com">info@domain.com</a>
@@ -101,17 +101,11 @@
                             <i aria-hidden="true" class="fas fa-phone-alt"></i>
                          </div>
                          <div class="icon-box-content">
-                            <h4>PHONE NUMBER</h4>
+                            <h4>NOMOR PONSEL</h4>
                             <ul>
                                <li>
                                   <a href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan yang tersedia." target="_blank">+62 822 3679 2273</a>
                                </li>
-                               {{-- <li>
-                                  <a href="callto:123669255587">+123 (669) 255 587</a>
-                               </li>
-                               <li>
-                                  <a href="callto:01977259912">+01 (977) 2599 12</a>
-                               </li> --}}
                             </ul>
                          </div>
                       </div>
@@ -122,7 +116,7 @@
                             <i aria-hidden="true" class="fas fa-map-marker-alt"></i>
                          </div>
                          <div class="icon-box-content">
-                            <h4>ADDRESS LOCATION</h4>
+                            <h4>LOKASI</h4>
                             <ul>
                                <li>
                                     Indonesia
