@@ -18,17 +18,17 @@
        <!-- ***home banner html start form here*** -->
        <section class="home-banner-section home-banner-slider">
           <div class="relative flex items-center">
-            <img class="w-full h-[800px] md:h-[800px] object-cover" src="{{ asset('assets/images/landscape 1.jpg') }}" alt="">
+            <img class="w-full h-[800px] md:h-[800px] object-cover" style="opacity: 150%; filter: brightness(0.6) contrast(1.2)" src="{{ asset('assets/images/landscape 1.jpg') }}" alt="">
             <div class="absolute inset-0 flex items-center justify-center">
                 <div class="container">
                     <div class="banner-content text-center text-white">
                         <div class="row">
                             <div class="col-lg-8 offset-lg-2">
-                                <h2 class="banner-title text-4xl md:text-5xl font-bold">CariTrip</h2>
+                                <h2 class="banner-title text-4xl md:text-5xl font-bold">Penuh Cerita</h2>
                                 <p class="mt-4">Kami percaya bahwa setiap perjalanan & petualangan adalah sebuah rangkaian cerita dan kami berkomitmen untuk membuat cerita Anda menjadi lebih menarik dan menyenangkan.</p>
                                 <div class="banner-btn mt-6">
                                 {{-- <a href="about.html" class="round-btn">LEARN MORE</a> --}}
-                                    <a href="booking.html" class="bg-[#2C2D83] text-white font-bold px-4 py-2 rounded">BOOK NOW</a>
+                                    <a href="booking.html" class="bg-[#2C2D83] text-white px-4 py-2 rounded">PESAN SEKARANG</a>
                                 </div>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
         </div>
 
           <div class="relative flex items-center">
-            <img class="w-full h-[800px] md:h-[800px] object-cover" src="{{ asset('assets/images/landscape 2.jpg') }}" alt="">
+            <img class="w-full h-[800px] md:h-[800px] object-cover" style="opacity: 150%; filter: brightness(0.6) contrast(1.2)" src="{{ asset('assets/images/landscape 2.jpg') }}" alt="">
             <div class="absolute inset-0 flex items-center justify-center">
                 <div class="container">
                     <div class="banner-content text-center text-white">
@@ -48,7 +48,7 @@
                                 <p class="mt-4">Yukk buat cerita petualangan liburanmu bersama CariTrip. Kami siap membawamu berkeliling menikmati pesona alam labuan bajo yang cantik dan unik. Tunggu apa lagi, ayo pesan sekarang!!</p>
                                 <div class="banner-btn mt-6">
                                 {{-- <a href="about.html" class="round-btn">LEARN MORE</a> --}}
-                                    <a href="booking.html" class="bg-[#2C2D83] text-white font-bold px-4 py-2 rounded">BOOK NOW</a>
+                                    <a href="booking.html" class="bg-[#2C2D83] text-white px-4 py-2 rounded">PESAN SEKARANG</a>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
              <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-sm-center">
                    <div class="section-heading">
-                      <h5 class="mt-4 font-bold text-[32px]">POPULAR TRIP PACKAGES</h5>
+                      <h5 class="mt-4 font-bold text-[32px]">PERJALANAN KAPAL YANG POPULER</h5>
                       {{-- <h2 class="section-title">CHECKOUT OUR TRIP PACKAGES</h2> --}}
                       {{-- <p>Fusce hic augue velit wisi quibusdam pariatur, iusto primis, nec nemo, rutrum. Vestibulum cumque laudantium. Sit ornare mollitia tenetur, aptent.</p> --}}
                    </div>
@@ -115,15 +115,15 @@
                        </div>
                     </article>
                     @endforeach
-                <div class="section-btn-wrap text-center">
-                   <a style="background-color: #2C2D83" href="{{ route('packages', ['type' => 'Boat Trip']) }}" class="round-btn">VIEW ALL PACKAGES</a>
+                <div class="section-btn-wrap text-center mb-20">
+                   <a style="background-color: #2C2D83" href="{{ route('packages', ['type' => 'Boat Trip']) }}" class="round-btn">LIHAT SEMUA</a>
                 </div>
              </div>
 
              <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-sm-center">
                    <div class="section-heading">
-                      <h5 class="mt-4 font-bold text-[32px]">POPULAR TRAVEL PACKAGES</h5>
+                      <h5 class="mt-4 font-bold text-[32px]">PERJALANAN TRAVEL POPULER</h5>
                       {{-- <h2 class="section-title">CHECKOUT OUR TRIP PACKAGES</h2> --}}
                       {{-- <p>Fusce hic augue velit wisi quibusdam pariatur, iusto primis, nec nemo, rutrum. Vestibulum cumque laudantium. Sit ornare mollitia tenetur, aptent.</p> --}}
                    </div>
@@ -171,7 +171,7 @@
                     </article>
                     @endforeach
                 <div class="section-btn-wrap text-center">
-                   <a style="background-color: #2C2D83" href="{{ route('packages', ['type' => 'Travel Trip']) }}" class="round-btn">VIEW ALL PACKAGES</a>
+                   <a style="background-color: #2C2D83" href="{{ route('packages', ['type' => 'Travel Trip']) }}" class="round-btn">LIHAT SEMUA</a>
                 </div>
              </div>
           </div>
@@ -182,12 +182,12 @@
           <div class="container">
              <div class="section-heading d-sm-flex align-items-center justify-content-between">
                 <div class="heading-group">
-                   <h5 style="color: #2C2D83" class="font-bold text-[32px] mb-4">LATEST BLOG</h5>
-                   <h2 class="section-title">OUR RECENT POSTS</h2>
+                   <h5 style="color: #2C2D83" class="font-bold text-[32px] mb-4">BLOG TERBARU</h5>
+                   <h2 class="section-title">POSTINGAN TERBARU KAMI</h2>
                    {{-- <p>Fusce hic augue velit wisi quibusdam pariatur, iusto primis, nec nemo, rutrum. <br>Vestibulum cumque laudantium. Sit ornare mollitia tenetur, aptent.</p> --}}
                 </div>
                 <div class="heading-btn">
-                   <a style="background-color: #2C2D83" href="{{ route('blogs.index') }}" class="round-btn">View All Blog</a>
+                   <a style="background-color: #2C2D83" href="{{ route('blogs.index') }}" class="round-btn">LIHAT SEMUA</a>
                 </div>
              </div>
              <div class="blog-section">
@@ -204,7 +204,7 @@
                             {{-- <p>Laboris hac erat dolor, posuere volutpat fringilla gravida metus nonummy, blandit mi...</p> --}}
                             <div class="post-footer d-flex justify-content-between align-items-center">
                                <div class="post-btn">
-                                  <a style="background-color: #2C2D83" href="{{ route('blogs.show', ['slug' => $blog->slug]) }}" class="round-btn">Read More</a>
+                                  <a style="background-color: #2C2D83" href="{{ route('blogs.show', ['slug' => $blog->slug]) }}" class="round-btn">Detail</a>
                                </div>
                             </div>
                          </div>

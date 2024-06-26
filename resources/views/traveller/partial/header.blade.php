@@ -21,9 +21,6 @@
              </div>
              <div class="header-icon text-right">
                 <div class="header-search-icon d-inline-block">
-                   {{-- <a href="#">
-                      <i aria-hidden="true" class="fas fa-search"></i>
-                   </a> --}}
                 </div>
                 <div class="offcanvas-menu d-inline-block">
                    <a href="#">
@@ -55,19 +52,19 @@
                 <nav id="navigation" class="navigation">
                    <ul>
                       <li>
-                         <a style="@if (request()->is('/') || request()->is('/*')) color: #2C2D83 @endif" href="/">Home</a>
+                         <a style="@if (request()->is('/') || request()->is('/*')) color: #2C2D83 @endif" href="/">Beranda</a>
                       </li>
                       <li>
-                        <a style="@if (request()->is('about') || request()->is('about/*')) color: #2C2D83 @endif" href="{{ route('about') }}">about us</a>
+                        <a style="@if (request()->is('about') || request()->is('about/*')) color: #2C2D83 @endif" href="{{ route('about') }}">Tentang</a>
                       </li>
                       <li>
-                        <a style="@if (request()->is('boats') || request()->is('boats/*')) color: #2C2D83 @endif" href="{{ route('boats') }}">boats</a>
+                        <a style="@if (request()->is('boats') || request()->is('boats/*')) color: #2C2D83 @endif" href="{{ route('boats') }}">Kapal</a>
                      </li>
                      <li class="menu-item-has-children">
-                        <a style="@if (request()->is('packages') || request()->is('packages/*')) color: #2C2D83 @endif" href="{{ route('packages') }}">Packages</a>
+                        <a style="@if (request()->is('packages') || request()->is('packages/*')) color: #2C2D83 @endif" href="{{ route('packages') }}">Paket</a>
                         <ul>
                            <li class="menu-item-has-children">
-                                <a style="@if (request()->is('packages') || request()->is('packages/*')) color: #2C2D83 @endif" href="{{ route('packages', ['type' => 'Boat Trip']) }}">Boat Trip</a>
+                                <a style="@if (request()->is('packages') || request()->is('packages/*')) color: #2C2D83 @endif" href="{{ route('packages', ['type' => 'Boat Trip']) }}">Perjalanan Kapal</a>
                                 <ul>
                                 <li class="menu-item-has-children">
                                     <a href="{{ route('packages', ['category' => 'Open Trip', 'type' => 'Boat Trip']) }}">Open Trip</a>
@@ -150,16 +147,16 @@
                         </ul>
                      </li>
                       <li>
-                        <a style="@if (request()->is('blogs') || request()->is('blogs/*')) color: #2C2D83 @endif" href="{{ route('blogs.index') }}">blogs</a>
+                        <a style="@if (request()->is('blogs') || request()->is('blogs/*')) color: #2C2D83 @endif" href="{{ route('blogs.index') }}">Blog</a>
                      </li>
                       <li>
-                        <a style="@if (request()->is('contact') || request()->is('contact/*')) color: #2C2D83 @endif" href="{{ route('contact') }}">contact</a>
+                        <a style="@if (request()->is('contact') || request()->is('contact/*')) color: #2C2D83 @endif" href="{{ route('contact') }}">Kontak</a>
                       </li>
                    </ul>
                 </nav>
              </div>
              <div class="header-btn">
-                <a target="_blank" style="background-color: #2C2D83" href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan yang tersedia." class="round-btn">Book Now</a>
+                <a target="_blank" style="background-color: #2C2D83" href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan yang tersedia." class="round-btn">Pesan Sekarang</a>
              </div>
           </div>
        </div>

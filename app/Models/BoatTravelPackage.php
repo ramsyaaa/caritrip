@@ -69,6 +69,7 @@ class BoatTravelPackage extends Model
         'itenary_list',
         'include_list',
         'exclude_list',
+        'is_popular',
         'seo_meta_description',
         'seo_meta_keywords',
         'language_id',

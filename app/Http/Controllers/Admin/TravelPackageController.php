@@ -76,6 +76,8 @@ class TravelPackageController extends Controller
             $requestData['package_key_visual'] = 'storage/' . $requestData['package_key_visual'];
         }
 
+        $requestData['is_popular'] = $request->is_popular == 'on' ? 1 : 0;
+
         TravelPackage::create($requestData);
         alert()->success('New ' . 'Travel Package'. ' Created!' );
 
@@ -146,6 +148,8 @@ class TravelPackageController extends Controller
                 ->store('uploads/packages', 'public');
             $requestData['package_key_visual'] = 'storage/' . $requestData['package_key_visual'];
         }
+
+        $requestData['is_popular'] = $request->is_popular == 'on' ? 1 : 0;
 
 
         alert()->success('Record Updated!' );

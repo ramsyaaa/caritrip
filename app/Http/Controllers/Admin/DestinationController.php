@@ -52,11 +52,15 @@ class DestinationController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'is_international' => ''
         ]);
 
         $requestData = $request->all();
 
-        Destination::create($requestData);
+        Destination::create([
+            'name' => $request->name,
+            'is_international' => $request->is_international == 'on' ? 1 : 0,
+        ]);
         alert()->success('New ' . 'Destination'. ' Created!' );
 
         return redirect('admin/destination');
@@ -109,7 +113,10 @@ class DestinationController extends Controller
 
         $destination = Destination::findOrFail($id);
         alert()->success('Record Updated!' );
-        $destination->update($requestData);
+        $destination->update([
+            'name' => $request->name,
+            'is_international' => $request->is_international == 'on' ? 1 : 0,
+        ]);
 
         return redirect('admin/destination');
     }
