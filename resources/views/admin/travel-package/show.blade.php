@@ -15,7 +15,7 @@
                         <div class="table-responsive">
                             <table class="table table-striped" role="grid">
                                 <tbody>
-                                    <tr><th> Nama Paket </th><td> {{ $travelpackage->package_name }} </td></tr><tr><th> Destinasi </th><td> {{ $travelpackage->destination ? $travelpackage->destination->name : "" }} </td></tr>
+                                    <tr><th> Nama Paket </th><td> {{ $travelpackage->package_name }} </td></tr><tr><th> Destinasi </th><td> {{ $travelpackage->destination ? $travelpackage->destination->name : "" }} </td></tr><tr><th> Tanggal Keberangaktan </th><td> {{ $travelpackage->date_of_departure }} </td></tr>
                                     <tr><th> Deskripsi </th><td> {!! $travelpackage->description !!} </td></tr>
                                     <tr><th> Gambar </th><td>
                                         <img id="image_preview" src="{{ asset( $travelpackage->package_key_visual) }}" alt="Image Preview" style="max-height: 300px; display: {{ isset($travelpackage) ? 'block' : 'none' }};" />

@@ -8,6 +8,11 @@
     {!! Form::select('destination_id', $destinations->pluck('name', 'id')->prepend('Pilih Destinasi', ''), null, ['class' => 'form-control']) !!}
     {!! $errors->first('destination_id', '<p class="help-block">:message</p>') !!}
 </div>
+<div class="form-group{{ $errors->has('date_of_departure') ? 'has-error' : ''}}">
+    {!! Form::label('date_of_departure', 'Tanggal Keberangkatan', ['class' => 'control-label']) !!}
+    {!! Form::date('date_of_departure', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+    {!! $errors->first('date_of_departure', '<p class="help-block">:message</p>') !!}
+</div>
 <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
     {!! Form::label('description', 'Deskripsi', ['class' => 'control-label']) !!}
     {!! Form::textarea('description', null, ['class' => 'form-control', 'id' => 'editor']) !!}

@@ -10,6 +10,7 @@ class TravelPackage extends Model
         'package_name',
         'description',
         'destination_id',
+        'date_of_departure',
         'package_key_visual',
         'have_itenary',
         'itenary_list',

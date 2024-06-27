@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\TravelPackageImage;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use Storage;
 
 class TravelPackageImageController extends Controller
@@ -60,9 +61,15 @@ class TravelPackageImageController extends Controller
         $requestData = $request->all();
         $requestData['travel_package_id'] = $id;
         if ($request->hasFile('image')) {
-            $requestData['image'] = $request->image
-                ->store('uploads/packages', 'public');
-                $requestData['image'] = 'storage/' . $requestData['image'];
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['image'] = 'uploads/' . $filename;
         }
 
         TravelPackageImage::create($requestData);
@@ -116,12 +123,20 @@ class TravelPackageImageController extends Controller
 
         if ($request->hasFile('image')) {
             if ($travel_image->image) {
-                $oldImagePath = str_replace('storage/', '', $travel_image->image);
-                Storage::disk('public')->delete($oldImagePath);
+                if (\File::exists(public_path($travel_image->image))) {
+                    \File::delete(public_path($travel_image->image));
+                }
+
+                $image = $request->file('image');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+
+                // Kompres gambar
+                $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save(public_path('uploads/' . $filename), 75);
+
+                $requestData['image'] = 'uploads/' . $filename;
             }
-            $requestData['image'] = $request->image
-                ->store('uploads/packages', 'public');
-            $requestData['image'] = 'storage/' . $requestData['image'];
         }
 
         alert()->success('Record Updated!' );
@@ -142,8 +157,9 @@ class TravelPackageImageController extends Controller
         alert()->success('Record Deleted!' );
         $travel_image = TravelPackageImage::findOrFail($id);
         if ($travel_image->image) {
-            $oldImagePath = str_replace('storage/', '', $travel_image->image);
-            Storage::disk('public')->delete($oldImagePath);
+            if (\File::exists(public_path($travel_image->image))) {
+                \File::delete(public_path($travel_image->image));
+            }
         }
         TravelPackageImage::destroy($id);
 

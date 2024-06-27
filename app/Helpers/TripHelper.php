@@ -2,6 +2,7 @@
 namespace App\Helpers;
 
 use App\Models\BoatTravelPackage;
+use App\Models\Destination;
 use App\Models\FullDayCruise;
 use App\Models\OpenTrip;
 use App\Models\PrivateTrip;
@@ -29,6 +30,13 @@ class TripHelper
         $data['navbarFullDayCruises'] = BoatTravelPackage::whereIn('id', $FullDayCruiseBoatTravelPackageIds)->get();
         $data['navbarTravelOpenTrips'] = TravelPackage::whereIn('id', $openTripTravelPackageIds)->get();
         $data['navbarTravelPrivateTrips'] = TravelPackage::whereIn('id', $privateTravelPackageIds)->get();
+
+
+        $destinations = Destination::get();
+        $destinations = $destinations->groupBy(function($destination) {
+            return $destination->country->name; // Ganti 'name' dengan kolom yang sesuai di tabel Destination
+        });
+        $data['destinations_navbar'] = $destinations;
 
         return $data;
     }

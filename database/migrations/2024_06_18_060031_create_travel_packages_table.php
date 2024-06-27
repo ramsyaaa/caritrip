@@ -18,6 +18,7 @@ class CreateTravelPackagesTable extends Migration
             $table->string('package_name')->nullable();
             $table->string('description')->nullable();
             $table->foreignId('destination_id');
+            $table->date('date_of_departure')->nullable();
             $table->string('package_key_visual');
             $table->boolean('have_itenary')->nullable();
             $table->text('itenary_list')->nullable();

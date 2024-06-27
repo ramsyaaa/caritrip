@@ -9,6 +9,7 @@ use App\Models\Boat;
 use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class BoatController extends Controller
 {
@@ -80,9 +81,15 @@ class BoatController extends Controller
         ]);
         $requestData = $request->all();
         if ($request->hasFile('boat_featured_image')) {
-            $requestData['boat_featured_image'] = $request->boat_featured_image
-            ->store('uploads/boats', 'public');
-            $requestData['boat_featured_image'] = 'storage/' . $requestData['boat_featured_image'];
+            $image = $request->file('boat_featured_image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['boat_featured_image'] = 'uploads/' . $filename;
         }
 
         Boat::create($requestData);
@@ -156,13 +163,19 @@ class BoatController extends Controller
 
         $requestData = $request->all();
         if ($request->hasFile('boat_featured_image')) {
-            if ($boat->boat_featured_image) {
-                $oldImagePath = str_replace('storage/', '', $boat->boat_featured_image);
-                Storage::disk('public')->delete($oldImagePath);
+            if (\File::exists(public_path($boat->boat_featured_image))) {
+                \File::delete(public_path($boat->boat_featured_image));
             }
-            $requestData['boat_featured_image'] = $request->boat_featured_image
-                ->store('uploads/boats', 'public');
-            $requestData['boat_featured_image'] = 'storage/' . $requestData['boat_featured_image'];
+
+            $image = $request->file('boat_featured_image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['boat_featured_image'] = 'uploads/' . $filename;
         }
 
 
@@ -182,6 +195,12 @@ class BoatController extends Controller
     public function destroy($id)
     {
         alert()->success('Record Deleted!' );
+        $boat = Boat::where(['id' => $id])->first();
+        if($boat->boat_featured_image){
+            if (\File::exists(public_path($boat->boat_featured_image))) {
+                \File::delete(public_path($boat->boat_featured_image));
+            }
+        }
         Boat::destroy($id);
 
         return redirect('admin/boat');

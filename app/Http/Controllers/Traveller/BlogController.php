@@ -7,6 +7,7 @@ use App\Helpers\UserLogHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Page;
+use App\Models\TravelPackage;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -14,6 +15,22 @@ class BlogController extends Controller
     public function index(Request $request){
         UserLogHelper::userLog($request, 'blog');
         $data = TripHelper::getNavbarTripsData();
+
+        $packages = TravelPackage::with('destination')->get();
+
+        // $groupedPackages = $packages->groupBy(function($package) {
+        //     return $package->destination->name; // Ganti 'name' dengan kolom yang sesuai di tabel Destination
+        // });
+
+        // dd($groupedPackages['South Korea'][0]['openTrips']);
+        // $finalGroupedPackages = [];
+
+        // foreach ($groupedPackages as $key => $package) {
+
+        // }
+
+
+
 
         $data['blogs'] = Blog::limit(20)->get();
         $data['latest_blogs'] = Blog::latest()->limit(10)->get();

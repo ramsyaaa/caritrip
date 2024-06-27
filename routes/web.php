@@ -16,6 +16,7 @@ use App\Http\Controllers\Traveller\AboutUsController;
 use App\Http\Controllers\Traveller\BlogController;
 use App\Http\Controllers\Traveller\BoatController;
 use App\Http\Controllers\Traveller\ContactController;
+use App\Http\Controllers\Traveller\DestinationController;
 use App\Http\Controllers\Traveller\PackageController;
 use Illuminate\Http\Request;
 
@@ -29,6 +30,8 @@ Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show')
 Route::get('/about', [AboutUsController::class, 'index'])->name('about');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/boats', [BoatController::class, 'index'])->name('boats');
+Route::get('/destinations', [DestinationController::class, 'index'])->name('destinations');
+Route::get('/destinations/{id}', [DestinationController::class, 'show'])->name('destinations.detail');
 Route::get('/auth-user', 'Auth\AuthController@loginPage')->name('auth.page');
 Route::post('/auth-user', 'Auth\AuthController@loginUser')->name('auth.submit');
 
@@ -55,7 +58,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resource('language', 'Admin\\LanguageController');
     Route::resource('blog', 'Admin\\BlogController');
     Route::resource('destination', 'Admin\\DestinationController');
+    Route::resource('destination/{id}/images', 'Admin\\DestinationImageController');
     Route::resource('blog-category', 'Admin\\BlogCategoryController');
+    Route::resource('countries', 'Admin\\CountryController');
 });
 
 

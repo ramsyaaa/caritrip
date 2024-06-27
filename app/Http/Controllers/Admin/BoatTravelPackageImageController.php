@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BoatTravelPackageImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class BoatTravelPackageImageController extends Controller
 {
@@ -60,9 +61,15 @@ class BoatTravelPackageImageController extends Controller
         $requestData = $request->all();
         $requestData['boat_travel_package_id'] = $id;
         if ($request->hasFile('image')) {
-            $requestData['image'] = $request->image
-                ->store('uploads/packages', 'public');
-                $requestData['image'] = 'storage/' . $requestData['image'];
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['image'] = 'uploads/' . $filename;
         }
 
         BoatTravelPackageImage::create($requestData);
@@ -115,13 +122,19 @@ class BoatTravelPackageImageController extends Controller
         $boatimage = BoatTravelPackageImage::findOrFail($id);
 
         if ($request->hasFile('image')) {
-            if ($boatimage->image) {
-                $oldImagePath = str_replace('storage/', '', $boatimage->image);
-                Storage::disk('public')->delete($oldImagePath);
+            if (\File::exists(public_path($boatimage->image))) {
+                \File::delete(public_path($boatimage->image));
             }
-            $requestData['image'] = $request->image
-                ->store('uploads/packages', 'public');
-            $requestData['image'] = 'storage/' . $requestData['image'];
+
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['image'] = 'uploads/' . $filename;
         }
 
         alert()->success('Record Updated!' );
@@ -142,8 +155,9 @@ class BoatTravelPackageImageController extends Controller
         alert()->success('Record Deleted!' );
         $boatimage = BoatTravelPackageImage::findOrFail($id);
         if ($boatimage->image) {
-            $oldImagePath = str_replace('storage/', '', $boatimage->image);
-            Storage::disk('public')->delete($oldImagePath);
+            if (\File::exists(public_path($boatimage->image))) {
+                \File::delete(public_path($boatimage->image));
+            }
         }
         BoatTravelPackageImage::destroy($id);
 

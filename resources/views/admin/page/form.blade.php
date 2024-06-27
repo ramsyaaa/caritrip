@@ -41,7 +41,7 @@
 </div>
 <div class="form-group{{ $errors->has('page_category') ? 'has-error' : ''}}">
     {!! Form::label('page_category', 'Kategori Halaman', ['class' => 'control-label']) !!}
-    {!! Form::select('page_category', json_decode('{"Home":"Home","About":"About","Boats":"Boats","Packages":"Packages","Blogs":"Blogs","Contact":"Contact"}', true), null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+    {!! Form::select('page_category', json_decode('{"Home":"Home","About":"About","Destinations":"Destinations","Packages":"Packages","Blogs":"Blogs","Contact":"Contact"}', true), null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
     {!! $errors->first('page_category', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group{{ $errors->has('language_id') ? 'has-error' : ''}}">

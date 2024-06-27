@@ -7,6 +7,7 @@ use App\Models\Destination;
 use App\Models\Language;
 use App\Models\TravelPackage;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use Storage;
 
 class TravelPackageController extends Controller
@@ -60,6 +61,7 @@ class TravelPackageController extends Controller
             'description' => 'required',
             'package_key_visual' => 'required',
             'destination_id' => 'required',
+            'date_of_departure' => 'required',
             'have_itenary' => 'required',
             'itenary_list' => 'required',
             'include_list' => 'required',
@@ -71,9 +73,15 @@ class TravelPackageController extends Controller
 
         $requestData = $request->all();
         if ($request->hasFile('package_key_visual')) {
-            $requestData['package_key_visual'] = $request->package_key_visual
-            ->store('uploads/packages', 'public');
-            $requestData['package_key_visual'] = 'storage/' . $requestData['package_key_visual'];
+            $image = $request->file('package_key_visual');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['package_key_visual'] = 'uploads/' . $filename;
         }
 
         $requestData['is_popular'] = $request->is_popular == 'on' ? 1 : 0;
@@ -128,6 +136,7 @@ class TravelPackageController extends Controller
             'package_name' => 'required',
             'description' => 'required',
             'destination_id' => 'required',
+            'date_of_departure' => 'required',
             'have_itenary' => 'required',
             'itenary_list' => 'required',
             'include_list' => 'required',
@@ -140,13 +149,19 @@ class TravelPackageController extends Controller
         $requestData = $request->all();
         $travelpackage = TravelPackage::findOrFail($id);
         if ($request->hasFile('package_key_visual')) {
-            if ($travelpackage->package_key_visual) {
-                $oldImagePath = str_replace('storage/', '', $travelpackage->package_key_visual);
-                Storage::disk('public')->delete($oldImagePath);
+            if (\File::exists(public_path($travelpackage->package_key_visual))) {
+                \File::delete(public_path($travelpackage->package_key_visual));
             }
-            $requestData['package_key_visual'] = $request->package_key_visual
-                ->store('uploads/packages', 'public');
-            $requestData['package_key_visual'] = 'storage/' . $requestData['package_key_visual'];
+
+            $image = $request->file('package_key_visual');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['package_key_visual'] = 'uploads/' . $filename;
         }
 
         $requestData['is_popular'] = $request->is_popular == 'on' ? 1 : 0;
@@ -170,8 +185,9 @@ class TravelPackageController extends Controller
         alert()->success('Record Deleted!' );
         $travelpackage = TravelPackage::findOrFail($id);
         if ($travelpackage->package_key_visual) {
-            $oldImagePath = str_replace('storage/', '', $travelpackage->package_key_visual);
-            Storage::disk('public')->delete($oldImagePath);
+            if (\File::exists(public_path($travelpackage->package_key_visual))) {
+                \File::delete(public_path($travelpackage->package_key_visual));
+            }
         };
         TravelPackage::destroy($id);
 

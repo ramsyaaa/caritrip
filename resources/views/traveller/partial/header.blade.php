@@ -54,48 +54,18 @@
                       <li>
                          <a style="@if (request()->is('/') || request()->is('/*')) color: #2C2D83 @endif" href="/">Beranda</a>
                       </li>
-                      <li>
-                        <a style="@if (request()->is('about') || request()->is('about/*')) color: #2C2D83 @endif" href="{{ route('about') }}">Tentang</a>
-                      </li>
-                      <li>
-                        <a style="@if (request()->is('boats') || request()->is('boats/*')) color: #2C2D83 @endif" href="{{ route('boats') }}">Kapal</a>
-                     </li>
-                     <li class="menu-item-has-children">
-                        <a style="@if (request()->is('packages') || request()->is('packages/*')) color: #2C2D83 @endif" href="{{ route('packages') }}">Paket</a>
+                      <li class="menu-item-has-children">
+                        <a style="@if (request()->is('packages') || request()->is('packages/*')) color: #2C2D83 @endif" href="#">Destinasi</a>
                         <ul>
+                            @foreach ($destinations_navbar as $key => $destination)
                            <li class="menu-item-has-children">
-                                <a style="@if (request()->is('packages') || request()->is('packages/*')) color: #2C2D83 @endif" href="{{ route('packages', ['type' => 'Boat Trip']) }}">Perjalanan Kapal</a>
+                                <a style="@if (request()->is('packages') || request()->is('packages/*')) color: #2C2D83 @endif" href="#">{{ $key }}</a>
                                 <ul>
-                                <li class="menu-item-has-children">
-                                    <a href="{{ route('packages', ['category' => 'Open Trip', 'type' => 'Boat Trip']) }}">Open Trip</a>
-                                    <ul>
-                                        @foreach ($navbarOpenTrips as $item)
-                                        <li>
-                                            <a href="{{ route('packages.detail', ['id' => $item->id, 'type' => 'Boat Trip']) }}">{{ $item->package_name }}</a>
+                                    @foreach ($destination as $item)
+                                        <li >
+                                            <a href="{{ route('destinations.detail', ['id' => $item['id']]) }}">{{ $item->name }}</a>
                                         </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="{{ route('packages', ['category' => 'Private Trip', 'type' => 'Boat Trip']) }}">Private Trip</a>
-                                    <ul>
-                                        @foreach ($navbarPrivateTrips as $item)
-                                        <li>
-                                            <a href="{{ route('packages.detail', ['id' => $item->id, 'type' => 'Boat Trip']) }}">{{ $item->package_name }}</a>
-                                        </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="{{ route('packages', ['category' => 'Full Day Cruise', 'type' => 'Boat Trip']) }}">Full Day Cruise</a>
-                                    <ul>
-                                        @foreach ($navbarFullDayCruises as $item)
-                                        <li>
-                                            <a href="{{ route('packages.detail', ['id' => $item->id, 'type' => 'Boat Trip']) }}">{{ $item->package_name }}</a>
-                                        </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
+                                    @endforeach
                                 <li style="display:none">
                                     <a href="{{ route('packages') }}">All Packages</a>
                                 </li>
@@ -107,40 +77,7 @@
                             <li style="display:none">
                               <a href="{{ route('packages') }}">All Packages</a>
                            </li>
-                           <li class="menu-item-has-children">
-                                <a style="@if (request()->is('packages') || request()->is('packages/*')) color: #2C2D83 @endif" href="{{ route('packages', ['type' => 'Travel Trip']) }}">Travel Trip</a>
-                                <ul>
-                                <li class="menu-item-has-children">
-                                    <a href="{{ route('packages', ['category' => 'Open Trip', 'type' => 'Travel Trip']) }}">Open Trip</a>
-                                    <ul>
-                                        @foreach ($navbarTravelOpenTrips as $item)
-                                        <li>
-                                            <a href="{{ route('packages.detail', ['id' => $item->id, 'type' => 'Travel Trip']) }}">{{ $item->package_name }}</a>
-                                        </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="{{ route('packages', ['category' => 'Private Trip', 'type' => 'Travel Trip']) }}">Private Trip</a>
-                                    <ul>
-                                        @foreach ($navbarTravelPrivateTrips as $item)
-                                        <li>
-                                            <a href="{{ route('packages.detail', ['id' => $item->id, 'type' => 'Travel Trip']) }}">{{ $item->package_name }}</a>
-                                        </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                                <li style="display:none">
-                                    <a href="{{ route('packages') }}">All Packages</a>
-                                </li>
-                                    <li style="display:none">
-                                        <a href="{{ route('packages') }}">Single Page</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li style="display:none">
-                              <a href="{{ route('packages') }}">All Packages</a>
-                           </li>
+                           @endforeach
                             <li style="display:none">
                                 <a href="{{ route('packages') }}">Single Page</a>
                             </li>
