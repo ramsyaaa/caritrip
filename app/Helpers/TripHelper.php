@@ -38,6 +38,37 @@ class TripHelper
         });
         $data['destinations_navbar'] = $destinations;
 
+        $data_destination_international = Destination::where(['is_international' => true])->get();
+        $list_international_destination = [];
+        foreach ($data_destination_international as $key => $item) {
+            $list_international_destination[] = $item->id;
+        }
+        $travel_international = TravelPackage::whereIn('destination_id', $list_international_destination)->get();
+
+        $list_international_destination = [];
+        foreach ($travel_international as $key => $item) {
+            $list_international_destination[] = $item->destination_id;
+        }
+
+        $data['international'] = Destination::whereIn('id', $list_international_destination)->get();
+
+
+        $data_destination_domestic = Destination::where(['is_international' => false])->get();
+        $list_domestic_destination = [];
+        foreach ($data_destination_domestic as $key => $item) {
+
+            $navbarOpenTrips = BoatTravelPackage::where(['destination_id' => $item->id])->whereIn('id', $openTripBoatTravelPackageIds)->get();
+            $navbarPrivateTrips = BoatTravelPackage::where(['destination_id' => $item->id])->whereIn('id', $privateBoatTravelPackageIds)->get();
+            $navbarFullDayCruises = BoatTravelPackage::where(['destination_id' => $item->id])->whereIn('id', $FullDayCruiseBoatTravelPackageIds)->get();
+            $list_domestic_destination[$item->name] = [
+                "openTrips" => $navbarOpenTrips,
+                'privateTrips' => $navbarPrivateTrips,
+                'fullDayCruises' => $navbarFullDayCruises,
+            ];
+        }
+
+        $data['domestics'] = $list_domestic_destination;
+
         return $data;
     }
 
