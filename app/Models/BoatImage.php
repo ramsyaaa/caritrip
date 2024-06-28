@@ -28,7 +28,7 @@ class BoatImage extends Model
      * @var array
      */
 
-     public function boat()
+    public function boat()
     {
         return $this->belongsTo(Boat::class, 'boat_id');
     }

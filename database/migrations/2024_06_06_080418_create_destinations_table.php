@@ -15,7 +15,11 @@ class CreateDestinationsTable extends Migration
     {
         Schema::create('destinations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('country_id')->nullable();
             $table->string('name');
+            $table->string('destination_image');
+            $table->text('description');
+            $table->boolean('is_international');
             $table->timestamps();
         });
     }

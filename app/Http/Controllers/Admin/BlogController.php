@@ -9,6 +9,7 @@ use App\Models\Blog;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class BlogController extends Controller
 {
@@ -67,9 +68,19 @@ class BlogController extends Controller
 
         $requestData = $request->all();
         if ($request->hasFile('featured_image')) {
-            $requestData['featured_image'] = $request->featured_image
-                ->store('uploads', 'public');
-                $requestData['featured_image'] = 'storage/' . $requestData['featured_image'];
+            // $requestData['featured_image'] = $request->featured_image
+            //     ->store('uploads', 'public');
+            //     $requestData['featured_image'] = 'storage/' . $requestData['featured_image'];
+
+            $image = $request->file('featured_image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['featured_image'] = 'uploads/' . $filename;
         }
 
         Blog::create($requestData);
@@ -135,13 +146,18 @@ class BlogController extends Controller
         ]);
         $requestData = $request->all();
         if ($request->hasFile('featured_image')) {
-            if ($blog->featured_image) {
-                $oldImagePath = str_replace('storage/', '', $blog->featured_image);
-                Storage::disk('public')->delete($oldImagePath);
+            if (\File::exists(public_path($blog->featured_image))) {
+                \File::delete(public_path($blog->featured_image));
             }
-            $requestData['featured_image'] = $request->featured_image
-                ->store('uploads', 'public');
-            $requestData['featured_image'] = 'storage/' . $requestData['featured_image'];
+            $image = $request->file('featured_image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['featured_image'] = 'uploads/' . $filename;
         }
 
         $blog = Blog::findOrFail($id);
@@ -161,6 +177,13 @@ class BlogController extends Controller
     public function destroy($id)
     {
         alert()->success('Record Deleted!' );
+        $blog = Blog::where('id', $id)->first();
+        if($blog->featured_image){
+            if (\File::exists(public_path($blog->featured_image))) {
+                \File::delete(public_path($blog->featured_image));
+            }
+        }
+
         Blog::destroy($id);
 
         return redirect('admin/blog');

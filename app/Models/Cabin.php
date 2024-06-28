@@ -13,4 +13,9 @@ class Cabin extends Model
         'description',
         'image',
     ];
+
+    public function boat()
+    {
+        return $this->belongsTo(Boat::class, 'boat_id');
+    }
 }

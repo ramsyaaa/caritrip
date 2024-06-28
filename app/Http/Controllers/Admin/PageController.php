@@ -8,6 +8,7 @@ use Alert;
 use App\Models\Language;
 use App\Models\Page;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use Storage;
 
 class PageController extends Controller
@@ -59,14 +60,26 @@ class PageController extends Controller
         $requestData = $request->all();
 
         if ($request->hasFile('page_og_image')) {
-            $requestData['page_og_image'] = $request->page_og_image
-            ->store('uploads/pages', 'public');
-            $requestData['page_og_image'] = 'storage/' . $requestData['page_og_image'];
+            $image = $request->file('page_og_image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['page_og_image'] = 'uploads/' . $filename;
         }
         if ($request->hasFile('page_banner_image')) {
-            $requestData['page_banner_image'] = $request->page_banner_image
-            ->store('uploads/pages', 'public');
-            $requestData['page_banner_image'] = 'storage/' . $requestData['page_banner_image'];
+            $image = $request->file('page_banner_image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['page_banner_image'] = 'uploads/' . $filename;
         }
 
         Page::create($requestData);
@@ -118,23 +131,35 @@ class PageController extends Controller
         $requestData = $request->all();
         $page = Page::findOrFail($id);
         if ($request->hasFile('page_og_image')) {
-            if ($page->page_og_image) {
-                $oldImagePath = str_replace('storage/', '', $page->page_og_image);
-                Storage::disk('public')->delete($oldImagePath);
+            if (\File::exists(public_path($page->page_og_image))) {
+                \File::delete(public_path($page->page_og_image));
             }
-            $requestData['page_og_image'] = $request->page_og_image
-                ->store('uploads/pages', 'public');
-            $requestData['page_og_image'] = 'storage/' . $requestData['page_og_image'];
+
+            $image = $request->file('page_og_image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['page_og_image'] = 'uploads/' . $filename;
         }
 
         if ($request->hasFile('page_banner_image')) {
-            if ($page->page_banner_image) {
-                $oldImagePath = str_replace('storage/', '', $page->page_banner_image);
-                Storage::disk('public')->delete($oldImagePath);
+            if (\File::exists(public_path($page->page_banner_image))) {
+                \File::delete(public_path($page->page_banner_image));
             }
-            $requestData['page_banner_image'] = $request->page_banner_image
-                ->store('uploads/pages', 'public');
-            $requestData['page_banner_image'] = 'storage/' . $requestData['page_banner_image'];
+
+            $image = $request->file('page_banner_image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['page_banner_image'] = 'uploads/' . $filename;
         }
 
 
@@ -156,12 +181,14 @@ class PageController extends Controller
         alert()->success('Record Deleted!' );
         $page = Page::findOrFail($id);
         if ($page->page_og_image) {
-            $oldImagePath = str_replace('storage/', '', $page->page_og_image);
-            Storage::disk('public')->delete($oldImagePath);
+            if (\File::exists(public_path($page->page_og_image))) {
+                \File::delete(public_path($page->page_og_image));
+            }
         }
         if ($page->page_banner_image) {
-                $oldImagePath = str_replace('storage/', '', $page->page_banner_image);
-                Storage::disk('public')->delete($oldImagePath);
+                if (\File::exists(public_path($page->page_banner_image))) {
+                    \File::delete(public_path($page->page_banner_image));
+                }
             }
 
         Page::destroy($id);

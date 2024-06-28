@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cabin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class BoatCabinController extends Controller
 {
@@ -63,9 +64,15 @@ class BoatCabinController extends Controller
         $requestData = $request->all();
         $requestData['boat_id'] = $id;
         if ($request->hasFile('image')) {
-            $requestData['image'] = $request->image
-                ->store('uploads/cabins', 'public');
-                $requestData['image'] = 'storage/' . $requestData['image'];
+                $image = $request->file('image');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+
+                // Kompres gambar
+                $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save(public_path('uploads/' . $filename), 75);
+
+                $requestData['image'] = 'uploads/' . $filename;
         }
 
         Cabin::create($requestData);
@@ -124,13 +131,19 @@ class BoatCabinController extends Controller
         $cabin = Cabin::findOrFail($id);
 
         if ($request->hasFile('image')) {
-            if ($cabin->image) {
-                $oldImagePath = str_replace('storage/', '', $cabin->image);
-                Storage::disk('public')->delete($oldImagePath);
+            if (\File::exists(public_path($cabin->image))) {
+                \File::delete(public_path($cabin->image));
             }
-            $requestData['image'] = $request->image
-                ->store('uploads/cabins', 'public');
-            $requestData['image'] = 'storage/' . $requestData['image'];
+
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['image'] = 'uploads/' . $filename;
         }
 
         alert()->success('Record Updated!' );
@@ -151,8 +164,9 @@ class BoatCabinController extends Controller
         alert()->success('Record Deleted!' );
         $cabin = Cabin::findOrFail($id);
         if ($cabin->image) {
-            $oldImagePath = str_replace('storage/', '', $cabin->image);
-            Storage::disk('public')->delete($oldImagePath);
+            if (\File::exists(public_path($cabin->image))) {
+                \File::delete(public_path($cabin->image));
+            }
         }
         Cabin::destroy($id);
 

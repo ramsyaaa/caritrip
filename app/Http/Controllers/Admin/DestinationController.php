@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Destination;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class DestinationController extends Controller
 {
@@ -52,11 +53,31 @@ class DestinationController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'destination_image' => 'required',
+            'description' => 'required',
+            'is_international' => ''
         ]);
 
         $requestData = $request->all();
 
-        Destination::create($requestData);
+         if ($request->hasFile('destination_image')) {
+                $image = $request->file('destination_image');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+
+                // Kompres gambar
+                $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save(public_path('uploads/' . $filename), 75);
+
+                $requestData['destination_image'] = 'uploads/' . $filename;
+        }
+
+        Destination::create([
+            'name' => $request->name,
+            'is_international' => $request->is_international == 'on' ? 1 : 0,
+            'destination_image' => 'uploads/' . $filename,
+            'description' => $request->description,
+        ]);
         alert()->success('New ' . 'Destination'. ' Created!' );
 
         return redirect('admin/destination');
@@ -104,12 +125,37 @@ class DestinationController extends Controller
 
         $request->validate([
             'name' => 'required',
+            'description' => 'required',
         ]);
         $requestData = $request->all();
 
+        $filename = "";
+        if ($request->hasFile('destination_image')) {
+            if ($destination->destination_image) {
+                if (\File::exists(public_path($destination->destination_image))) {
+                    \File::delete(public_path($destination->destination_image));
+                }
+
+                $image = $request->file('destination_image');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+
+                // Kompres gambar
+                $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save(public_path('uploads/' . $filename), 75);
+
+                $requestData['destination_image'] = 'uploads/' . $filename;
+            }
+        }
+
         $destination = Destination::findOrFail($id);
         alert()->success('Record Updated!' );
-        $destination->update($requestData);
+        $destination->update([
+            'name' => $request->name,
+            'is_international' => $request->is_international == 'on' ? 1 : 0,
+            'destination_image' => 'uploads/' . $filename,
+            'description' => $request->description,
+        ]);
 
         return redirect('admin/destination');
     }
@@ -124,6 +170,12 @@ class DestinationController extends Controller
     public function destroy($id)
     {
         alert()->success('Record Deleted!' );
+        $destination = Destination::where(['id' => $id])->first();
+        if ($destination->destination_image) {
+            if (\File::exists(public_path($destination->destination_image))) {
+                \File::delete(public_path($destination->destination_image));
+            }
+        }
         Destination::destroy($id);
 
         return redirect('admin/destination');

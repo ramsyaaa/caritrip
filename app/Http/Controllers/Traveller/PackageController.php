@@ -24,6 +24,7 @@ class PackageController extends Controller
         $boatTravelPackageIds = [];
         $data['category'] = null;
         $data['type'] = null;
+        $data['destination_id'] = $request->input('destination_id');
 
         // Check for the category in the request
         if ($request->has('category')) {
@@ -56,44 +57,95 @@ class PackageController extends Controller
             // Filter trips based on the type
             if ($data['type'] == 'Boat Trip') {
                 if(count($boatTravelPackageIds) > 0) {
-                    $data['trips'] = BoatTravelPackage::whereIn('id', $boatTravelPackageIds)->get();
+                    if($data['destination_id'] != null){
+                        $data['trips'] = BoatTravelPackage::where(['destination_id' => $data['destination_id']])->whereIn('id', $boatTravelPackageIds)->get();
+                    }else{
+                        $data['trips'] = BoatTravelPackage::whereIn('id', $boatTravelPackageIds)->get();
+                    }
+
                 } else {
-                    $data['trips'] = BoatTravelPackage::get();
+                    if($data['destination_id'] != null){
+                        $data['trips'] = BoatTravelPackage::where(['destination_id' => $data['destination_id']])->get();
+                    }else{
+                        $data['trips'] = BoatTravelPackage::get();
+                    }
                 }
                 // Set travels to an empty collection as type is boat trip
                 $data['travels'] = collect();
             } elseif ($data['type'] == 'Travel Trip') {
                 if(count($travelPackageIds) > 0) {
-                    $data['travels'] = TravelPackage::whereIn('id', $travelPackageIds)->get();
+                    if($data['destination_id'] != null){
+                        $data['travels'] = TravelPackage::where(['destination_id' => $data['destination_id']])->whereIn('id', $travelPackageIds)->get();
+                    }else{
+                        $data['travels'] = TravelPackage::whereIn('id', $travelPackageIds)->get();
+                    }
                 } else {
-                    $data['travels'] = TravelPackage::get();
+                    if($data['destination_id'] != null){
+                        $data['travels'] = TravelPackage::where(['destination_id' => $data['destination_id']])->get();
+                    }else{
+                        $data['travels'] = TravelPackage::get();
+                    }
                 }
                 // Set trips to an empty collection as type is travel trip
                 $data['trips'] = collect();
             } else {
                 // If type is not specified or invalid, set both
                 if(count($boatTravelPackageIds) > 0) {
-                    $data['trips'] = BoatTravelPackage::whereIn('id', $boatTravelPackageIds)->get();
+                    if($data['destination_id'] != null){
+                        $data['trips'] = BoatTravelPackage::where(['destination_id' => $data['destination_id']])->whereIn('id', $boatTravelPackageIds)->get();
+                    }else{
+                        $data['trips'] = BoatTravelPackage::whereIn('id', $boatTravelPackageIds)->get();
+                    }
                 } else {
-                    $data['trips'] = BoatTravelPackage::get();
+                    if($data['destination_id'] != null){
+                        $data['trips'] = BoatTravelPackage::where(['destination_id' => $data['destination_id']])->get();
+                    }else{
+                        $data['trips'] = BoatTravelPackage::get();
+                    }
                 }
                 if(count($travelPackageIds) > 0) {
-                    $data['travels'] = TravelPackage::whereIn('id', $travelPackageIds)->get();
+                    if($data['destination_id'] != null){
+                        $data['travels'] = TravelPackage::where(['destination_id' => $data['destination_id']])->whereIn('id', $travelPackageIds)->get();
+                    }else{
+                        $data['travels'] = TravelPackage::whereIn('id', $travelPackageIds)->get();
+                    }
                 } else {
-                    $data['travels'] = TravelPackage::get();
+                    if($data['destination_id'] != null){
+                        $data['travels'] = TravelPackage::where(['destination_id' => $data['destination_id']])->get();
+                    }else{
+                        $data['travels'] = TravelPackage::get();
+                    }
                 }
             }
         } else {
             // If type is not specified, set both trips and travels
             if(count($boatTravelPackageIds) > 0) {
-                $data['trips'] = BoatTravelPackage::whereIn('id', $boatTravelPackageIds)->get();
+                if($data['destination_id'] != null){
+                    $data['trips'] = BoatTravelPackage::where(['destination_id' => $data['destination_id']])->whereIn('id', $boatTravelPackageIds)->get();
+                }else{
+                    $data['trips'] = BoatTravelPackage::whereIn('id', $boatTravelPackageIds)->get();
+                }
             } else {
-                $data['trips'] = BoatTravelPackage::get();
+                if($data['destination_id'] != null){
+                    $data['trips'] = BoatTravelPackage::where(['destination_id' => $data['destination_id']])->get();
+                }else{
+                    $data['trips'] = BoatTravelPackage::get();
+                }
+
             }
             if(count($travelPackageIds) > 0) {
-                $data['travels'] = TravelPackage::whereIn('id', $travelPackageIds)->get();
+                if($data['destination_id'] != null){
+                    $data['travels'] = TravelPackage::where(['destination_id' => $data['destination_id']])->whereIn('id', $travelPackageIds)->get();
+                }else{
+                    $data['travels'] = TravelPackage::whereIn('id', $travelPackageIds)->get();
+                }
+
             } else {
-                $data['travels'] = TravelPackage::get();
+                if($data['destination_id'] != null){
+                    $data['travels'] = TravelPackage::where(['destination_id' => $data['destination_id']])->get();
+                }else{
+                    $data['travels'] = TravelPackage::get();
+                }
             }
         }
 

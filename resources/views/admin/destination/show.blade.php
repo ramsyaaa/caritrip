@@ -8,14 +8,15 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Destination Detail</h4>
+                            <h4 class="card-title">Detail Destinasi</h4>
                         </div>
                     </div>
                     <div class="card-body px-0">
                         <div class="table-responsive">
                             <table class="table table-striped" role="grid">
                                 <tbody>
-                                    <tr><th> Name </th><td> {{ $destination->name }} </td></tr>
+                                    <tr><th> Nama Destinasi </th><td> {{ $destination->name }} </td></tr>
+                                    <tr><th> Destinasi Internasional </th><td> {{ $destination->is_international ? 'Yes' : 'No' }} </td></tr>
                                 </tbody>
                             </table>
                             <a href="{{ url('/admin/destination') }}"><button class="btn btn-warning btn-sm"><i class="fa fa-close" aria-hidden="true"></i> Back</button></a>

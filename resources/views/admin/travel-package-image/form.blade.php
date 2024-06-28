@@ -1,5 +1,5 @@
 <div class="form-group{{ $errors->has('image') ? 'has-error' : ''}}">
-    {!! Form::label('image', 'Key Visual', ['class' => 'control-label']) !!}
+    {!! Form::label('image', 'Gambar', ['class' => 'control-label']) !!}
     {!! Form::file('image', ['class' => 'form-control', 'id' => 'image', 'onchange' => 'previewImage(event)']) !!}
     {!! $errors->first('image', '<p class="help-block">:message</p>') !!}
 </div>
@@ -10,7 +10,7 @@
 
 <div class="form-group" align="right">
     {!! Form::submit($formMode === 'edit' ? 'Update' : 'Create', ['class' => 'btn btn-primary']) !!}
-    <a href="#" onClick="javascript:history.go(-1)" class="btn btn-danger">Cancel and Back</a>
+    <a href="#" onClick="javascript:history.go(-1)" class="btn btn-danger">Batal dan Kembali</a>
 </div>
 
 

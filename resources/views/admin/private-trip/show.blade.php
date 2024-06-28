@@ -8,19 +8,19 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Private Trip Detail</h4>
+                            <h4 class="card-title">Detail Private Trip</h4>
                         </div>
                     </div>
                     <div class="card-body px-0">
                         <div class="table-responsive">
                             <table class="table table-striped" role="grid">
                                 <tbody>
-                                    <tr><th> Duration </th><td>{{ $private_trip->duration }}</td></tr>
-                                    <tr><th> Pax </th><td>{{ $private_trip->pax }}</td></tr>
-                                    <tr><th> Price </th><td>{{ number_format($private_trip->price, 0, ',', '.') }}</td></tr>
+                                    <tr><th> Durasi </th><td>{{ $private_trip->duration }}</td></tr>
+                                    <tr><th> Jumlah Penumpang </th><td>{{ $private_trip->pax }}</td></tr>
+                                    <tr><th> Harga </th><td>{{ number_format($private_trip->price, 0, ',', '.') }}</td></tr>
                                 </tbody>
                             </table>
-                            <a href="{{ url('/admin/boat-travel-package/' . $boat_travel_package_id . '/private-trip') }}"><button class="btn btn-warning btn-sm"><i class="fa fa-close" aria-hidden="true"></i> Back</button></a>
+                            <a href="{{ url('/admin/boat-travel-package/' . $boat_travel_package_id . '/private-trip') }}"><button class="btn btn-warning btn-sm"><i class="fa fa-close" aria-hidden="true"></i> Kembali</button></a>
                         </div>
                     </div>
                 </div>

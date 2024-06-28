@@ -8,17 +8,17 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Blog Category Detail</h4>
+                            <h4 class="card-title">Detail Kategori Blog</h4>
                         </div>
                     </div>
                     <div class="card-body px-0">
                         <div class="table-responsive">
                             <table class="table table-striped" role="grid">
                                 <tbody>
-                                    <tr><th> Category Name </th><td> {{ $blogcategory->category_name }} </td></tr>
+                                    <tr><th> Nama Kategori </th><td> {{ $blogcategory->category_name }} </td></tr>
                                 </tbody>
                             </table>
-                            <a href="{{ url('/admin/blog-category') }}"><button class="btn btn-warning btn-sm"><i class="fa fa-close" aria-hidden="true"></i> Back</button></a>
+                            <a href="{{ url('/admin/blog-category') }}"><button class="btn btn-warning btn-sm"><i class="fa fa-close" aria-hidden="true"></i> Kembali</button></a>
                         </div>
                     </div>
                 </div>

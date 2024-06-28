@@ -18,11 +18,13 @@ class CreateTravelPackagesTable extends Migration
             $table->string('package_name')->nullable();
             $table->string('description')->nullable();
             $table->foreignId('destination_id');
+            $table->date('date_of_departure')->nullable();
             $table->string('package_key_visual');
             $table->boolean('have_itenary')->nullable();
             $table->text('itenary_list')->nullable();
             $table->text('include_list')->nullable();
             $table->text('exclude_list')->nullable();
+            $table->boolean('is_popular')->nullable();
             $table->text('seo_meta_description')->nullable();
             $table->text('seo_meta_keywords')->nullable();
             $table->integer('language_id')->nullable();

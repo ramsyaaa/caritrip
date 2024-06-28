@@ -28,8 +28,8 @@ class HomeController extends Controller
         UserLogHelper::userLog($request, 'home');
         $data = TripHelper::getNavbarTripsData();
 
-        $data['packages'] = BoatTravelPackage::get();
-        $data['travels'] = TravelPackage::get();
+        $data['packages'] = BoatTravelPackage::where(['is_popular' => true])->get();
+        $data['travels'] = TravelPackage::where(['is_popular' => true])->get();
         $data['blogs'] = Blog::limit(9)->get();
 
         $page = Page::where(['page_category' => 'Home'])->first();

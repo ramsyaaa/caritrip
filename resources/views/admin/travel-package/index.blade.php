@@ -8,12 +8,12 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Travel Package List</h4>
+                            <h4 class="card-title">List Paket Travel</h4>
                             <a href="{{ url('/admin/travel-package'. '/create') }}" class="btn btn-success mr-2">
                                 <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                 </svg>
-                                Add New
+                                Tambah
                             </a>
                         </div>
                     </div>
@@ -23,15 +23,15 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Package Name</th><th>Language</th>
-                                        <th>Actions</th>
+                                        <th>Nama Paket</th><th>Paket Populer</th><th>Bahasa</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($travelpackage as $i => $item)
                                     <tr>
                                         <td>{{ $i+1 }}</td>
-                                        <td>{{ $item->package_name }}</td><td>{{ $item->language ? $item->language->language_name : '' }}</td>
+                                        <td>{{ $item->package_name }}</td><td>{{ $item->is_popular ? 'Yes' : 'No' }}</td><td>{{ $item->language ? $item->language->language_name : '' }}</td>
                                         <td>
                                             <div class="flex align-items-center list-user-action">
                                                 <a class="btn btn-sm btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="View" href="{{ url('/admin/travel-package/' . $item->id) }}">

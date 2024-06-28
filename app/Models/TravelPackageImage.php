@@ -10,4 +10,9 @@ class TravelPackageImage extends Model
         'image',
         'travel_package_id'
     ];
+
+    public function travelPackage()
+    {
+        return $this->belongsTo(TravelPackage::class, 'travel_package_id');
+    }
 }

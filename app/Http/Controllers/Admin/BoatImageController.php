@@ -9,6 +9,7 @@ use App\Models\Boat;
 use App\Models\BoatImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class BoatImageController extends Controller
 {
@@ -66,9 +67,15 @@ class BoatImageController extends Controller
         $requestData = $request->all();
         $requestData['boat_id'] = $id;
         if ($request->hasFile('key_visual')) {
-            $requestData['key_visual'] = $request->key_visual
-                ->store('uploads/boats', 'public');
-                $requestData['key_visual'] = 'storage/' . $requestData['key_visual'];
+            $image = $request->file('key_visual');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['key_visual'] = 'uploads/' . $filename;
         }
 
         BoatImage::create($requestData);
@@ -127,13 +134,19 @@ class BoatImageController extends Controller
         $boatimage = BoatImage::findOrFail($id);
 
         if ($request->hasFile('key_visual')) {
-            if ($boatimage->key_visual) {
-                $oldImagePath = str_replace('storage/', '', $boatimage->key_visual);
-                Storage::disk('public')->delete($oldImagePath);
+            if (\File::exists(public_path($boatimage->key_visual))) {
+                \File::delete(public_path($boatimage->key_visual));
             }
-            $requestData['key_visual'] = $request->key_visual
-                ->store('uploads/boats', 'public');
-            $requestData['key_visual'] = 'storage/' . $requestData['key_visual'];
+
+            $image = $request->file('key_visual');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['key_visual'] = 'uploads/' . $filename;
         }
 
         alert()->success('Record Updated!' );
@@ -154,8 +167,9 @@ class BoatImageController extends Controller
         alert()->success('Record Deleted!' );
         $boatimage = BoatImage::findOrFail($id);
         if ($boatimage->key_visual) {
-            $oldImagePath = str_replace('storage/', '', $boatimage->key_visual);
-            Storage::disk('public')->delete($oldImagePath);
+            if (\File::exists(public_path($boatimage->key_visual))) {
+                \File::delete(public_path($boatimage->key_visual));
+            }
         }
         BoatImage::destroy($id);
 

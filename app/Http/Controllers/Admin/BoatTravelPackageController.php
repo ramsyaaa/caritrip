@@ -11,6 +11,7 @@ use App\Models\Destination;
 use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class BoatTravelPackageController extends Controller
 {
@@ -76,10 +77,18 @@ class BoatTravelPackageController extends Controller
 
         $requestData = $request->all();
         if ($request->hasFile('package_key_visual')) {
-            $requestData['package_key_visual'] = $request->package_key_visual
-            ->store('uploads/packages', 'public');
-            $requestData['package_key_visual'] = 'storage/' . $requestData['package_key_visual'];
+            $image = $request->file('package_key_visual');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['package_key_visual'] = 'uploads/' . $filename;
         }
+
+         $requestData['is_popular'] = $request->is_popular == 'on' ? 1 : 0;
 
         BoatTravelPackage::create($requestData);
         alert()->success('New ' . 'Boat Travel Package'. ' Created!' );
@@ -145,14 +154,22 @@ class BoatTravelPackageController extends Controller
         $requestData = $request->all();
         $boattravelpackage = BoatTravelPackage::findOrFail($id);
         if ($request->hasFile('package_key_visual')) {
-            if ($boattravelpackage->package_key_visual) {
-                $oldImagePath = str_replace('storage/', '', $boattravelpackage->package_key_visual);
-                Storage::disk('public')->delete($oldImagePath);
+            if (\File::exists(public_path($boattravelpackage->package_key_visual))) {
+                \File::delete(public_path($boattravelpackage->package_key_visual));
             }
-            $requestData['package_key_visual'] = $request->package_key_visual
-                ->store('uploads/packages', 'public');
-            $requestData['package_key_visual'] = 'storage/' . $requestData['package_key_visual'];
+
+            $image = $request->file('package_key_visual');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['package_key_visual'] = 'uploads/' . $filename;
         }
+
+        $requestData['is_popular'] = $request->is_popular == 'on' ? 1 : 0;
 
 
         alert()->success('Record Updated!' );
@@ -173,8 +190,9 @@ class BoatTravelPackageController extends Controller
         alert()->success('Record Deleted!' );
         $boattravelpackage = BoatTravelPackage::findOrFail($id);
         if ($boattravelpackage->package_key_visual) {
-            $oldImagePath = str_replace('storage/', '', $boattravelpackage->package_key_visual);
-            Storage::disk('public')->delete($oldImagePath);
+            if (\File::exists(public_path($boattravelpackage->package_key_visual))) {
+                \File::delete(public_path($boattravelpackage->package_key_visual));
+            }
         }
 
         BoatTravelPackage::destroy($id);

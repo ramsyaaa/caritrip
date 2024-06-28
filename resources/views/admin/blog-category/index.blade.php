@@ -8,12 +8,12 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Blog Category List</h4>
+                            <h4 class="card-title">List Kategori Blog</h4>
                             <a href="{{ url('/admin/blog-category'. '/create') }}" class="btn btn-success mr-2">
                                 <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                 </svg>
-                                Add New
+                                Tambah
                             </a>
                         </div>
                     </div>
@@ -23,8 +23,8 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Category Name</th>
-                                        <th>Actions</th>
+                                        <th>Nama Kategori</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>

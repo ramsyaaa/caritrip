@@ -1,15 +1,15 @@
 <div class="form-group{{ $errors->has('title') ? 'has-error' : ''}}">
-    {!! Form::label('title', 'Title', ['class' => 'control-label']) !!}
+    {!! Form::label('title', 'Judul', ['class' => 'control-label']) !!}
     {!! Form::text('title', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
     {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group{{ $errors->has('id_category') ? 'has-error' : ''}}">
-    {!! Form::label('id_category', 'Category', ['class' => 'control-label']) !!}
-    {!! Form::select('id_category', $blog_categories->pluck('category_name', 'id')->prepend('Choose Category', ''), null, ['class' => 'form-control']) !!}
+    {!! Form::label('id_category', 'Kategori', ['class' => 'control-label']) !!}
+    {!! Form::select('id_category', $blog_categories->pluck('category_name', 'id')->prepend('Pilih Kategori', ''), null, ['class' => 'form-control']) !!}
     {!! $errors->first('id_category', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group{{ $errors->has('featured_image') ? 'has-error' : ''}}">
-    {!! Form::label('featured_image', 'Featured Image', ['class' => 'control-label']) !!}
+    {!! Form::label('featured_image', 'Gambar', ['class' => 'control-label']) !!}
     {!! Form::file('featured_image', ['class' => 'form-control', 'id' => 'featured_image', 'onchange' => 'previewImage(event)']) !!}
     {!! $errors->first('featured_image', '<p class="help-block">:message</p>') !!}
 </div>
@@ -22,12 +22,12 @@
     {!! $errors->first('slug', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
-    {!! Form::label('content', 'Content', ['class' => 'control-label']) !!}
+    {!! Form::label('content', 'Konten', ['class' => 'control-label']) !!}
     {!! Form::textarea('content', null, ['class' => 'form-control', 'id' => 'editor']) !!}
     {!! $errors->first('content', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group{{ $errors->has('meta_description') ? 'has-error' : ''}}">
-    {!! Form::label('meta_description', 'Meta Description', ['class' => 'control-label']) !!}
+    {!! Form::label('meta_description', 'Meta Deskripsi', ['class' => 'control-label']) !!}
     {!! Form::textarea('meta_description', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
     {!! $errors->first('meta_description', '<p class="help-block">:message</p>') !!}
 </div>
@@ -40,7 +40,7 @@
 
 <div class="form-group" align="right">
     {!! Form::submit($formMode === 'edit' ? 'Update' : 'Create', ['class' => 'btn btn-primary']) !!}
-    <a href="#" onClick="javascript:history.go(-1)" class="btn btn-danger">Cancel and Back</a>
+    <a href="#" onClick="javascript:history.go(-1)" class="btn btn-danger">Batal dan Kembali</a>
 </div>
 
 <script>

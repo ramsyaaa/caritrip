@@ -9,6 +9,7 @@ use App\Models\BoatTravelTrip;
 use App\Models\BoatTravelTripImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class BoatTravelTripImageController extends Controller
 {
@@ -62,9 +63,15 @@ class BoatTravelTripImageController extends Controller
         $requestData = $request->all();
 
         if ($request->hasFile('images')) {
-            $requestData['images'] = $request->images
-                ->store('uploads', 'public');
-                $requestData['images'] = 'storage/' . $requestData['images'];
+            $image = $request->file('images');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['images'] = 'uploads/' . $filename;
         }
 
         $get_trip = BoatTravelTrip::where([
@@ -126,13 +133,19 @@ class BoatTravelTripImageController extends Controller
         $boattraveltripimage = BoatTravelTripImage::findOrFail($id);
 
         if ($request->hasFile('images')) {
-            if ($boattraveltripimage->images) {
-                $oldImagePath = str_replace('storage/', '', $boattraveltripimage->images);
-                Storage::disk('public')->delete($oldImagePath);
+            if (\File::exists(public_path($boattraveltripimage->images))) {
+                \File::delete(public_path($boattraveltripimage->images));
             }
-            $requestData['images'] = $request->images
-                ->store('uploads', 'public');
-            $requestData['images'] = 'storage/' . $requestData['images'];
+
+            $image = $request->file('images');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            // Kompres gambar
+            $imageResized = Image::make($image)->resize(1440, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/' . $filename), 75);
+
+            $requestData['images'] = 'uploads/' . $filename;
         }
 
         $get_trip = BoatTravelTrip::where([
@@ -156,6 +169,12 @@ class BoatTravelTripImageController extends Controller
     public function destroy($id)
     {
         alert()->success('Record Deleted!' );
+        $boattraveltripimage = BoatTravelTripImage::where(['id' => $id])->first();
+        if($boattraveltripimage->images){
+            if (\File::exists(public_path($boattraveltripimage->images))) {
+                \File::delete(public_path($boattraveltripimage->images));
+            }
+        }
         BoatTravelTripImage::destroy($id);
 
         return redirect('admin/boat-travel-trip-image');
