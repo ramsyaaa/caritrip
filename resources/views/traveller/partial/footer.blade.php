@@ -52,29 +52,24 @@
                                <i class="fab fa-facebook-f" aria-hidden="true"></i>
                             </a>
                          </li>
-                         <li>
-                            <a href="https://www.twitter.com/" target="_blank">
-                               <i class="fab fa-twitter" aria-hidden="true"></i>
+                        <li>
+                            <a href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan yang tersedia." target="_blank">
+                                <i class="fab fa-whatsapp" aria-hidden="true"></i>
                             </a>
-                         </li>
-                         <li>
-                            <a href="https://www.youtube.com/" target="_blank">
-                               <i class="fab fa-youtube" aria-hidden="true"></i>
-                            </a>
-                         </li>
+                        </li>
                          <li>
                             <a href="https://www.instagram.com/" target="_blank">
                                <i class="fab fa-instagram" aria-hidden="true"></i>
                             </a>
                          </li>
-                         <li>
-                            <a href="https://www.linkedin.com/" target="_blank">
-                               <i class="fab fa-linkedin" aria-hidden="true"></i>
+                        <li>
+                            <a href="mailto:admincaritrip@gmail.com?subject=Caritrip Asking&body=Hello, I am from the Caritrip website and am interested in your trip package. Could you please provide more details about it?.">
+                                <i class="icon icon-envelope1" aria-hidden="true"></i>
                             </a>
-                         </li>
+                        </li>
                       </ul>
                    </div>
-                   <div class="footer-menu flex w-full justify-center">
+                   {{-- <div class="footer-menu flex w-full justify-center">
                       <ul>
                          <li>
                             <a href="policy.html">Privacy Policy</a>
@@ -86,7 +81,7 @@
                             <a href="faq.html">FAQ</a>
                          </li>
                       </ul>
-                   </div>
+                   </div> --}}
                 </div>
              </div>
           </div>

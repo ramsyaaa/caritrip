@@ -45,7 +45,7 @@ class Boat extends Model
         return $this->hasMany(Cabin::class, 'boat_id');
     }
 
-    protected $fillable = ['boat_name', 'boat_length', 'boat_width', 'boat_depth', 'boat_speed', 'boat_year_built', 'boat_fuel_capacity', 'boat_water_capacity', 'boat_origin', 'boat_material', 'boat_main_engine', 'boat_dingy', 'boat_safety_equipment', 'boat_facility', 'boat_capacity', 'boat_entertainment', 'boat_featured_image', 'seo_meta_description', 'seo_meta_keywords', 'language_id', 'highlight_video'];
+    protected $fillable = ['boat_name', 'boat_length', 'boat_width', 'boat_depth', 'boat_speed', 'boat_year_built', 'boat_fuel_capacity', 'boat_water_capacity', 'boat_origin', 'boat_material', 'boat_main_engine', 'boat_dingy', 'boat_safety_equipment', 'boat_facility', 'boat_capacity', 'boat_entertainment', 'boat_featured_image', 'seo_meta_description', 'seo_meta_keywords', 'language_id'];
 
 
 

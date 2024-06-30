@@ -36,14 +36,24 @@
           <div class="bottom-header-inner d-flex justify-content-between align-items-center">
              <div class="header-social social-icon">
                 <ul>
+                    <li>
+                        <a href="https://www.facebook.com/" target="_blank">
+                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        </a>
+                    </li>
                    <li>
-                      <a href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan yang tersedia." target="_blank" target="_blank">
+                      <a href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan yang tersedia." target="_blank">
                          <i class="fab fa-whatsapp" aria-hidden="true"></i>
                       </a>
                    </li>
                    <li>
-                    <a href="mailto:alifnaufalrizki27@gmail.com?subject=Caritrip Asking&body=Hello, I am from the Caritrip website and am interested in your trip package. Could you please provide more details about it?.">
-                         <i class="icon icon-envelope1" aria-hidden="true"></i>
+                        <a href="https://www.instagram.com/" target="_blank">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                   <li>
+                        <a href="mailto:admincaritrip@gmail.com?subject=Caritrip Asking&body=Hello, I am from the Caritrip website and am interested in your trip package. Could you please provide more details about it?.">
+                            <i class="icon icon-envelope1" aria-hidden="true"></i>
                       </a>
                    </li>
                 </ul>
@@ -104,10 +114,10 @@
                         <ul>
                             @foreach ($domestics as $key => $destination)
                            <li class="menu-item-has-children">
-                                <a href="#">{{ $key }}</a>
+                                <a href="/packages/?destination_id={{ $destination['destination_id'] }}">{{ $key }}</a>
                                 <ul>
                                     <li class="menu-item-has-children">
-                                        <a href="#">Open Trip</a>
+                                        <a href="/packages/?destination_id={{ $destination['destination_id'] }}&category=Open Trip">Open Trip</a>
                                         <ul>
                                             @foreach ($destination['openTrips'] as $key => $item)
                                             <li>
@@ -123,7 +133,7 @@
                                         </ul>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="#">Private Trip</a>
+                                        <a href="/packages/?destination_id={{ $destination['destination_id'] }}&category=Private Trip">Private Trip</a>
                                         <ul>
                                             @foreach ($destination['privateTrips'] as $key => $item)
                                             <li>
@@ -139,7 +149,7 @@
                                         </ul>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="#">Full Day Cruise</a>
+                                        <a href="/packages/?destination_id={{ $destination['destination_id'] }}&category=Full Day Cruise">Full Day Cruise</a>
                                         <ul>
                                             @foreach ($destination['fullDayCruises'] as $key => $item)
                                             <li>

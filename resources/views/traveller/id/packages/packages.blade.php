@@ -22,7 +22,7 @@
                     <div class="relative w-full">
                         <img class="w-full h-[500px] md:h-[400px] object-cover" src="@isset($meta_page_banner_image) @if($meta_page_banner_image != null) {{ asset($meta_page_banner_image) }} @else {{ asset('assets/images/landscape 3.jpg') }} @endif @else {{ asset('assets/images/landscape 3.jpg') }} @endisset" alt="">
                         <div class="flex items-center justify-center w-full h-full absolute top-0 left-0">
-                        <h1 class="font-bold text-white text-[32px]">List Paket Perjalanan @if($category) ({{ $category }}) @endif</h1>
+                        <h1 class="font-bold text-white text-[32px]">List Paket Perjalanan @if($type) {{ $type }} @endif @if($category) ({{ $category }}) @endif <br><p class="text-center">@if($destination) {{ $destination->name }} @endif</p></h1>
                         </div>
                     </div>
                 </div>
@@ -35,51 +35,45 @@
                 <div class="w-full text-center mb-4 font-bold text-[24px]">
                     Paket Perjalanan Kapal
                 </div>
-                <div class="container">
-                    @foreach ($trips as $trip)
-                    <article class="package-item">
-                       <figure class="package-image" style="background-image: url({{ asset($trip->package_key_visual) }});"></figure>
-                       <div class="package-content">
-                          <h3>
-                             <div class="font-bold text-[24px]">
-                                {{ $trip->package_name }}
-                             </div>
-                          </h3>
-                          <p>{!! $trip->trip_note !!}</p>
-                          <div class="package-meta">
-                            <ul>
-                                <li style="margin-bottom: 4px">
-                                    <i style="color: #2C2D83" class="fas fa-ship"></i>
-                                    {{ $trip->trip_subcategory }}
-                                </li>
-                                <li style="margin-bottom: 4px">
-                                   <i style="color: #2C2D83" class="fas fa-map-marker-alt"></i>
-                                   {{ $trip->destination->name }}
-                                </li>
-                             </ul>
-                          </div>
-                       </div>
-                       <div style="background-color: #2C2D83" class="package-price">
-                          <div class="review-area">
-                             <span class="review-text">Mulai dari</span>
-                             {{-- <div class="rating-start-wrap d-inline-block">
-                                <div class="rating-start">
-                                   <span style="width: 80%"></span>
+                <div class="destination-item-wrap">
+                    <div class="container">
+                        <div class="row gx-5">
+                            @foreach ($trips as $trip)
+                            <div class="col-lg-4 col-md-6">
+                            <article class="destination-item" style="background-image: url({{ asset($trip->package_key_visual) }});">
+                                <div class="destination-content w-full">
+                                    <div class="package-meta">
+                                        <ul class="flex items-center gap-2">
+                                            <li style="margin-bottom: 4px">
+                                                <i style="color: #2C2D83" class="fas fa-ship"></i>
+                                                {{ $trip->trip_subcategory }}
+                                            </li>
+                                            <li style="margin-bottom: 4px">
+                                            <i style="color: #2C2D83" class="fas fa-map-marker-alt"></i>
+                                            {{ $trip->destination->name }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h3>
+                                        <a href="{{ route('packages.detail', ['id' => $trip->id, 'type' => 'Boat Trip']) }}" style="font-family: 'Fredoka', sans-serif !important;">{{ $trip->package_name }}</a>
+                                    </h3>
+                                    <div class="">
+                                        <span class="text-[16px] mt-2" style="font-family: 'Fredoka', sans-serif !important;">Mulai dari</span>
+                                    </div>
+                                    <h6 class="text-[24px] mt-1">
+                                        <span style="font-family: 'Fredoka', sans-serif !important;">Rp @if(count($trip->openTrips) > 0) {{ number_format($trip->openTrips[0]->price, 0, ',', '.') }} @elseif(count($trip->privateTrips) > 0) {{ number_format($trip->privateTrips[0]->price, 0, ',', '.') }} @elseif(count($trip->fullDayCruises) > 0) {{ number_format($trip->fullDayCruises[0]->price, 0, ',', '.') }} @else 0 @endif </span>
+                                    </h6>
+                                    <div class="w-full flex items-center justify-end">
+                                        <a href="{{ route('packages.detail', ['id' => $trip->id, 'type' => 'Boat Trip']) }}" class="px-3 py-2 bg-[#2C2D83] text-white rounded-lg">
+                                            Detail
+                                        </a>
+                                    </div>
                                 </div>
-                             </div> --}}
-                          </div>
-                          <h6 class="price-list">
-                             <span>Rp @if(count($trip->openTrips) > 0) {{ number_format($trip->openTrips[0]->price, 0, ',', '.') }} @elseif(count($trip->privateTrips) > 0) {{ number_format($trip->privateTrips[0]->price, 0, ',', '.') }} @elseif(count($trip->fullDayCruises) > 0) {{ number_format($trip->fullDayCruises[0]->price, 0, ',', '.') }} @else 0 @endif </span>
-                          </h6>
-                          <a href="{{ route('packages.detail', ['id' => $trip->id, 'category' => $category, 'type' => 'Boat Trip']) }}"
-                            style="border-radius: 20px; border: 2px solid white; font-size: 16px; padding: 10px 20px; color: white; display: inline-block; text-align: center;"
-                            onMouseOver="this.style.backgroundColor='#F6B334'; this.style.color='white';"
-                            onMouseOut="this.style.backgroundColor='transparent'; this.style.color='white';">
-                            Detail
-                         </a>
-                       </div>
-                    </article>
-                    @endforeach
+                            </article>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
              </div>
              <!-- ***package section html start form here*** -->
@@ -91,48 +85,40 @@
                 <div class="w-full text-center mb-4 font-bold text-[24px]">
                     Paket Travel
                 </div>
-                <div class="container">
-                    @foreach ($travels as $trip)
-                    <article class="package-item">
-                       <figure class="package-image" style="background-image: url({{ asset($trip->package_key_visual) }});"></figure>
-                       <div class="package-content">
-                          <h3>
-                             <div class="font-bold text-[24px]">
-                                {{ $trip->package_name }}
-                             </div>
-                          </h3>
-                          <p>{!! $trip->trip_note !!}</p>
-                          <div class="package-meta">
-                            <ul>
-                                <li style="margin-bottom: 4px">
-                                   <i style="color: #2C2D83" class="fas fa-map-marker-alt"></i>
-                                   {{ $trip->destination->name }}
-                                </li>
-                             </ul>
-                          </div>
-                       </div>
-                       <div style="background-color: #2C2D83" class="package-price">
-                          <div class="review-area">
-                             <span class="review-text">Mulai Dari</span>
-                             {{-- <div class="rating-start-wrap d-inline-block">
-                                <div class="rating-start">
-                                   <span style="width: 80%"></span>
+                <div class="destination-item-wrap">
+                    <div class="container">
+                        <div class="row gx-5">
+                            @foreach ($travels as $trip)
+                            <div class="col-lg-4 col-md-6">
+                            <article class="destination-item" style="background-image: url({{ asset($trip->package_key_visual) }});">
+                                <div class="destination-content w-full">
+                                    <span class="cat-link">
+                                        <a href="{{ route('packages.detail', ['id' => $trip->id, 'type' => 'Travel Trip']) }}" style="font-family: 'Fredoka', sans-serif !important;">{{ $trip->destination->name }}</a>
+                                    </span>
+                                    <h3>
+                                        <a href="{{ route('packages.detail', ['id' => $trip->id, 'type' => 'Travel Trip']) }}" style="font-family: 'Fredoka', sans-serif !important;">{{ $trip->package_name }}</a>
+                                    </h3>
+                                    <div class="">
+                                        <span class="text-[16px] mb-2" style="font-family: 'Fredoka', sans-serif !important;">Mulai dari</span>
+                                    </div>
+                                    <h6 class="text-[24px] mt-4">
+                                        <span style="font-family: 'Fredoka', sans-serif !important;">Rp @if(count($trip->openTrips) > 0) {{ number_format($trip->openTrips[0]->price, 0, ',', '.') }} @elseif(count($trip->privateTrips) > 0) {{ number_format($trip->privateTrips[0]->price, 0, ',', '.') }} @else 0 @endif </span>
+                                    </h6>
+                                    <div class="w-full flex items-center justify-end">
+                                        <a href="{{ route('packages.detail', ['id' => $trip->id, 'type' => 'Travel Trip']) }}" class="px-3 py-2 bg-[#2C2D83] text-white rounded-lg">
+                                            Detail
+                                        </a>
+                                    </div>
                                 </div>
-                             </div> --}}
-                          </div>
-                          <h6 class="price-list">
-                             <span>Rp @if(count($trip->openTrips) > 0) {{ number_format($trip->openTrips[0]->price, 0, ',', '.') }} @elseif(count($trip->privateTrips) > 0) {{ number_format($trip->privateTrips[0]->price, 0, ',', '.') }} @else 0 @endif </span>
-                          </h6>
-                          <a href="{{ route('packages.detail', ['id' => $trip->id, 'category' => $category, 'type' => 'Travel Trip']) }}"
-                            style="border-radius: 20px; border: 2px solid white; font-size: 16px; padding: 10px 20px; color: white; display: inline-block; text-align: center;"
-                            onMouseOver="this.style.backgroundColor='#F6B334'; this.style.color='white';"
-                            onMouseOut="this.style.backgroundColor='transparent'; this.style.color='white';">
-                            Detail
-                         </a>
-                       </div>
-                    </article>
-                    @endforeach
+                            </article>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
+
+
+
              </div>
              <!-- ***package section html start form here*** -->
              @endif

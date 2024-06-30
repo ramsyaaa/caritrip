@@ -33,30 +33,32 @@
           <div class="container">
              <div class="row">
                 <div class="col-lg-8 primary right-sidebar">
-                   <!-- blog post item html start -->
-                   <div class="grid blog-inner row">
-                    @foreach ($blogs as $blog)
-                      <div class="grid-item col-md-6">
-                         <article class="post">
-                            <figure class="featured-post">
-                               <img src="{{ $blog->featured_image }}" alt="">
-                            </figure>
-                            <div class="post-content">
-                               <div class="cat-meta">
-                                  <a>{{ $blog->category ? $blog->category->category_name : '' }}</a>
-                               </div>
-                               <h3 class="font-bold text-[16px] mb-4"><a href="{{ route('blogs.show', ['slug' => $blog->slug]) }}">{{ $blog->title }}</a></h3>
-                               <div class="post-footer d-flex justify-content-between align-items-center">
-                                  <div class="post-btn">
-                                     <a href="{{ route('blogs.show', ['slug' => $blog->slug]) }}" class="round-btn">Detail</a>
-                                  </div>
-                               </div>
+                   <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        @foreach ($blogs as $blog)
+                            <div class="w-full">
+                                <article class="post bg-white shadow rounded-lg overflow-hidden">
+                                    <figure class="featured-post">
+                                        <img src="{{ $blog->featured_image }}" alt="" class="w-full">
+                                    </figure>
+                                    <div class="post-content p-4">
+                                        <div class="cat-meta mb-2">
+                                            <a class="text-gray-500">{{ $blog->category ? $blog->category->category_name : '' }}</a>
+                                        </div>
+                                        <h3 class="font-bold text-lg mb-4">
+                                            <a href="{{ route('blogs.show', ['slug' => $blog->slug]) }}">{{ $blog->title }}</a>
+                                        </h3>
+                                        <p class="line-clamp-2 mb-4">{{ strip_tags($blog->content) }}</p>
+                                        <div class="post-footer flex justify-between items-center">
+                                            <div class="post-btn">
+                                                <a href="{{ route('blogs.show', ['slug' => $blog->slug]) }}" class="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600">Read more</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
                             </div>
-                         </article>
-                      </div>
-                      @endforeach
-                   </div>
-                   <!-- blog post item html end -->
+                        @endforeach
+                    </div>
+
                 </div>
                 <div class="col-lg-4 secondary">
                    <div class="sidebar">
@@ -72,6 +74,7 @@
                                      <h5>
                                         <a href="{{ route('blogs.show', ['slug' => $recent_blog->slug]) }}">{{ $recent_blog->title }}</a>
                                      </h5>
+                                     <p class="truncate">{{ strip_tags($recent_blog->content) }}</p>
                                      <div class="entry-meta">
                                         <span class="posted-on">
                                             <?php $date = new DateTime($recent_blog->created_at); ?>

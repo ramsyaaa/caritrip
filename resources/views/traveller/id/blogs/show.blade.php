@@ -72,6 +72,7 @@
                                      <h5>
                                         <a href="{{ route('blogs.show', ['slug' => $recent_blog->slug]) }}">{{ $recent_blog->title }}</a>
                                      </h5>
+                                     <p class="truncate">{{ strip_tags($recent_blog->content) }}</p>
                                      <div class="entry-meta">
                                         <span class="posted-on">
                                             <?php $date = new DateTime($recent_blog->created_at); ?>

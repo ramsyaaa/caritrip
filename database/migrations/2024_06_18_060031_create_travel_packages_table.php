@@ -25,6 +25,7 @@ class CreateTravelPackagesTable extends Migration
             $table->text('include_list')->nullable();
             $table->text('exclude_list')->nullable();
             $table->boolean('is_popular')->nullable();
+            $table->text('instagram_post')->nullable();
             $table->text('seo_meta_description')->nullable();
             $table->text('seo_meta_keywords')->nullable();
             $table->integer('language_id')->nullable();
