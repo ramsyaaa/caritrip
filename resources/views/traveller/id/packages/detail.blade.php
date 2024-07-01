@@ -31,30 +31,31 @@
           </div>
           <!-- ***Inner Banner html end here*** -->
           <!-- ***career section html start form here*** -->
+
           <div style="font-family: 'Fredoka', sans-serif !important;" class="inner-package-detail-wrap">
              <div class="container">
                 <div class="row">
                    <div class="col-lg-8 primary right-sidebar">
                       <div >
-                        <div class="slider h-[200px] md:h-[300px] lg:h-[600px]">
+                        <div class="slider h-[200px] md:h-[300px] lg:h-[600px] relative overflow-hidden">
                             @php
                                 $isActive = false;
                             @endphp
                             @if(count($package->images) > 0)
                                 @foreach ($package->images as $image)
-                                <img src="{{ asset($image->image) }}" class="@if ($loop->iteration == 1) active @php $isActive = true; @endphp @endif">
+                                    <img src="{{ asset($image->image) }}" class="@if ($loop->iteration == 1) active @php $isActive = true; @endphp @endif">
                                 @endforeach
                             @endif
                             @if($type == 'Boat Trip')
-                            @if(count($package->boat->images) > 0)
-                                @foreach ($package->boat->images as $image)
-                                <img src="{{ asset($image->key_visual) }}" class="@if ($loop->iteration == 1 && !$isActive) active @php $isActive = true; @endphp @endif">
-                                @endforeach
+                                @if(count($package->boat->images) > 0)
+                                    @foreach ($package->boat->images as $image)
+                                        <img src="{{ asset($image->key_visual) }}" class="@if ($loop->iteration == 1 && !$isActive) active @php $isActive = true; @endphp @endif">
+                                    @endforeach
+                                @endif
                             @endif
-                            @endif
+                            <button class="prev absolute top-1/2 left-8 transform -translate-y-1/2 bg-white bg-opacity-50 text-white p-2 rounded-full w-[50px] h-[50px]">❮</button>
+                            <button class="next absolute top-1/2 right-8 transform -translate-y-1/2 bg-white bg-opacity-50 text-white p-2 rounded-full w-[50px] h-[50px]">❯</button>
                         </div>
-
-
 
                          <div class="package-content-detail my-6">
                             @if($type == 'Travel Trip')
@@ -103,12 +104,12 @@
                                {!! $package->itenary_list !!}
                             </article>
                             @endif
-                            @if($type == 'Boat Trip')
-                            <iframe width="560" height="560" src="{{ $package->boat->highlight_video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="w-full flex justify-center">
+                                {!! $package->instagram_post !!}
+                            </div>
                             <div class="flex justify-center w-full">
                                 <a class="px-4 py-2 text-white text-center text-[24px] rounded-lg bg-[#2C2D83] mt-4" target="_blank" href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan paket {{ $package->package_name }}">Pesan Sekarang</a>
                             </div>
-                            @endif
                         </div>
                       </div>
                    </div>
@@ -315,18 +316,44 @@
     @include('traveller.partial.footer')
  </div>
 
- <script>
-
-
+<script>
     document.addEventListener('DOMContentLoaded', function() {
         const images = document.querySelectorAll('.slider img');
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
         let currentIndex = 0;
+        let interval;
 
-        setInterval(() => {
+        function showImage(index) {
             images[currentIndex].classList.remove('active');
-            currentIndex = (currentIndex + 1) % images.length;
+            currentIndex = (index + images.length) % images.length;
             images[currentIndex].classList.add('active');
-        }, 2000);
+        }
+
+        function startSlideshow() {
+            interval = setInterval(() => {
+                showImage(currentIndex + 1);
+            }, 5000);
+        }
+
+        function stopSlideshow() {
+            clearInterval(interval);
+        }
+
+        prevButton.addEventListener('click', () => {
+            stopSlideshow();
+            showImage(currentIndex - 1);
+            startSlideshow();
+        });
+
+        nextButton.addEventListener('click', () => {
+            stopSlideshow();
+            showImage(currentIndex + 1);
+            startSlideshow();
+        });
+
+        startSlideshow();
     });
 </script>
+
 @endsection

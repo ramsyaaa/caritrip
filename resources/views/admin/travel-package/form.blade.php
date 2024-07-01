@@ -52,6 +52,11 @@
     {!! Form::textarea('exclude_list', null, ['class' => 'form-control', 'id' => 'exclude_list']) !!}
     {!! $errors->first('exclude_list', '<p class="help-block">:message</p>') !!}
 </div>
+<div class="form-group{{ $errors->has('instagram_post') ? 'has-error' : ''}}">
+    {!! Form::label('instagram_post', 'Instagram Embed Link', ['class' => 'control-label']) !!}
+    {!! Form::text('instagram_post', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+    {!! $errors->first('instagram_post', '<p class="help-block">:message</p>') !!}
+</div>
 <div>
     <Label>Populer Paket</Label>
     <div class="flex items-center">

@@ -86,11 +86,6 @@
 <div class="form-group">
     <img id="image_preview" src="{{ isset($boat) && $boat->boat_featured_image ? asset( $boat->boat_featured_image) : '' }}" alt="Image Preview" style="max-height: 300px; display: {{ isset($boat) && $boat->boat_featured_image ? 'block' : 'none' }};" />
 </div>
-<div class="form-group{{ $errors->has('highlight_video') ? 'has-error' : ''}}">
-    {!! Form::label('highlight_video', 'Highlight Video (URL)', ['class' => 'control-label']) !!}
-    {!! Form::text('highlight_video', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
-    {!! $errors->first('highlight_video', '<p class="help-block">:message</p>') !!}
-</div>
 <div class="form-group{{ $errors->has('language_id') ? 'has-error' : ''}}">
     {!! Form::label('language_id', 'Bahasa', ['class' => 'control-label']) !!}
     {!! Form::select('language_id', $languages->pluck('language_name', 'id')->prepend('Pilih Bahasa', ''), null, ['class' => 'form-control']) !!}

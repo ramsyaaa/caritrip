@@ -70,6 +70,7 @@ class BoatTravelPackage extends Model
         'include_list',
         'exclude_list',
         'is_popular',
+        'instagram_post',
         'seo_meta_description',
         'seo_meta_keywords',
         'language_id',

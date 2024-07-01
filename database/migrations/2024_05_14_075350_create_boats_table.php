@@ -32,7 +32,6 @@ class CreateBoatsTable extends Migration
             $table->integer('boat_capacity')->nullable();
             $table->string('boat_entertainment')->nullable();
             $table->string('boat_featured_image')->nullable();
-            $table->string('highlight_video')->nullable();
             $table->text('seo_meta_description')->nullable();
             $table->text('seo_meta_keywords')->nullable();
             $table->integer('language_id')->nullable();

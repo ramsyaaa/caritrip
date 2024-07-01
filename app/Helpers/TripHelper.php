@@ -61,6 +61,7 @@ class TripHelper
             $navbarPrivateTrips = BoatTravelPackage::where(['destination_id' => $item->id])->whereIn('id', $privateBoatTravelPackageIds)->get();
             $navbarFullDayCruises = BoatTravelPackage::where(['destination_id' => $item->id])->whereIn('id', $FullDayCruiseBoatTravelPackageIds)->get();
             $list_domestic_destination[$item->name] = [
+                "destination_id" => $item->id,
                 "openTrips" => $navbarOpenTrips,
                 'privateTrips' => $navbarPrivateTrips,
                 'fullDayCruises' => $navbarFullDayCruises,

@@ -6,6 +6,7 @@ use App\Helpers\TripHelper;
 use App\Helpers\UserLogHelper;
 use App\Http\Controllers\Controller;
 use App\Models\BoatTravelPackage;
+use App\Models\Destination;
 use App\Models\FullDayCruise;
 use App\Models\OpenTrip;
 use App\Models\Page;
@@ -147,6 +148,12 @@ class PackageController extends Controller
                     $data['travels'] = TravelPackage::get();
                 }
             }
+        }
+
+        if($data['destination_id'] != null){
+            $data['destination'] = Destination::where(['id' => $data['destination_id']])->first();
+        }else{
+            $data['destination'] = null;
         }
 
         $page = Page::where(['page_category' => 'Packages'])->first();

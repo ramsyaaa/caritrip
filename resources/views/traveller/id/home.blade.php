@@ -196,11 +196,11 @@
                             <div class="cat-meta">
                                <a style="color: #2C2D83">{{ $blog->category ? $blog->category->category_name : '' }}</a>
                             </div>
-                            <h3><a href="{{ route('blogs.show', ['slug' => $blog->slug]) }}">{{ $blog->title }}</a></h3>
-                            {{-- <p>Laboris hac erat dolor, posuere volutpat fringilla gravida metus nonummy, blandit mi...</p> --}}
+                            <h3><a class="font-bold text-[16px]" href="{{ route('blogs.show', ['slug' => $blog->slug]) }}">{{ $blog->title }}</a></h3>
+                            <p class="line-clamp-2">{{ strip_tags($blog->content) }}</p>
                             <div class="post-footer d-flex justify-content-between align-items-center">
                                <div class="post-btn">
-                                  <a style="background-color: #2C2D83" href="{{ route('blogs.show', ['slug' => $blog->slug]) }}" class="round-btn">Detail</a>
+                                  <a style="background-color: #2C2D83" href="{{ route('blogs.show', ['slug' => $blog->slug]) }}" class="round-btn">Read more</a>
                                </div>
                             </div>
                          </div>

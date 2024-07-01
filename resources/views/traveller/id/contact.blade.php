@@ -46,25 +46,20 @@
                                   </a>
                                </li>
                                <li>
-                                  <a href="https://www.twitter.com" style="background-color: #2C2D83" target="_blank">
-                                     <i class="fab fa-twitter" aria-hidden="true"></i>
-                                  </a>
-                               </li>
-                               <li>
-                                  <a href="https://www.youtube.com" style="background-color: #2C2D83" target="_blank">
-                                     <i class="fab fa-youtube" aria-hidden="true"></i>
-                                  </a>
-                               </li>
+                                    <a href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan yang tersedia." style="background-color: #2C2D83" target="_blank">
+                                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                                    </a>
+                                </li>
                                <li>
                                   <a href="https://www.instagram.com" style="background-color: #2C2D83" target="_blank">
                                      <i class="fab fa-instagram" aria-hidden="true"></i>
                                   </a>
                                </li>
                                <li>
-                                  <a href="https://www.pinterest.com" style="background-color: #2C2D83" target="_blank">
-                                     <i class="fab fa-pinterest" aria-hidden="true"></i>
-                                  </a>
-                               </li>
+                                    <a style="background-color: #2C2D83" href="mailto:admincaritrip@gmail.com?subject=Caritrip Asking&body=Hello, I am from the Caritrip website and am interested in your trip package. Could you please provide more details about it?.">
+                                        <i class="icon icon-envelope1" aria-hidden="true"></i>
+                                    </a>
+                                </li>
                             </ul>
                          </div>
                       </div>
