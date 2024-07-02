@@ -10,7 +10,7 @@
                          <a href="index.html"><img src="assets/images/site-logo.png" alt=""></a>
                       </div>
                       <div class="textwidget widget-text">
-                         Urna ratione ante harum provident, eleifend, vulputate molestiae proin fringilla, praesentium magna conubia at perferendis, pretium, aenean aut ultrices.
+                        CariTrip adalah tour operator wisata yang hadir untuk kamu yang masih bimbang & bingung dalam merencanakan liburan terbaik dengan cita rasa petualangan tak terbatas. Kami menyediakan aneka paket wisata open trip dan private trip, yang turut menjamin mutu liburan kamu. Harga tiap paket wisata bervariasi, dan bisa disesuaikan dengan budget liburan kamu. Tentunya harga paket wisata yg kami tawarkan sesuai dengan kualitas pelayanan yang kami berikan. Informasi biaya setiap paket wisata dijelaskan sedetail mungkin di dalam platform ini dan akan diperjelas lagi via whatsapp agar kamu tidak lagi bingung dan bimbang dalam merencanakan liburanmu.
                       </div>
                    </aside>
                 </div>
@@ -34,7 +34,7 @@
                             </li>
                             <li>
                                <i aria-hidden="true" class="icon icon-map-marker1"></i>
-                               Indonesia
+                               Labuan Bajo
                             </li>
                          </ul>
                       </div>
@@ -48,8 +48,8 @@
                    <div class="social-icon flex w-full justify-center">
                       <ul class="flex w-full justify-center">
                          <li>
-                            <a href="https://www.facebook.com/" target="_blank">
-                               <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                            <a href="https://www.tiktok.com/@cari_trip?is_from_webapp=1&sender_device=pc" target="_blank">
+                               <i class="fab fa-tiktok" aria-hidden="true"></i>
                             </a>
                          </li>
                         <li>
@@ -58,7 +58,7 @@
                             </a>
                         </li>
                          <li>
-                            <a href="https://www.instagram.com/" target="_blank">
+                            <a href="https://www.instagram.com/caritrip.id/?utm_source=ig_web_button_share_sheet" target="_blank">
                                <i class="fab fa-instagram" aria-hidden="true"></i>
                             </a>
                          </li>
@@ -69,19 +69,6 @@
                         </li>
                       </ul>
                    </div>
-                   {{-- <div class="footer-menu flex w-full justify-center">
-                      <ul>
-                         <li>
-                            <a href="policy.html">Privacy Policy</a>
-                         </li>
-                         <li>
-                            <a href="policy.html">Term & Condition</a>
-                         </li>
-                         <li>
-                            <a href="faq.html">FAQ</a>
-                         </li>
-                      </ul>
-                   </div> --}}
                 </div>
              </div>
           </div>
@@ -130,11 +117,10 @@
                    </div>
                    <div class="socialgroup">
                       <ul>
-                         <li> <a target="_blank" href="#"> <i class="fab fa-facebook"></i> </a> </li>
-                         <li> <a target="_blank" href="#"> <i class="fab fa-google"></i> </a> </li>
-                         <li> <a target="_blank" href="#"> <i class="fab fa-twitter"></i> </a> </li>
-                         <li> <a target="_blank" href="#"> <i class="fab fa-instagram"></i> </a> </li>
-                         <li> <a target="_blank" href="#"> <i class="fab fa-pinterest"></i> </a> </li>
+                         <li> <a target="_blank" href="https://www.tiktok.com/@cari_trip?is_from_webapp=1&sender_device=pc"> <i class="fab fa-tiktok"></i> </a> </li>
+                         <li> <a target="_blank" href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan yang tersedia."> <i class="fab fa-whatsapp"></i> </a> </li>
+                         <li> <a target="_blank" href="https://www.instagram.com/caritrip.id/?utm_source=ig_web_button_share_sheet"> <i class="fab fa-instagram"></i> </a> </li>
+                         <li> <a target="_blank" href="mailto:admincaritrip@gmail.com?subject=Caritrip Asking&body=Hello, I am from the Caritrip website and am interested in your trip package. Could you please provide more details about it?."> <i class="icon icon-envelope1"></i> </a> </li>
                       </ul>
                    </div>
                 </div>
@@ -159,7 +145,7 @@
                    </li>
                    <li>
                       <i aria-hidden="true" class="icon icon-map-marker1"></i>
-                      Indonesia
+                      Labuan Bajo
                    </li>
                 </ul>
              </div>

@@ -41,8 +41,8 @@
                          <div class="social-icon mt-4">
                             <ul>
                                <li>
-                                  <a href="https://www.facebook.com" style="background-color: #2C2D83" target="_blank">
-                                     <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                                  <a href="https://www.tiktok.com/@cari_trip?is_from_webapp=1&sender_device=pc" style="background-color: #2C2D83" target="_blank">
+                                     <i class="fab fa-tiktok" aria-hidden="true"></i>
                                   </a>
                                </li>
                                <li>
@@ -51,7 +51,7 @@
                                     </a>
                                 </li>
                                <li>
-                                  <a href="https://www.instagram.com" style="background-color: #2C2D83" target="_blank">
+                                  <a href="https://www.instagram.com/caritrip.id/?utm_source=ig_web_button_share_sheet" style="background-color: #2C2D83" target="_blank">
                                      <i class="fab fa-instagram" aria-hidden="true"></i>
                                   </a>
                                </li>
@@ -63,9 +63,9 @@
                             </ul>
                          </div>
                       </div>
-                      <div class="contact-map">
-                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.540423056448!2d-0.12174238402827448!3d51.50330061882345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604b900d26973%3A0x4291f3172409ea92!2slastminute.com%20London%20Eye!5e0!3m2!1sen!2snp!4v1646314586610!5m2!1sen!2snp" width="600" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                      </div>
+                        <div class="contact-map">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63144.207509148444!2d119.82302755697172!3d-8.449391897086624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2db468a6d47ed641%3A0x87f524333c6a6e8d!2sLabuan%20Bajo%2C%20Kec.%20Komodo%2C%20Kabupaten%20Manggarai%20Barat%2C%20Nusa%20Tenggara%20Tim.!5e0!3m2!1sid!2sid!4v1719914305650!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
                    </div>
                 </div>
              </div>
@@ -84,7 +84,7 @@
                             <h4>ALAMAT EMAIL</h4>
                             <ul>
                                <li>
-                                  <a href="mailto:info@domain.com">info@domain.com</a>
+                                  <a href="mailto:info@domain.com">admin@caritrip.id</a>
                                </li>
                             </ul>
                          </div>
@@ -114,7 +114,7 @@
                             <h4>LOKASI</h4>
                             <ul>
                                <li>
-                                    Indonesia
+                                    Labuan Bajo
                                </li>
                             </ul>
                          </div>

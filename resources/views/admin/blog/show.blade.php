@@ -15,7 +15,7 @@
                         <div class="table-responsive">
                             <table class="table table-striped" role="grid">
                                 <tbody>
-                                    <tr><th> Judul </th><td> {{ $blog->title }} </td></tr><tr><th> Kategori </th><td> {{ $blog->category->category_name }} </td></tr>
+                                    <tr><th> Judul </th><td> {{ $blog->title }} </td></tr><tr><th> Kategori </th><td> {{ $blog->category->category_name }} </td></tr><tr><th> Author </th><td> {{ $blog->user->name }} </td></tr>
                                     <tr><th> Gambar </th><td>
                                         <img id="image_preview" src="{{ asset( $blog->featured_image) }}" alt="Image Preview" style="max-height: 300px; display: {{ isset($blog) ? 'block' : 'none' }};" />
                                     </td></tr>
