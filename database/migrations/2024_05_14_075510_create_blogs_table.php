@@ -19,7 +19,7 @@ class CreateBlogsTable extends Migration
             $table->integer('id_category')->nullable();
             $table->string('featured_image')->nullable();
             $table->string('slug')->nullable();
-            $table->text('content')->nullable();
+            $table->longText('content')->nullable();
             $table->text('meta_description')->nullable();
             $table->text('meta_keywords')->nullable();
             });

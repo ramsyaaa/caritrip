@@ -42,6 +42,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('', 'Admin\AdminController@index')->name('index');
+    Route::get('profile', 'Admin\\ProfileController@index')->name('profile');
+    Route::post('profile', 'Admin\\ProfileController@store');
+    Route::resource('users', 'Admin\\UserController');
     Route::resource('page', 'Admin\\PageController');
     Route::resource('boat/{id}/images', 'Admin\\BoatImageController');
     Route::resource('boat/{id}/cabins', 'Admin\\BoatCabinController');
