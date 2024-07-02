@@ -88,6 +88,8 @@
  <script src="{{ asset('vendor/landing/assets/vendors/fancybox/dist/jquery.fancybox.min.js') }}"></script>
  <script src="{{ asset('vendor/landing/assets/vendors/slick-nav/jquery.slicknav.js') }}"></script>
  <script src="{{ asset('vendor/landing/assets/js/custom.min.js') }}"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
 
    </body>
 </html>

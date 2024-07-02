@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
@@ -27,12 +28,17 @@ class Blog extends Model
         return $this->belongsTo(BlogCategory::class, 'id_category');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['title', 'id_category', 'featured_image', 'slug', 'content', 'meta_description', 'meta_keywords'];
+    protected $fillable = ['title', 'user_id', 'id_category', 'featured_image', 'slug', 'content', 'meta_description', 'meta_keywords'];
 
 
 

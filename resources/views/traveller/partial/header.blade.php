@@ -37,8 +37,8 @@
              <div class="header-social social-icon">
                 <ul>
                     <li>
-                        <a href="https://www.facebook.com/" target="_blank">
-                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        <a href="https://www.tiktok.com/@cari_trip?is_from_webapp=1&sender_device=pc" target="_blank">
+                            <i class="fab fa-tiktok" aria-hidden="true"></i>
                         </a>
                     </li>
                    <li>
@@ -47,7 +47,7 @@
                       </a>
                    </li>
                    <li>
-                        <a href="https://www.instagram.com/" target="_blank">
+                        <a href="https://www.instagram.com/caritrip.id/?utm_source=ig_web_button_share_sheet" target="_blank">
                             <i class="fab fa-instagram" aria-hidden="true"></i>
                         </a>
                     </li>

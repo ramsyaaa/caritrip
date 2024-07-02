@@ -18,7 +18,7 @@ class CreateDestinationsTable extends Migration
             $table->foreignId('country_id')->nullable();
             $table->string('name');
             $table->string('destination_image');
-            $table->text('description');
+            $table->longText('description');
             $table->boolean('is_international');
             $table->timestamps();
         });

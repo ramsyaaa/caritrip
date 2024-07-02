@@ -67,12 +67,25 @@
                             @if($type == 'Boat Trip')
                             <article class="text-[16px] mb-[20px]">
                                 <h3 class="font-bold text-[32px]">Detail :</h3>
-                                Panjang Kapal : {{ $package->boat->boat_length }} m, Lebar Kapal : {{ $package->boat->boat_width }} m, Kedalaman Kapal : {{ $package->boat->boat_depth }} m, Kecepatan : {{ $package->boat->boat_length }} knots, Tahun Pembuatan : {{ $package->boat->boat_year_built }}, Kapasitas Bensin : {{ $package->boat->boat_fuel_capacity }} L, Kapasitas Air : {{ $package->boat->boat_water_capacity }} L, Asal Kapal : {{ $package->boat->boat_origin }}, Material Kapal : {{ $package->boat->boat_material }}, Mesin Utama : {{ $package->boat->boat_main_engine }}, Dinghy : {{ $package->boat->boat_dingy }}, Kapasitas : {{ $package->boat->boat_capacity }} penumpang, Hiburan : {{ $package->boat->boat_entertainment }}
-                             </article>
+                                @if($package->boat->boat_length != null) Panjang Kapal : {{ $package->boat->boat_length }} m, @endif
+                                @if($package->boat->boat_width != null) Lebar Kapal : {{ $package->boat->boat_width }} m, @endif
+                                @if($package->boat->boat_depth != null )Kedalaman Kapal : {{ $package->boat->boat_depth }} m, @endif
+                                @if($package->boat->boat_length != null) Kecepatan : {{ $package->boat->boat_length }} knots, @endif
+                                @if($package->boat->boat_year_built != null) Tahun Pembuatan : {{ $package->boat->boat_year_built }}, @endif
+                                @if($package->boat->boat_fuel_capacity != null) Kapasitas Bensin : {{ $package->boat->boat_fuel_capacity }} L, @endif
+                                @if($package->boat->boat_water_capacity != null) Kapasitas Air : {{ $package->boat->boat_water_capacity }} L, @endif
+                                @if($package->boat->boat_origin != null) Asal Kapal : {{ $package->boat->boat_origin }}, @endif
+                                @if($package->boat->boat_material != null) Material Kapal : {{ $package->boat->boat_material }}, @endif
+                                @if($package->boat->boat_main_engine != null) Mesin Utama : {{ $package->boat->boat_main_engine }}, @endif
+                                @if($package->boat->boat_dingy != null) Dinghy : {{ $package->boat->boat_dingy }}, @endif
+                                @if($package->boat->boat_capacity != null) Kapasitas Kapal : {{ $package->boat->boat_capacity }} penumpang, @endif
+                                @if($package->boat->boat_entertainment != null) Hiburan : {{ $package->boat->boat_entertainment }} @endif
+                            </article>
                             <article class="">
                                {{-- <h3>OVERVIEW :</h3> --}}
                                {{-- {!! $package->trip_note !!} --}}
                             </article>
+                            @if(count($package->boat->cabins) > 0)
                             <article class="bg-light-grey mb-[20px] px-4 py-4 font-bold text-[32px]">
                                 <h3><i class="fas fa-check text-[32px]"></i> Kabin  :</h3>
                                 <ol class="text-[16px] font-normal">
@@ -81,14 +94,19 @@
                                     @endforeach
                                 </ol>
                              </article>
+                             @endif
+                             @if($package->boat->boat_facility != null)
                             <article class="bg-light-grey mb-[20px] px-4 py-4  text-[16px]">
                                 <h3 class="text-[32px] font-bold"><i class="fas fa-check text-[32px] font-bold mb-4"></i> Fasilitas  :</h3>
                                 {!! $package->boat->boat_facility !!}
                              </article>
+                             @endif
+                             @if($package->boat->boat_safety_equipment != null)
                              <article class="bg-light-grey mb-[20px] px-4 py-4  text-[16px]">
                                 <h3 class="text-[32px] font-bold"><i class="fas fa-check text-[32px] font-bold mb-4"></i> Peralatan Keselamatan  :</h3>
                                 {!! $package->boat->boat_safety_equipment !!}
                              </article>
+                             @endif
                              @endif
                             <article class="bg-light-grey mb-[20px] px-4 py-4  text-[16px]">
                                <h3 class="text-[32px] font-bold"><i class="fas fa-check text-[32px] font-bold mb-4"></i> Include  :</h3>

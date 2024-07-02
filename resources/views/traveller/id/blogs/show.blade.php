@@ -37,12 +37,12 @@
                          <img src="assets/images/img27.jpg" alt="">
                       </figure>
                       <div class="entry-meta">
-                         {{-- <span class="byline">
-                            <a href="blog-archive.html">Demoteam</a>
-                         </span> --}}
+                         <span class="byline">
+                            <a href="#l">{{ $blog->user->name }}</a>
+                         </span>
                          <span class="posted-on">
                             <?php $date = new DateTime($blog->created_at); ?>
-                            <a href="blog-archive.html">{{ $date->format('F j, Y') }}</a>
+                            <a href="#">{{ $date->format('F j, Y') }}</a>
                          </span>
                          {{-- <span class="comments-link">
                             <a href="#commentArea">No Comments</a>

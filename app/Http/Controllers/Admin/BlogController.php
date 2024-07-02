@@ -83,6 +83,8 @@ class BlogController extends Controller
             $requestData['featured_image'] = 'uploads/' . $filename;
         }
 
+        $requestData['user_id'] = auth()->user()->id;
+
         Blog::create($requestData);
         alert()->success('New ' . 'Blog'. ' Created!' );
 
