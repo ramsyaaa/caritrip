@@ -1,5 +1,5 @@
 <div class="form-group{{ $errors->has('boat_name') ? 'has-error' : ''}}">
-    {!! Form::label('boat_name', 'Nama Kapal', ['class' => 'control-label']) !!}
+    {!! Form::label('boat_name', '*Nama Kapal', ['class' => 'control-label']) !!}
     {!! Form::text('boat_name', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
     {!! $errors->first('boat_name', '<p class="help-block">:message</p>') !!}
 </div>
@@ -87,7 +87,7 @@
     <img id="image_preview" src="{{ isset($boat) && $boat->boat_featured_image ? asset( $boat->boat_featured_image) : '' }}" alt="Image Preview" style="max-height: 300px; display: {{ isset($boat) && $boat->boat_featured_image ? 'block' : 'none' }};" />
 </div>
 <div class="form-group{{ $errors->has('language_id') ? 'has-error' : ''}}">
-    {!! Form::label('language_id', 'Bahasa', ['class' => 'control-label']) !!}
+    {!! Form::label('language_id', '*Bahasa', ['class' => 'control-label']) !!}
     {!! Form::select('language_id', $languages->pluck('language_name', 'id')->prepend('Pilih Bahasa', ''), null, ['class' => 'form-control']) !!}
     {!! $errors->first('language_id', '<p class="help-block">:message</p>') !!}
 </div>

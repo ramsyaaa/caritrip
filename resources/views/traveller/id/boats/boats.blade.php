@@ -42,7 +42,19 @@
                              </div>
                           </h3>
                           <div class="my-4">
-                            Panjang Kapal : {{ $item->boat_length }} m, Lebar Kapal : {{ $item->boat_width }} m, Kedalaman Kapal : {{ $item->boat_depth }} m, Kecepatan : {{ $item->boat_length }} knots, Tahun Pembuatan : {{ $item->boat_year_built }}, Kapasitas Bensin : {{ $item->boat_fuel_capacity }} L, Kapasitas Air : {{ $item->boat_water_capacity }} L, Asal Kapal : {{ $item->boat_origin }}, Material Kapal : {{ $item->boat_material }}, Mesin Utama : {{ $item->boat_main_engine }}, Dinghy : {{ $item->boat_dingy }}, Kapasitas Kapal : {{ $item->boat_capacity }} penumpang, Hiburan : {{ $item->boat_entertainment }}
+                            @if($item->boat_length != null) Panjang Kapal : {{ $item->boat_length }} m, @endif
+                            @if($item->boat_width != null) Lebar Kapal : {{ $item->boat_width }} m, @endif
+                            @if($item->boat_depth != null )Kedalaman Kapal : {{ $item->boat_depth }} m, @endif
+                            @if($item->boat_length != null) Kecepatan : {{ $item->boat_length }} knots, @endif
+                            @if($item->boat_year_built != null) Tahun Pembuatan : {{ $item->boat_year_built }}, @endif
+                            @if($item->boat_fuel_capacity != null) Kapasitas Bensin : {{ $item->boat_fuel_capacity }} L, @endif
+                            @if($item->boat_water_capacity != null) Kapasitas Air : {{ $item->boat_water_capacity }} L, @endif
+                            @if($item->boat_origin != null) Asal Kapal : {{ $item->boat_origin }}, @endif
+                            @if($item->boat_material != null) Material Kapal : {{ $item->boat_material }}, @endif
+                            @if($item->boat_main_engine != null) Mesin Utama : {{ $item->boat_main_engine }}, @endif
+                            @if($item->boat_dingy != null) Dinghy : {{ $item->boat_dingy }}, @endif
+                            @if($item->boat_capacity != null) Kapasitas Kapal : {{ $item->boat_capacity }} penumpang, @endif
+                            @if($item->boat_entertainment != null) Hiburan : {{ $item->boat_entertainment }} @endif
                           </div>
 
                           <div class="font-bold text-[20px] my-4">
