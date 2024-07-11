@@ -308,6 +308,9 @@
                                             <div class="w-full flex justify-center">
                                                 <img src="{{ asset($item->boatTravelPackage->package_key_visual) }}" class="w-full" alt="">
                                             </div>
+                                            <div class="mt-4 flex justify-start text-[20px] font-bold">
+                                                ({{ $item->duration }})
+                                            </div>
                                             <div class="mt-4 text-[24px]">
                                                 Mulai Dari : Rp{{ number_format($item->price, 0, ',', '.') }}
                                             </div>
