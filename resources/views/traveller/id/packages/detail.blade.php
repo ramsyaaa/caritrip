@@ -223,9 +223,11 @@
                                                 Mulai dari : Rp{{ number_format($item->price, 0, ',', '.') }} / pax
                                             </div>
                                             @if($type == 'Boat Trip')
+                                            @if($item->extra_bed_price != null)
                                             <div class="mt-4 text-[16px]">
                                                 Extra kasur : Rp{{ number_format($item->extra_bed_price, 0, ',', '.') }}
                                             </div>
+                                            @endif
                                             @endif
                                         </div>
                                         @endforeach
