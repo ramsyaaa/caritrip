@@ -54,14 +54,13 @@ class FullDayCruiseController extends Controller
     {
         $request->validate([
             'days' => 'required|numeric',
-            'nights' => 'required|numeric',
             'price' => 'required|numeric',
             'pax' => 'required',
         ]);
 
         $requestData = $request->all();
         $requestData['boat_travel_package_id'] = $id;
-        $requestData['duration'] = $request->days . 'D' . $request->nights . 'N';
+        $requestData['duration'] = $request->days . 'D';
 
         FullDayCruise::create($requestData);
         alert()->success('New ' . 'Full Day Cruise'. ' Created!' );
@@ -95,13 +94,11 @@ class FullDayCruiseController extends Controller
     {
         $full_day_cruise = FullDayCruise::findOrFail($id);
         $durationString = $full_day_cruise->duration;
-        preg_match('/(\d+)D(\d+)N/', $durationString, $matches);
+        preg_match('/(\d+)D/', $durationString, $matches);
 
         $days = isset($matches[1]) ? $matches[1] : 0;
-        $nights = isset($matches[2]) ? $matches[2] : 0;
         $data['full_day_cruise'] = $full_day_cruise;
         $data['full_day_cruise']->days = $days;
-        $data['full_day_cruise']->nights = $nights;
         $data['boat_travel_package_id'] = $boat_travel_package_id;
 
         return view('admin.full-day-cruise.edit', $data);
@@ -119,13 +116,12 @@ class FullDayCruiseController extends Controller
     {
         $request->validate([
             'days' => 'required|numeric',
-            'nights' => 'required|numeric',
             'price' => 'required|numeric',
             'pax' => 'required',
         ]);
 
         $requestData = $request->all();
-        $requestData['duration'] = $request->days . 'D' . $request->nights . 'N';
+        $requestData['duration'] = $request->days . 'D';
         $full_day_cruise = FullDayCruise::findOrFail($id);
 
         alert()->success('Record Updated!' );

@@ -37,7 +37,7 @@
                                         <td>{{ $item->cabin ? $item->cabin->name : '' }}</td>
                                         <td>{{ $item->duration }}</td>
                                         <td>{{ number_format($item->price, 0, ',', '.') }}</td>
-                                        <td>{{ number_format($item->extra_bed_price, 0, ',', '.') }}</td>
+                                        <td> @if($item->extra_bed_price != null){{ number_format($item->extra_bed_price, 0, ',', '.') }} @endif</td>
                                         <td>
                                             <div class="flex align-items-center list-user-action">
                                                 <a class="btn btn-sm btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="View" href="{{ url('/admin/boat-travel-package/' . $boat_travel_package_id . '/open-trip/' . $item->id) }}">

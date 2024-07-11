@@ -62,7 +62,7 @@ class OpenTripController extends Controller
             'days' => 'required|numeric',
             'nights' => 'required|numeric',
             'price' => 'required|numeric',
-            'extra_bed_price' => 'required|numeric',
+            'extra_bed_price' => '',
         ]);
 
         $requestData = $request->all();
@@ -130,7 +130,7 @@ class OpenTripController extends Controller
             'days' => 'required|numeric',
             'nights' => 'required|numeric',
             'price' => 'required|numeric',
-            'extra_bed_price' => 'required|numeric',
+            'extra_bed_price' => '',
         ]);
 
         $requestData = $request->all();

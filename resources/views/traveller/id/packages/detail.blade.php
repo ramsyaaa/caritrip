@@ -223,9 +223,11 @@
                                                 Mulai dari : Rp{{ number_format($item->price, 0, ',', '.') }} / pax
                                             </div>
                                             @if($type == 'Boat Trip')
+                                            @if($item->extra_bed_price != null)
                                             <div class="mt-4 text-[16px]">
                                                 Extra kasur : Rp{{ number_format($item->extra_bed_price, 0, ',', '.') }}
                                             </div>
+                                            @endif
                                             @endif
                                         </div>
                                         @endforeach
@@ -305,6 +307,9 @@
                                         <div x-show="fullDayCruise{{ $loop->iteration }}">
                                             <div class="w-full flex justify-center">
                                                 <img src="{{ asset($item->boatTravelPackage->package_key_visual) }}" class="w-full" alt="">
+                                            </div>
+                                            <div class="mt-4 flex justify-start text-[20px] font-bold">
+                                                ({{ $item->duration }})
                                             </div>
                                             <div class="mt-4 text-[24px]">
                                                 Mulai Dari : Rp{{ number_format($item->price, 0, ',', '.') }}

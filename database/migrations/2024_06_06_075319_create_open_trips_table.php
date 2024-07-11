@@ -19,7 +19,7 @@ class CreateOpenTripsTable extends Migration
             $table->foreignId('cabin_id');
             $table->string('duration');
             $table->string('price');
-            $table->string('extra_bed_price');
+            $table->string('extra_bed_price')->nullable();
             $table->timestamps();
         });
     }
