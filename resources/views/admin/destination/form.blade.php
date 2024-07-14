@@ -4,14 +4,19 @@
     {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
 </div>
 
-
 <div>
     <Label>Destinasi Internasional</Label>
-    <div class="flex items-center">
+    <div class="flex items-center mb-4">
         <input name="is_international" id="is_international" type="checkbox" @if(isset($destination)) @if($destination->is_international) checked @endif @endif>
         <label for="is_international">Yes</label>
     </div>
     {!! $errors->first('is_international', '<p class="help-block">:message</p>') !!}
+</div>
+
+<div class="form-group{{ $errors->has('country_id') ? 'has-error' : ''}}">
+    {!! Form::label('country_id', '*Negara', ['class' => 'control-label']) !!}
+    {!! Form::select('country_id', $countries->pluck('name', 'id')->prepend('Pilih Negara', ''), null, ['class' => 'form-control']) !!}
+    {!! $errors->first('country_id', '<p class="help-block">:message</p>') !!}
 </div>
 
 <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
