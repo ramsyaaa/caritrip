@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 use App\Models\Destination;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -39,7 +40,8 @@ class DestinationController extends Controller
      */
     public function create()
     {
-        return view('admin.destination.create');
+        $data['countries'] = Country::get();
+        return view('admin.destination.create', $data);
     }
 
     /**
@@ -55,6 +57,7 @@ class DestinationController extends Controller
             'name' => 'required',
             'destination_image' => 'required',
             'description' => 'required',
+            "country_id" => 'required',
             'is_international' => ''
         ]);
 
@@ -77,6 +80,7 @@ class DestinationController extends Controller
             'is_international' => $request->is_international == 'on' ? 1 : 0,
             'destination_image' => 'uploads/' . $filename,
             'description' => $request->description,
+            "country_id" => $request->country_id,
         ]);
         alert()->success('New ' . 'Destination'. ' Created!' );
 
@@ -108,6 +112,7 @@ class DestinationController extends Controller
     {
         $destination = Destination::findOrFail($id);
         $data['destination'] = $destination;
+        $data['countries'] = Country::get();
         return view('admin.destination.edit', $data);
     }
 
@@ -126,6 +131,7 @@ class DestinationController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
+            "country_id" => 'required',
         ]);
         $requestData = $request->all();
 
@@ -155,6 +161,7 @@ class DestinationController extends Controller
             'is_international' => $request->is_international == 'on' ? 1 : 0,
             'destination_image' => 'uploads/' . $filename,
             'description' => $request->description,
+            "country_id" => $request->country_id,
         ]);
 
         return redirect('admin/destination');
