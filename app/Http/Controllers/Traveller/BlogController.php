@@ -53,6 +53,9 @@ class BlogController extends Controller
         $data['blog'] = Blog::where([
             'slug' => $slug,
         ])->first();
+        if($data['blog'] == null){
+            return abort(404);
+        }
         $data['blogs'] = Blog::latest()->limit(5)->get();
 
         $data['page_title'] = $data['blog'] ? "CariTrip - " . $data['blog']->title : '';

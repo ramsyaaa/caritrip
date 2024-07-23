@@ -35,9 +35,7 @@ class DestinationController extends Controller
         UserLogHelper::userLog($request, 'destinations');
         $data = TripHelper::getNavbarTripsData();
 
-        $data['destination'] = Destination::where([
-            'id' => $id,
-        ])->first();
+        $data['destination'] = Destination::findOrFail($id);
         $data['destinations'] = Destination::get();
 
         $data['page_title'] = $data['destination'] ? "CariTrip - " . $data['destination']->name : '';

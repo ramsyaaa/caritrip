@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BoatTravelPackage;
 use App\Models\Country;
 use App\Models\Destination;
+use App\Models\TravelPackage;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -178,6 +180,19 @@ class DestinationController extends Controller
     {
         alert()->success('Record Deleted!' );
         $destination = Destination::where(['id' => $id])->first();
+
+        $checkBoatPackage = BoatTravelPackage::where([
+            'destination_id' => $id
+        ])->first();
+        $checkTravelPackage = TravelPackage::where([
+            'destination_id' => $id,
+        ])->first();
+
+        if($checkBoatPackage != null || $checkTravelPackage != null){
+            alert()->error("Destinasi ini digunakan di paket kapal atau paket travel, ubah destinasi di sana terlebih dahulu." );
+            return redirect()->back();
+        }
+
         if ($destination->destination_image) {
             if (\File::exists(public_path($destination->destination_image))) {
                 \File::delete(public_path($destination->destination_image));
