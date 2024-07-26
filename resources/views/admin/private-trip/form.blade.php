@@ -20,6 +20,11 @@
     {!! Form::text('price', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
     {!! $errors->first('price', '<p class="help-block">:message</p>') !!}
 </div>
+<div class="form-group{{ $errors->has('extra_pax_price') ? 'has-error' : ''}}">
+    {!! Form::label('extra_pax_price', 'Harga Tambahan Penumpang', ['class' => 'control-label']) !!}
+    {!! Form::text('extra_pax_price', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+    {!! $errors->first('extra_pax_price', '<p class="help-block">:message</p>') !!}
+</div>
 
 
 <div class="form-group" align="right">

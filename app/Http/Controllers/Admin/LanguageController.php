@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
+use App\Models\Boat;
+use App\Models\BoatTravelPackage;
 use App\Models\Language;
+use App\Models\Page;
+use App\Models\TravelPackage;
 use Illuminate\Http\Request;
 
 class LanguageController extends Controller
@@ -223,6 +227,27 @@ class LanguageController extends Controller
         $checkLang = Language::count();
         if($checkLang <= 1){
             alert()->error('Cannot delete the latest date' );
+            return redirect('/admin/language');
+        }
+
+        $checkLangPage = Page::where([
+            'language_id' => $id,
+        ])->first();
+
+        $checkLangBoat = Boat::where([
+            'language_id' => $id,
+        ])->first();
+
+        $checkLangBoatTravel = BoatTravelPackage::where([
+            'language_id' => $id,
+        ])->first();
+
+        $checkLangTravel = TravelPackage::where([
+            'language_id' => $id,
+        ])->first();
+
+        if($checkLangPage != null || $checkLangBoat != null || $checkLangBoatTravel != null || $checkLangTravel != null){
+            alert()->error('Tidak bisa menghapus bahasa ini karena sudah digunakan.' );
             return redirect('/admin/language');
         }
 

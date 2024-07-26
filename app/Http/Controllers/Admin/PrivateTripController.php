@@ -57,6 +57,7 @@ class PrivateTripController extends Controller
             'days' => 'required|numeric',
             'nights' => 'required|numeric',
             'price' => 'required|numeric',
+            'extra_pax_price' => '',
             'pax' => 'required',
         ]);
 
@@ -122,6 +123,7 @@ class PrivateTripController extends Controller
             'days' => 'required|numeric',
             'nights' => 'required|numeric',
             'price' => 'required|numeric',
+            'extra_pax_price' => '',
             'pax' => 'required',
         ]);
 

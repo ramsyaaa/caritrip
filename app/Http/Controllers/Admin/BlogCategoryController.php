@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
+use App\Models\Blog;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 
@@ -132,6 +133,15 @@ class BlogCategoryController extends Controller
      */
     public function destroy($id)
     {
+        $checkBlog = Blog::where([
+            'id_category' => $id,
+        ])->first();
+
+        if($checkBlog != null) {
+            alert()->error('Tidak bisa menghapus kategori ini karena digunakan di blog' );
+            return redirect('/admin/blog-category');
+        }
+
         alert()->success('Record Deleted!' );
         BlogCategory::destroy($id);
 

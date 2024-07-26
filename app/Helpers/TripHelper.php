@@ -1,6 +1,7 @@
 <?php
 namespace App\Helpers;
 
+use App\Models\BlogCategory;
 use App\Models\BoatTravelPackage;
 use App\Models\Destination;
 use App\Models\FullDayCruise;
@@ -67,6 +68,8 @@ class TripHelper
                 'fullDayCruises' => $navbarFullDayCruises,
             ];
         }
+
+        $data['categories'] = BlogCategory::get();
 
         $data['domestics'] = $list_domestic_destination;
 

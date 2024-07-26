@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Destination;
 use App\Models\Language;
+use App\Models\TravelOpenTrip;
 use App\Models\TravelPackage;
+use App\Models\TravelPackageImage;
+use App\Models\TravelPrivateTrip;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Storage;
@@ -189,6 +192,28 @@ class TravelPackageController extends Controller
                 \File::delete(public_path($travelpackage->package_key_visual));
             }
         };
+
+        TravelOpenTrip::where([
+            'travel_package_id' => $id,
+        ])->delete();
+        TravelPrivateTrip::where([
+            'travel_package_id' => $id,
+        ])->delete();
+
+        $getImages = TravelPackageImage::where([
+            'travel_package_id' => $id,
+        ])->get();
+
+        TravelPackageImage::where([
+            'travel_package_id' => $id,
+        ])->delete();
+
+        foreach ($getImages as $key => $item) {
+            if (\File::exists(public_path($item->image))) {
+                \File::delete(public_path($item->image));
+            }
+        }
+
         TravelPackage::destroy($id);
 
         return redirect('admin/travel-package');

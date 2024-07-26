@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Alert;
 use App\Models\Boat;
+use App\Models\BoatTravelPackage;
 use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -194,6 +195,15 @@ class BoatController extends Controller
      */
     public function destroy($id)
     {
+        $checkPackage = BoatTravelPackage::where([
+            'boat_id' => $id,
+        ])->fist();
+
+        if($checkPackage != null){
+            alert()->error('Tidak bisa menghapus kapal ini karena digunakan di paket kapal' );
+            return redirect('/admin/boat');
+        }
+
         alert()->success('Record Deleted!' );
         $boat = Boat::where(['id' => $id])->first();
         if($boat->boat_featured_image){
