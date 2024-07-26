@@ -61,7 +61,31 @@
                    <div class="col-lg-4 secondary">
                       <div class="sidebar">
                          <aside class="widget widget_latest_post widget-post-thumb">
-                            <h3 class="widget-title">Blog Terbaru</h3>
+                            <h3 class="widget-title">Related Blog</h3>
+                            <ul>
+                                @foreach ($related_blogs as $related_blog)
+                               <li>
+                                  <figure class="post-thumb">
+                                     <a href="{{ route('blogs.show', ['slug' => $related_blog->slug]) }}"><img src="{{ asset($related_blog->featured_image) }}" alt=""></a>
+                                  </figure>
+                                  <div class="post-content">
+                                     <h5>
+                                        <a href="{{ route('blogs.show', ['slug' => $related_blog->slug]) }}">{{ $related_blog->title }}</a>
+                                     </h5>
+                                     <p class="truncate">{{ strip_tags($related_blog->content) }}</p>
+                                     <div class="entry-meta">
+                                        <span class="posted-on">
+                                            <?php $date = new DateTime($related_blog->created_at); ?>
+                                           <a href="{{ route('blogs.show', ['slug' => $related_blog->slug]) }}">{{ $date->format('F j, Y') }}</a>
+                                        </span>
+                                     </div>
+                                  </div>
+                               </li>
+                               @endforeach
+                            </ul>
+
+
+                            <h3 class="widget-title mt-6s">Blog Terbaru</h3>
                             <ul>
                                 @foreach ($blogs as $recent_blog)
                                <li>

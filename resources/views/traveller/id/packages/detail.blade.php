@@ -164,13 +164,13 @@
                                     Open Trip
                                 </div>
                                 @endif
-                                @if(($category == 'Private Trip' || !$category) && count($package->openTrips) > 0)
+                                @if(($category == 'Private Trip' || !$category) && count($package->privateTrips) > 0)
                                 <div @click="openTrip=false;privateTrip=true;fullDayCruise=false" :class="privateTrip ? ' bg-[#2C2D83] text-white' : ''" class="w-full px-4 py-2 font-bold text-[16px] flex justify-center rounded-t-lg cursor-pointer duration-500">
                                     Private Trip
                                 </div>
                                 @endif
                                 @if($type == 'Boat Trip')
-                                @if(($category == 'Full Day Cruise' || !$category) && count($package->openTrips) > 0)
+                                @if(($category == 'Full Day Cruise' || !$category) && count($package->fullDayCruises) > 0)
                                 <div @click="openTrip=false;privateTrip=false;fullDayCruise=true" :class="fullDayCruise ? ' bg-[#2C2D83] text-white' : ''" class="w-full px-4 py-2 font-bold text-[16px] flex justify-center rounded-t-lg cursor-pointer duration-500">
                                     Full Day Cruise
                                 </div>
@@ -234,7 +234,7 @@
                                     </div>
                                 </div>
                                 @endif
-                                @if(($category == 'Private Trip' || !$category) && count($package->openTrips) > 0)
+                                @if(($category == 'Private Trip' || !$category) && count($package->privateTrips) > 0)
                                 <div x-show="privateTrip" class="p-2 bg-[#2C2D83] rounded-b-lg"
                                     x-data="{
                                         @foreach ($package->privateTrips as $item)
@@ -271,16 +271,20 @@
                                             <div class="mt-4 text-[24px]">
                                                 Mulai Dari : Rp{{ number_format($item->price, 0, ',', '.') }}
                                             </div>
+                                            @if($type == 'Boat Trip')
+                                            @if($item->extra_pax_price != null)
                                             <div class="mt-4 text-[16px]">
-                                                {{-- Extra Bed : Rp{{ number_format($item->extra_bed_price, 0, ',', '.') }} --}}
+                                                Extra penumpang : Rp{{ number_format($item->extra_pax_price, 0, ',', '.') }}
                                             </div>
+                                            @endif
+                                            @endif
                                         </div>
                                         @endforeach
                                     </div>
                                 </div>
                                 @endif
                                 @if($type == 'Boat Trip')
-                                @if(($category == 'Full Day Cruise' || !$category) && count($package->openTrips) > 0)
+                                @if(($category == 'Full Day Cruise' || !$category) && count($package->fullDayCruises) > 0)
                                 <div x-show="fullDayCruise" class="p-2 bg-[#2C2D83] rounded-b-lg"
                                     x-data="{
                                         @foreach ($package->fullDayCruises as $item)

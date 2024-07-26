@@ -22,7 +22,13 @@
                 <div class="relative w-full">
                     <img class="w-full h-[500px] md:h-[400px] object-cover" src="@isset($meta_page_banner_image) @if($meta_page_banner_image != null) {{ asset($meta_page_banner_image) }} @else {{ asset('assets/images/landscape 3.jpg') }} @endif @else {{ asset('assets/images/landscape 3.jpg') }} @endisset" alt="">
                     <div class="flex items-center justify-center w-full h-full absolute top-0 left-0">
-                    <h1 class="font-bold text-white text-[32px]">Semua Blog</h1>
+                    <h1 class="font-bold text-white text-[32px]">
+                        @if($category != null)
+                        Blog Kategori {{ $category->category_name }}
+                        @else
+                        Semua Blog
+                        @endif
+                    </h1>
                     </div>
                 </div>
             </div>

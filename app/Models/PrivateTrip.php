@@ -8,6 +8,7 @@ class PrivateTrip extends Model
 {
     protected $fillable = [
         'boat_travel_package_id',
+        'extra_pax_price',
         'duration',
         'price',
         'pax',

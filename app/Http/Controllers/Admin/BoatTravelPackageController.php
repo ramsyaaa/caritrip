@@ -7,8 +7,12 @@ use App\Http\Controllers\Controller;
 use Alert;
 use App\Models\Boat;
 use App\Models\BoatTravelPackage;
+use App\Models\BoatTravelPackageImage;
 use App\Models\Destination;
+use App\Models\FullDayCruise;
 use App\Models\Language;
+use App\Models\OpenTrip;
+use App\Models\PrivateTrip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -192,6 +196,30 @@ class BoatTravelPackageController extends Controller
         if ($boattravelpackage->package_key_visual) {
             if (\File::exists(public_path($boattravelpackage->package_key_visual))) {
                 \File::delete(public_path($boattravelpackage->package_key_visual));
+            }
+        }
+
+        OpenTrip::where([
+            'boat_travel_package_id' => $id,
+        ])->delete();
+        PrivateTrip::where([
+            'boat_travel_package_id' => $id,
+        ])->delete();
+        FullDayCruise::where([
+            'boat_travel_package_id' => $id,
+        ])->delete();
+
+        $getImages = BoatTravelPackageImage::where([
+            'boat_travel_package_id' => $id,
+        ])->get();
+
+        BoatTravelPackageImage::where([
+            'boat_travel_package_id' => $id,
+        ])->delete();
+
+        foreach ($getImages as $key => $item) {
+            if (\File::exists(public_path($item->image))) {
+                \File::delete(public_path($item->image));
             }
         }
 

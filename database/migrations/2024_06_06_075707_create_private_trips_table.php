@@ -16,6 +16,7 @@ class CreatePrivateTripsTable extends Migration
         Schema::create('private_trips', function (Blueprint $table) {
             $table->id();
             $table->foreignId('boat_travel_package_id');
+            $table->string('extra_pax_price');
             $table->string('duration');
             $table->string('pax');
             $table->string('price');

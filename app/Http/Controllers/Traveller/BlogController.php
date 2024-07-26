@@ -6,6 +6,7 @@ use App\Helpers\TripHelper;
 use App\Helpers\UserLogHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\BlogCategory;
 use App\Models\Page;
 use App\Models\TravelPackage;
 use Illuminate\Http\Request;
@@ -18,21 +19,20 @@ class BlogController extends Controller
 
         $packages = TravelPackage::with('destination')->get();
 
-        // $groupedPackages = $packages->groupBy(function($package) {
-        //     return $package->destination->name; // Ganti 'name' dengan kolom yang sesuai di tabel Destination
-        // });
+        $category = isset($_GET['category_id']) ? $_GET['category_id'] : null;
+        $query = Blog::limit(20);
 
-        // dd($groupedPackages['South Korea'][0]['openTrips']);
-        // $finalGroupedPackages = [];
+        // Tambahkan kondisi where jika parameter 'category' ada
+        $data['category'] = null;
+        if ($category) {
+            $data['category'] =BlogCategory::where([
+                'id' => $category,
+            ])->first();
+            $query->where('id_category', $category);
+        }
 
-        // foreach ($groupedPackages as $key => $package) {
-
-        // }
-
-
-
-
-        $data['blogs'] = Blog::limit(20)->get();
+        // Ambil data blogs berdasarkan query
+        $data['blogs'] = $query->get();
         $data['latest_blogs'] = Blog::latest()->limit(10)->get();
 
         $page = Page::where(['page_category' => 'Blogs'])->first();
@@ -56,6 +56,7 @@ class BlogController extends Controller
         if($data['blog'] == null){
             return abort(404);
         }
+        $data['related_blogs'] = Blog::where(['id_category' => $data['blog']->id_category])->latest()->limit(5)->get();
         $data['blogs'] = Blog::latest()->limit(5)->get();
 
         $data['page_title'] = $data['blog'] ? "CariTrip - " . $data['blog']->title : '';

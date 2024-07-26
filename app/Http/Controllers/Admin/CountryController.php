@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Country;
+use App\Models\Destination;
 use Illuminate\Http\Request;
 
 class CountryController extends Controller
@@ -124,6 +125,15 @@ class CountryController extends Controller
      */
     public function destroy($id)
     {
+        $checkDestination = Destination::where([
+            'country_id' => $id,
+        ])->first();
+
+        if($checkDestination != null){
+            alert()->error('Negara ini dugnakan di destinasi' );
+            return redirect('/admin/countries');
+        }
+
         alert()->success('Record Deleted!' );
         Country::destroy($id);
 

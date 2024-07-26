@@ -31,6 +31,7 @@
           </div>
        </div>
     </div>
+
     <div class="bottom-header">
        <div class="container">
           <div class="bottom-header-inner d-flex justify-content-between align-items-center">
@@ -52,7 +53,7 @@
                         </a>
                     </li>
                    <li>
-                        <a href="mailto:admincaritrip@gmail.com?subject=Caritrip Asking&body=Hello, I am from the Caritrip website and am interested in your trip package. Could you please provide more details about it?.">
+                        <a href="mailto:info@caritrip.com?subject=Caritrip Asking&body=Hello, I am from the Caritrip website and am interested in your trip package. Could you please provide more details about it?.">
                             <i class="icon icon-envelope1" aria-hidden="true"></i>
                       </a>
                    </li>
@@ -119,9 +120,12 @@
                                     <li class="menu-item-has-children">
                                         <a href="/packages/?destination_id={{ $destination['destination_id'] }}&category=Open Trip">Open Trip</a>
                                         <ul>
+                                            @php
+                                                $destination['openTrips'] = \App\Helpers\SortPackageHelper::sortTripsByPriority($destination['openTrips']->toArray());
+                                            @endphp
                                             @foreach ($destination['openTrips'] as $key => $item)
                                             <li>
-                                                <a href="{{ route('packages.detail', ['id' => $item->id, 'type' => 'Boat Trip']) }}">{{ $item->package_name }}</a>
+                                                <a href="{{ route('packages.detail', ['id' => $item['id'], 'type' => 'Boat Trip']) }}">{{ $item['package_name'] }}</a>
                                             </li>
                                             @endforeach
                                             <li style="display:none">
@@ -135,9 +139,12 @@
                                     <li class="menu-item-has-children">
                                         <a href="/packages/?destination_id={{ $destination['destination_id'] }}&category=Private Trip">Private Trip</a>
                                         <ul>
+                                            @php
+                                                $destination['privateTrips'] = \App\Helpers\SortPackageHelper::sortTripsByPriority($destination['privateTrips']->toArray());
+                                            @endphp
                                             @foreach ($destination['privateTrips'] as $key => $item)
                                             <li>
-                                                <a href="{{ route('packages.detail', ['id' => $item->id, 'type' => 'Boat Trip']) }}">{{ $item->package_name }}</a>
+                                                <a href="{{ route('packages.detail', ['id' => $item['id'], 'type' => 'Boat Trip']) }}">{{ $item['package_name'] }}</a>
                                             </li>
                                             @endforeach
                                             <li style="display:none">
@@ -151,9 +158,12 @@
                                     <li class="menu-item-has-children">
                                         <a href="/packages/?destination_id={{ $destination['destination_id'] }}&category=Full Day Cruise">Full Day Cruise</a>
                                         <ul>
+                                            @php
+                                                $destination['fullDayCruises'] = \App\Helpers\SortPackageHelper::sortTripsByPriority($destination['fullDayCruises']->toArray());
+                                            @endphp
                                             @foreach ($destination['fullDayCruises'] as $key => $item)
                                             <li>
-                                                <a href="{{ route('packages.detail', ['id' => $item->id, 'type' => 'Boat Trip']) }}">{{ $item->package_name }}</a>
+                                                <a href="{{ route('packages.detail', ['id' => $item['id'], 'type' => 'Boat Trip']) }}">{{ $item['package_name'] }}</a>
                                             </li>
                                             @endforeach
                                             <li style="display:none">
@@ -181,8 +191,21 @@
                             </li>
                         </ul>
                      </li>
-                      <li>
+                     <li class="menu-item-has-children">
                         <a style="@if (request()->is('blogs') || request()->is('blogs/*')) color: #2C2D83 @endif" href="{{ route('blogs.index') }}">Blog</a>
+                        <ul>
+                            @foreach ($categories as $key => $category)
+                           <li class="">
+                                <a href="{{ route('blogs.index', ['category_id' => $category->id]) }}">{{ $category->category_name }}</a>
+                            </li>
+                           @endforeach
+                           <li style="display:none">
+                              <a href="{{ route('blogs.index') }}">All Blogs</a>
+                           </li>
+                            <li style="display:none">
+                                <a href="{{ route('blogs.index') }}">Single Page</a>
+                            </li>
+                        </ul>
                      </li>
                       <li>
                         <a style="@if (request()->is('contact') || request()->is('contact/*')) color: #2C2D83 @endif" href="{{ route('contact') }}">Kontak</a>
