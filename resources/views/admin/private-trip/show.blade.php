@@ -17,7 +17,7 @@
                                 <tbody>
                                     <tr><th> Durasi </th><td>{{ $private_trip->duration }}</td></tr>
                                     <tr><th> Jumlah Penumpang </th><td>{{ $private_trip->pax }}</td></tr>
-                                    <tr><th> Harga </th><td>Rp{{ number_format($private_trip->price, 0, ',', '.') }}</td></tr>
+                                    <tr><th> Harga </th><td>Rp{{ number_format($private_trip->price, 0, ',', '.') }} {{ $private_trip->unit }}</td></tr>
                                     <tr><th> Harga Tambahan Penumpang </th><td>Rp{{ number_format($private_trip->extra_pax_price, 0, ',', '.') }}</td></tr>
                                 </tbody>
                             </table>

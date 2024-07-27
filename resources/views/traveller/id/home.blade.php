@@ -100,7 +100,7 @@
                                                 <span class="text-[16px] mt-2" style="font-family: 'Fredoka', sans-serif !important;">Mulai dari</span>
                                             </div>
                                             <h6 class="text-[24px] mt-1">
-                                                <span style="font-family: 'Fredoka', sans-serif !important;">Rp @if(count($trip->openTrips) > 0) {{ number_format($trip->openTrips[0]->price, 0, ',', '.') }} @elseif(count($trip->privateTrips) > 0) {{ number_format($trip->privateTrips[0]->price, 0, ',', '.') }} @elseif(count($trip->fullDayCruises) > 0) {{ number_format($trip->fullDayCruises[0]->price, 0, ',', '.') }} @else 0 @endif / pax / day </span>
+                                                <span style="font-family: 'Fredoka', sans-serif !important;">Rp @if(count($trip->openTrips) > 0) {{ number_format($trip->openTrips[0]->price, 0, ',', '.') }} {{ $trip->openTrips[0]->unit }} @elseif(count($trip->privateTrips) > 0) {{ number_format($trip->privateTrips[0]->price, 0, ',', '.') }} {{ $trip->privateTrips[0]->unit }} @elseif(count($trip->fullDayCruises) > 0) {{ number_format($trip->fullDayCruises[0]->price, 0, ',', '.') }} {{ $trip->fullDayCruises[0]->unit }} @else 0 @endif</span>
                                             </h6>
                                             <div class="w-full flex items-center justify-end">
                                                 <a href="{{ route('packages.detail', ['id' => $trip->id, 'type' => 'Boat Trip']) }}" class="px-3 py-2 bg-[#2C2D83] text-white rounded-lg">
@@ -150,7 +150,7 @@
                                                 <span class="text-[16px] mt-4" style="font-family: 'Fredoka', sans-serif !important;">Mulai dari</span>
                                             </div>
                                             <h6 class="text-[24px]">
-                                                <span style="font-family: 'Fredoka', sans-serif !important;">Rp @if(count($trip->openTrips) > 0) {{ number_format($trip->openTrips[0]->price, 0, ',', '.') }} @elseif(count($trip->privateTrips) > 0) {{ number_format($trip->privateTrips[0]->price, 0, ',', '.') }} @else 0 @endif </span>
+                                                <span style="font-family: 'Fredoka', sans-serif !important;">Rp @if(count($trip->openTrips) > 0) {{ number_format($trip->openTrips[0]->price, 0, ',', '.') }} {{ $trip->openTrips[0]->unit }} @elseif(count($trip->privateTrips) > 0) {{ number_format($trip->privateTrips[0]->price, 0, ',', '.') }} {{ $trip->privateTrips[0]->unit }} @else 0 @endif </span>
                                             </h6>
                                             <div class="w-full flex items-center justify-end">
                                                 <a href="{{ route('packages.detail', ['id' => $trip->id, 'type' => 'Travel Trip']) }}" class="px-3 py-2 bg-[#2C2D83] text-white rounded-lg">

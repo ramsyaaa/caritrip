@@ -58,9 +58,22 @@ class FullDayCruiseController extends Controller
             'pax' => 'required',
         ]);
 
+        if($request->per_pax != "on" && $request->per_day != "on"){
+            return redirect()->back()->withErrors(['per_pax' => 'You must select either per pax or per day.'])->withInput();
+        }
+
         $requestData = $request->all();
         $requestData['boat_travel_package_id'] = $id;
         $requestData['duration'] = $request->days . 'D';
+
+        $requestData['unit'] = "";
+
+        if($request->per_pax == "on"){
+            $requestData['unit'] = $requestData['unit'] . "/pax";
+        }
+        if($request->per_day == "on"){
+            $requestData['unit'] = $requestData['unit'] . "/day";
+        }
 
         FullDayCruise::create($requestData);
         alert()->success('New ' . 'Full Day Cruise'. ' Created!' );
@@ -96,6 +109,11 @@ class FullDayCruiseController extends Controller
         $durationString = $full_day_cruise->duration;
         preg_match('/(\d+)D/', $durationString, $matches);
 
+        $priceUnit = $full_day_cruise->unit;
+
+        $full_day_cruise->per_pax = str_contains($priceUnit, '/pax');
+        $full_day_cruise->per_day = str_contains($priceUnit, '/day');
+
         $days = isset($matches[1]) ? $matches[1] : 0;
         $data['full_day_cruise'] = $full_day_cruise;
         $data['full_day_cruise']->days = $days;
@@ -120,9 +138,21 @@ class FullDayCruiseController extends Controller
             'pax' => 'required',
         ]);
 
+        if($request->per_pax != "on" && $request->per_day != "on"){
+            return redirect()->back()->withErrors(['per_pax' => 'You must select either per pax or per day.'])->withInput();
+        }
+
         $requestData = $request->all();
         $requestData['duration'] = $request->days . 'D';
         $full_day_cruise = FullDayCruise::findOrFail($id);
+        $requestData['unit'] = "";
+
+        if($request->per_pax == "on"){
+            $requestData['unit'] = $requestData['unit'] . "/pax";
+        }
+        if($request->per_day == "on"){
+            $requestData['unit'] = $requestData['unit'] . "/day";
+        }
 
         alert()->success('Record Updated!' );
         $full_day_cruise->update($requestData);

@@ -11,6 +11,7 @@ class TravelOpenTrip extends Model
         'date',
         'duration',
         'price',
+        'unit',
     ];
 
     public function travelPackage()

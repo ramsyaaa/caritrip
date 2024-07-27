@@ -19,6 +19,7 @@ class CreateTravelOpenTripsTable extends Migration
             $table->date('date');
             $table->string('duration');
             $table->string('price');
+            $table->string('unit');
             $table->timestamps();
         });
     }

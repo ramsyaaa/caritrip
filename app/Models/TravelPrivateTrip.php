@@ -10,6 +10,7 @@ class TravelPrivateTrip extends Model
         'travel_package_id',
         'duration',
         'price',
+        'unit',
         'pax',
     ];
 

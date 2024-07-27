@@ -17,7 +17,7 @@
                                 <tbody>
                                     <tr><th> Durasi </th><td>{{ $private_trip->duration }}</td></tr>
                                     <tr><th> Jumlah Penumpang </th><td>{{ $private_trip->pax }}</td></tr>
-                                    <tr><th> Harga </th><td>{{ number_format($private_trip->price, 0, ',', '.') }}</td></tr>
+                                    <tr><th> Harga </th><td>Rp{{ number_format($private_trip->price, 0, ',', '.') }} {{ $private_trip->unit }}</td></tr>
                                 </tbody>
                             </table>
                             <a href="{{ url('/admin/travel-package/' . $travel_package_id . '/private-trip') }}"><button class="btn btn-warning btn-sm"><i class="fa fa-close" aria-hidden="true"></i> Kembali</button></a>

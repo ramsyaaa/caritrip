@@ -220,7 +220,7 @@
                                             </div>
                                             @endif
                                             <div class="mt-4 text-[24px]">
-                                                Mulai dari : Rp{{ number_format($item->price, 0, ',', '.') }} / pax
+                                                Mulai dari : Rp{{ number_format($item->price, 0, ',', '.') }} {{ $item->unit }}
                                             </div>
                                             @if($type == 'Boat Trip')
                                             @if($item->extra_bed_price != null)
@@ -269,7 +269,7 @@
                                                 {{-- {{ $item->cabin->description }} --}}
                                             </div>
                                             <div class="mt-4 text-[24px]">
-                                                Mulai Dari : Rp{{ number_format($item->price, 0, ',', '.') }}
+                                                Mulai Dari : Rp{{ number_format($item->price, 0, ',', '.') }} {{ $item->unit }}
                                             </div>
                                             @if($type == 'Boat Trip')
                                             @if($item->extra_pax_price != null)
@@ -316,7 +316,7 @@
                                                 ({{ $item->duration }})
                                             </div>
                                             <div class="mt-4 text-[24px]">
-                                                Mulai Dari : Rp{{ number_format($item->price, 0, ',', '.') }}
+                                                Mulai Dari : Rp{{ number_format($item->price, 0, ',', '.') }} {{ $item->unit }}
                                             </div>
                                         </div>
                                         @endforeach

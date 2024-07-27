@@ -17,8 +17,8 @@
                                 <tbody>
                                     <tr><th> Kabin </th><td>{{ $open_trip->cabin ? $open_trip->cabin->name : '' }}</td></tr>
                                     <tr><th> Durasi </th><td>{{ $open_trip->duration }}</td></tr>
-                                    <tr><th> Harga </th><td>{{ number_format($open_trip->price, 0, ',', '.') }}</td></tr>
-                                    <tr><th> Harga Extra Kasur </th><td>{{ number_format($open_trip->extra_bed_price, 0, ',', '.') }}</td></tr>
+                                    <tr><th> Harga </th><td>Rp{{ number_format($open_trip->price, 0, ',', '.') }} {{ $open_trip->unit }}</td></tr>
+                                    <tr><th> Harga Extra Kasur </th><td>Rp{{ number_format($open_trip->extra_bed_price, 0, ',', '.') }}</td></tr>
                                 </tbody>
                             </table>
                             <a href="{{ url('/admin/boat-travel-package/' . $boat_travel_package_id . '/open-trip') }}"><button class="btn btn-warning btn-sm"><i class="fa fa-close" aria-hidden="true"></i> Back</button></a>
