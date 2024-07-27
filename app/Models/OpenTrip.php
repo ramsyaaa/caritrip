@@ -11,6 +11,7 @@ class OpenTrip extends Model
         'cabin_id',
         'duration',
         'price',
+        'unit',
         'extra_bed_price',
     ];
 

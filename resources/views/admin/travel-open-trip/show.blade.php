@@ -17,7 +17,7 @@
                                 <tbody>
                                     <tr><th> Tanggal </th><td>{{ $open_trip->date }}</td></tr>
                                     <tr><th> Durasi </th><td>{{ $open_trip->duration }}</td></tr>
-                                    <tr><th> Harga </th><td>{{ number_format($open_trip->price, 0, ',', '.') }}</td></tr>
+                                    <tr><th> Harga </th><td>Rp{{ number_format($open_trip->price, 0, ',', '.') }} {{ $open_trip->unit }}</td></tr>
                                 </tbody>
                             </table>
                             <a href="{{ url('/admin/travel-package/' . $travel_package_id . '/open-trip') }}"><button class="btn btn-warning btn-sm"><i class="fa fa-close" aria-hidden="true"></i> Kembali</button></a>

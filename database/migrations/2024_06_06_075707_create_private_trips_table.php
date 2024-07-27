@@ -20,6 +20,7 @@ class CreatePrivateTripsTable extends Migration
             $table->string('duration');
             $table->string('pax');
             $table->string('price');
+            $table->string('unit');
             $table->timestamps();
         });
     }

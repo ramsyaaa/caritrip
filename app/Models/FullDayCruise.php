@@ -10,6 +10,7 @@ class FullDayCruise extends Model
         'boat_travel_package_id',
         'duration',
         'price',
+        'unit',
         'pax',
     ];
 

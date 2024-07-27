@@ -59,9 +59,22 @@ class TravelPrivateTripController extends Controller
             'pax' => 'required',
         ]);
 
+        if($request->per_pax != "on" && $request->per_day != "on"){
+            return redirect()->back()->withErrors(['per_pax' => 'You must select either per pax or per day.'])->withInput();
+        }
+
         $requestData = $request->all();
         $requestData['travel_package_id'] = $id;
         $requestData['duration'] = $request->days . 'D' . $request->nights . 'N';
+
+        $requestData['unit'] = "";
+
+        if($request->per_pax == "on"){
+            $requestData['unit'] = $requestData['unit'] . "/pax";
+        }
+        if($request->per_day == "on"){
+            $requestData['unit'] = $requestData['unit'] . "/day";
+        }
 
         TravelPrivateTrip::create($requestData);
         alert()->success('New ' . 'Travel Private Trip'. ' Created!' );
@@ -97,6 +110,11 @@ class TravelPrivateTripController extends Controller
         $durationString = $private_trip->duration;
         preg_match('/(\d+)D(\d+)N/', $durationString, $matches);
 
+        $priceUnit = $private_trip->unit;
+
+        $private_trip->per_pax = str_contains($priceUnit, '/pax');
+        $private_trip->per_day = str_contains($priceUnit, '/day');
+
         $days = isset($matches[1]) ? $matches[1] : 0;
         $nights = isset($matches[2]) ? $matches[2] : 0;
         $data['private_trip'] = $private_trip;
@@ -124,9 +142,21 @@ class TravelPrivateTripController extends Controller
             'pax' => 'required',
         ]);
 
+        if($request->per_pax != "on" && $request->per_day != "on"){
+            return redirect()->back()->withErrors(['per_pax' => 'You must select either per pax or per day.'])->withInput();
+        }
+
         $requestData = $request->all();
         $requestData['duration'] = $request->days . 'D' . $request->nights . 'N';
         $open_trip = TravelPrivateTrip::findOrFail($id);
+        $requestData['unit'] = "";
+
+        if($request->per_pax == "on"){
+            $requestData['unit'] = $requestData['unit'] . "/pax";
+        }
+        if($request->per_day == "on"){
+            $requestData['unit'] = $requestData['unit'] . "/day";
+        }
 
         alert()->success('Record Updated!' );
         $open_trip->update($requestData);

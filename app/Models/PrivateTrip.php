@@ -11,6 +11,7 @@ class PrivateTrip extends Model
         'extra_pax_price',
         'duration',
         'price',
+        'unit',
         'pax',
     ];
 

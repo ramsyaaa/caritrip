@@ -36,7 +36,7 @@
                                         <td>{{ $i+1 }}</td>
                                         <td>{{ $item->cabin ? $item->cabin->name : '' }}</td>
                                         <td>{{ $item->duration }}</td>
-                                        <td>{{ number_format($item->price, 0, ',', '.') }}</td>
+                                        <td>{{ number_format($item->price, 0, ',', '.') }} {{ $item->unit }}</td>
                                         <td> @if($item->extra_bed_price != null){{ number_format($item->extra_bed_price, 0, ',', '.') }} @endif</td>
                                         <td>
                                             <div class="flex align-items-center list-user-action">

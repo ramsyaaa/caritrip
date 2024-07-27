@@ -35,7 +35,7 @@
                                         <td>{{ $i+1 }}</td>
                                         <td>{{ $item->duration }}</td>
                                         <td>{{ $item->pax }}</td>
-                                        <td>{{ number_format($item->price, 0, ',', '.') }}</td>
+                                        <td>{{ number_format($item->price, 0, ',', '.') }} {{ $item->unit }}</td>
                                         <td>
                                             <div class="flex align-items-center list-user-action">
                                                 <a class="btn btn-sm btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="View" href="{{ url('/admin/boat-travel-package/' . $boat_travel_package_id . '/full-day-cruise/' . $item->id) }}">

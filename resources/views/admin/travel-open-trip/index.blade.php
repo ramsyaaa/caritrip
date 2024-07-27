@@ -33,7 +33,7 @@
                                     <tr>
                                         <td>{{ $i+1 }}</td>
                                         <td>{{ $item->duration }}</td>
-                                        <td>{{ number_format($item->price, 0, ',', '.') }}</td>
+                                        <td>Rp{{ number_format($item->price, 0, ',', '.') }} {{ $item->unit }}</td>
                                         <td>
                                             <div class="flex align-items-center list-user-action">
                                                 <a class="btn btn-sm btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="View" href="{{ url('/admin/travel-package/' . $travel_package_id . '/open-trip/' . $item->id) }}">

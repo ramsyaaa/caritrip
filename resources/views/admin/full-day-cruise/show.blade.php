@@ -17,7 +17,7 @@
                                 <tbody>
                                     <tr><th> Durasi </th><td>{{ $full_day_cruise->duration }}</td></tr>
                                     <tr><th> Jumlah Penumpang </th><td>{{ $full_day_cruise->pax }}</td></tr>
-                                    <tr><th> Harga </th><td>{{ number_format($full_day_cruise->price, 0, ',', '.') }}</td></tr>
+                                    <tr><th> Harga </th><td>Rp{{ number_format($full_day_cruise->price, 0, ',', '.') }} {{ $full_day_cruise->unit }}</td></tr>
                                 </tbody>
                             </table>
                             <a href="{{ url('/admin/boat-travel-package/' . $boat_travel_package_id . '/full-day-cruise') }}"><button class="btn btn-warning btn-sm"><i class="fa fa-close" aria-hidden="true"></i> Kembali</button></a>

@@ -20,6 +20,24 @@
     {!! Form::text('price', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
     {!! $errors->first('price', '<p class="help-block">:message</p>') !!}
 </div>
+<div style="display: flex; gap: 30px;">
+    <div>
+        <Label>Harga per pax</Label>
+        <div class="flex items-center mb-4">
+            <input name="per_pax" id="per_pax" type="checkbox" @if(isset($open_trip)) @if($open_trip->per_pax) checked @endif @endif>
+            <label for="per_pax">Yes</label>
+        </div>
+
+    </div>
+    <div>
+        <Label>Harga per hari</Label>
+        <div class="flex items-center mb-4">
+            <input name="per_day" id="per_day" type="checkbox" @if(isset($open_trip)) @if($open_trip->per_day) checked @endif @endif>
+            <label for="per_day">Yes</label>
+        </div>
+
+    </div>
+</div>
 
 
 <div class="form-group" align="right">
