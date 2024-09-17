@@ -56,7 +56,7 @@
                                   </a>
                                </li>
                                <li>
-                                    <a style="background-color: #2C2D83" href="mailto:info@caritrip.com?subject=Caritrip Asking&body=Hello, I am from the Caritrip website and am interested in your trip package. Could you please provide more details about it?.">
+                                    <a style="background-color: #2C2D83" href="mailto:kreasipetualangannusantara@gmail.com?subject=Caritrip Asking&body=Hello, I am from the Caritrip website and am interested in your trip package. Could you please provide more details about it?.">
                                         <i class="icon icon-envelope1" aria-hidden="true"></i>
                                     </a>
                                 </li>
@@ -84,7 +84,7 @@
                             <h4>ALAMAT EMAIL</h4>
                             <ul>
                                <li>
-                                  <a href="mailto:info@caritrip.com?subject=Caritrip Asking&body=Hello, I am from the Caritrip website and am interested in your trip package. Could you please provide more details about it?.">info@caritrip.com</a>
+                                  <a href="mailto:kreasipetualangannusantara@gmail.com?subject=Caritrip Asking&body=Hello, I am from the Caritrip website and am interested in your trip package. Could you please provide more details about it?.">kreasipetualangannusantara@gmail.com</a>
                                </li>
                             </ul>
                          </div>

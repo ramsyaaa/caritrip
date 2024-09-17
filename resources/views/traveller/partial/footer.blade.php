@@ -27,9 +27,9 @@
                                </a>
                             </li>
                             <li>
-                               <a href="mailto:info@caritrip.com?subject=Caritrip Asking&body=Hello, I am from the Caritrip website and am interested in your trip package. Could you please provide more details about it?.">
+                               <a href="mailto:kreasipetualangannusantara@gmail.com?subject=Caritrip Asking&body=Hello, I am from the Caritrip website and am interested in your trip package. Could you please provide more details about it?.">
                                   <i aria-hidden="true" class="icon icon-envelope1"></i>
-                                  info@caritrip.com
+                                  kreasipetualangannusantara@gmail.com
                                </a>
                             </li>
                             <li>
@@ -63,7 +63,7 @@
                             </a>
                          </li>
                         <li>
-                            <a href="mailto:info@caritrip.com?subject=Caritrip Asking&body=Hello, I am from the Caritrip website and am interested in your trip package. Could you please provide more details about it?.">
+                            <a href="mailto:kreasipetualangannusantara@gmail.com?subject=Caritrip Asking&body=Hello, I am from the Caritrip website and am interested in your trip package. Could you please provide more details about it?.">
                                 <i class="icon icon-envelope1" aria-hidden="true"></i>
                             </a>
                         </li>
@@ -120,7 +120,7 @@
                          <li> <a target="_blank" href="https://www.tiktok.com/@cari_trip?is_from_webapp=1&sender_device=pc"> <i class="fab fa-tiktok"></i> </a> </li>
                          <li> <a target="_blank" href="https://wa.me/+6282236792273?text=Hai, saya tertarik dengan Cari Trip. Saya ingin bertanya tentang perjalanan yang tersedia."> <i class="fab fa-whatsapp"></i> </a> </li>
                          <li> <a target="_blank" href="https://www.instagram.com/caritrip.id/?utm_source=ig_web_button_share_sheet"> <i class="fab fa-instagram"></i> </a> </li>
-                         <li> <a target="_blank" href="mailto:info@caritrip.com?subject=Caritrip Asking&body=Hello, I am from the Caritrip website and am interested in your trip package. Could you please provide more details about it?."> <i class="icon icon-envelope1"></i> </a> </li>
+                         <li> <a target="_blank" href="mailto:kreasipetualangannusantara@gmail.com?subject=Caritrip Asking&body=Hello, I am from the Caritrip website and am interested in your trip package. Could you please provide more details about it?."> <i class="icon icon-envelope1"></i> </a> </li>
                       </ul>
                    </div>
                 </div>
@@ -138,9 +138,9 @@
                       </a>
                    </li>
                    <li>
-                      <a href="mailto:info@caritrip.com?subject=Caritrip Asking&body=Hello, I am from the Caritrip website and am interested in your trip package. Could you please provide more details about it?.">
+                      <a href="mailto:kreasipetualangannusantara@gmail.com?subject=Caritrip Asking&body=Hello, I am from the Caritrip website and am interested in your trip package. Could you please provide more details about it?.">
                          <i aria-hidden="true" class="icon icon-envelope1"></i>
-                         info@caritrip.com
+                         kreasipetualangannusantara@gmail.com
                       </a>
                    </li>
                    <li>
